@@ -1,7 +1,11 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 
+<<<<<<< HEAD
 describe('attack arithmetic/integer_overflow_add.sol', function () {
+=======
+describe('attack arithmetic/integer_overflow.sol', function () {
+>>>>>>> 3f8af02 (add: hardhat framework configs and arithmetic tests)
     async function deployContracts() {
       const IntegerOverflowAdd = await ethers.getContractFactory('contracts/arithmetic/integer_overflow_add.sol:IntegerOverflowAdd');
       const overflow = await IntegerOverflowAdd.deploy();  
