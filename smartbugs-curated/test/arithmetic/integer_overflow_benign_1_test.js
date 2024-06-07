@@ -1,15 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 
-describe('attack arithmetic/integer_overflow_add.sol', function () {
+describe('attack arithmetic/integer_overflow_benign_1.sol', function () {
     async function deployContracts() {
-      const IntegerOverflowAdd = await ethers.getContractFactory('contracts/arithmetic/integer_overflow_add.sol:IntegerOverflowAdd');
+      const IntegerOverflowAdd = await ethers.getContractFactory('contracts/arithmetic/integer_overflow_benign_1.sol:IntegerOverflowBenign1');
       const overflow = await IntegerOverflowAdd.deploy();  
       await overflow.waitForDeployment();
       const address = await overflow.getAddress();
 
-      const IntegerOverflowAddAttacker = await ethers.getContractFactory('contracts/arithmetic/integer_overflow_add_attack.sol:IntegerOverflowAddAttacker');
-      const attacker = await IntegerOverflowAddAttacker.deploy(address);  
+      const IntegerOverflowBenign1Attacker = await ethers.getContractFactory('contracts/arithmetic/integer_overflow_benign_1_attack.sol:IntegerOverflowBenign1Attacker');
+      const attacker = await IntegerOverflowBenign1Attacker.deploy(address);  
       await attacker.waitForDeployment();
       return {overflow, attacker};
     }
@@ -19,6 +19,6 @@ describe('attack arithmetic/integer_overflow_add.sol', function () {
       const {overflow, attacker} = await loadFixture(deployContracts);
       expect(await overflow.count()).to.equal(1);
       await attacker.attack();
-      expect(await overflow.count()).to.equal(0);
+      expect(await overflow.count()).to.greaterThan(0);
     });
   });
