@@ -373,3 +373,10 @@ testeth
 node_modules
 bin_output
 logs
+
+# nodejs
+node_modules
+
+# hardhat
+artifacts
+cache
