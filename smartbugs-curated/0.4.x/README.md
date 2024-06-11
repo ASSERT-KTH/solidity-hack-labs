@@ -25,7 +25,7 @@ These attacks are automated using Hardhat testing framework.
 
 ### Installation
 1. Make sure that Nodejs is installed.
-2. Clone repo and go into `smartbug` directory.
+2. Clone repo and go into `smartbugs-curated/0.4.x` directory.
 3. Run `npm ci`.
 
 ### Running tests
