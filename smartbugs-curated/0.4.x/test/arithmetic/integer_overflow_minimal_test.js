@@ -4,23 +4,23 @@ const { expect } = require('chai');
 describe('attack arithmetic/integer_overflow_minimal.sol', function () {
     async function deployContracts() {
       const IntegerOverflowAdd = await ethers.getContractFactory('contracts/arithmetic/integer_overflow_minimal.sol:IntegerOverflowMinimal');
-      const overflow = await IntegerOverflowAdd.deploy();  
-      await overflow.waitForDeployment();
-      const address = await overflow.getAddress();
+      const victim = await IntegerOverflowAdd.deploy();  
+      await victim.waitForDeployment();
+      const address = await victim.getAddress();
 
       const IntegerOverflowMinimalAttacker = await ethers.getContractFactory('contracts/arithmetic/integer_overflow_minimal_attack.sol:IntegerOverflowMinimalAttacker');
       const attacker = await IntegerOverflowMinimalAttacker.deploy(address);  
       await attacker.waitForDeployment();
-      return {overflow, attacker};
+      return {victim, attacker};
     }
 
   
-    it('exploit overflow vulnerability', async function () {
-      const {overflow, attacker} = await loadFixture(deployContracts);
-      expect(await overflow.count()).to.equal(1);
-      await overflow.run(1);
-      expect(await overflow.count()).to.equal(0);
+    it('exploit underflow vulnerability', async function () {
+      const {victim, attacker} = await loadFixture(deployContracts);
+      expect(await victim.count()).to.equal(1);
+      await victim.run(1);
+      expect(await victim.count()).to.equal(0);
       await attacker.attack();
-      expect(await overflow.count()).to.greaterThan(0);
+      expect(await victim.count()).to.greaterThan(0);
     });
   });
