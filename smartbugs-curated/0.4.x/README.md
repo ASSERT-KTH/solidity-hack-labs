@@ -21,7 +21,7 @@ These attacks are automated using Hardhat testing framework.
 ## How to get started
 
 ### Prerequisites
-- Nodejs with npm7+ (tested using node:v20.14.0 and npm:10.5.0)
+- Nodejs with npm7+ (tested using node:v20.14.0 and npm:10.7.0)
 
 ### Installation
 1. Make sure that Nodejs is installed.
