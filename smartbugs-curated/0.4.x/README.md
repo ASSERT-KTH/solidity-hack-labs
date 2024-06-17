@@ -6,9 +6,9 @@ These attacks are automated using Hardhat testing framework.
 
 ## Directory structure
 - `contracts/`: Contains Solidity smart contracts.
-    + `<category>`: intermediate directory where `<category>` corresponds to the category of vulnerabilities.
-        - `<file_name>.sol`: smart contract file from smartbugs-curated.
-        - `<file_name>_attack.sol`: attacker contract w.r.t. `<file_name>.sol`
+    + `dataset/`: Dataset directory corresponding to smartbugs-curated contracts.
+    + `<category>/`: intermediate directory where `<category>` corresponds to the category of vulnerabilities.
+        - `<file_name>_attack.sol`: attacker contract w.r.t. `dataset/<category>/<file_name>.sol`
 
 - `test/`: Contains test files. Hardhat uses Mocha testing framework by default.
     + `<category>`: intermediate directory where `<category>` corresponds to the category of vulnerabilities.
