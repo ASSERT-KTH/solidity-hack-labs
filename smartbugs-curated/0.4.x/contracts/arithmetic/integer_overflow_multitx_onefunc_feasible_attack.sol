@@ -1,6 +1,6 @@
 pragma solidity ^0.4.23;
 
-import "./integer_overflow_multitx_onefunc_feasible.sol";
+import "../dataset/arithmetic/integer_overflow_multitx_onefunc_feasible.sol";
 
 contract IntegerOverflowMultiTxOneFuncFeasibleAttacker {
     IntegerOverflowMultiTxOneFuncFeasible public target;

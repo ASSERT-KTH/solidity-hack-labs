@@ -1,11 +1,11 @@
  pragma solidity ^0.4.10;
 
- import "./timelock.sol";
+ import "../dataset/arithmetic/timelock.sol";
  
  contract TimeLockAttacker {
     TimeLock public target;
 
-    function TimeLockAttacker(address _targetAddress) public {
+    constructor (address _targetAddress) public {
         target = TimeLock(_targetAddress);
     }
 

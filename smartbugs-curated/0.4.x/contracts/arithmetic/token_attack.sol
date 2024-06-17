@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import "./token.sol";
+import "../dataset/arithmetic/token.sol";
 
  contract TokenAttacker {
   Token target;

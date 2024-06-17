@@ -1,6 +1,6 @@
 pragma solidity ^0.4.19;
 
-import "./integer_overflow_benign_1.sol";
+import "../dataset/arithmetic/integer_overflow_benign_1.sol";
 
 contract IntegerOverflowBenign1Attacker {
     IntegerOverflowBenign1 victimContract;

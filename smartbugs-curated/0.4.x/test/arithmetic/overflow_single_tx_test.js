@@ -3,7 +3,7 @@ const { expect } = require('chai');
 
 describe('attack arithmetic/overflow_single_tx.sol', function () {
     async function deployContracts() {
-      const IntegerOverflowSingleTransaction = await ethers.getContractFactory('contracts/arithmetic/overflow_single_tx.sol:IntegerOverflowSingleTransaction');
+      const IntegerOverflowSingleTransaction = await ethers.getContractFactory('contracts/dataset/arithmetic/overflow_single_tx.sol:IntegerOverflowSingleTransaction');
       const victim = await IntegerOverflowSingleTransaction.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

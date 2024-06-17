@@ -1,6 +1,6 @@
 pragma solidity ^0.4.23;
 
-import "./overflow_single_tx.sol";
+import "../dataset/arithmetic/overflow_single_tx.sol";
 
 contract IntegerOverflowSingleTransactionAttacker {
     IntegerOverflowSingleTransaction public target;

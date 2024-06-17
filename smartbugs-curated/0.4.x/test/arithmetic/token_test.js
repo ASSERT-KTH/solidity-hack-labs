@@ -7,7 +7,7 @@ describe('attack arithmetic/token.sol', function () {
       const randomPrivateKey = ethers.Wallet.createRandom().privateKey;
 
       to_address = ethers.computeAddress(randomPrivateKey);
-      const Token = await ethers.getContractFactory('contracts/arithmetic/token.sol:Token');
+      const Token = await ethers.getContractFactory('contracts/dataset/arithmetic/token.sol:Token');
       const victim = await Token.deploy(1);  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

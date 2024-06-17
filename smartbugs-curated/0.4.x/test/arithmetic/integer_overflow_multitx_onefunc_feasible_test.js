@@ -3,7 +3,7 @@ const { expect } = require('chai');
 
 describe('attack arithmetic/integer_overflow_multitx_onefunc_feasible.sol', function () {
     async function deployContracts() {
-      const IntegerOverflowMultiTxMultiFuncFeasible = await ethers.getContractFactory('contracts/arithmetic/integer_overflow_multitx_onefunc_feasible.sol:IntegerOverflowMultiTxOneFuncFeasible');
+      const IntegerOverflowMultiTxMultiFuncFeasible = await ethers.getContractFactory('contracts/dataset/arithmetic/integer_overflow_multitx_onefunc_feasible.sol:IntegerOverflowMultiTxOneFuncFeasible');
       const victim = await IntegerOverflowMultiTxMultiFuncFeasible.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

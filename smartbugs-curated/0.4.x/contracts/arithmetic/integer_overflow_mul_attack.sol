@@ -1,6 +1,6 @@
 pragma solidity ^0.4.19;
 
-import "./integer_overflow_mul.sol";
+import "../dataset/arithmetic/integer_overflow_mul.sol";
 
 contract IntegerOverflowMulAttacker {
     IntegerOverflowMul victimContract;

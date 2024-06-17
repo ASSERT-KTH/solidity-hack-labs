@@ -1,6 +1,6 @@
 pragma solidity 0.4.25;
 
-import "./overflow_simple_add.sol";
+import "../dataset/arithmetic/overflow_simple_add.sol";
 
 contract Overflow_AddAttacker {
     Overflow_Add victimContract;

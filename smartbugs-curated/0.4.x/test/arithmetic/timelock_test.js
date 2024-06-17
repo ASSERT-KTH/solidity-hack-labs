@@ -3,7 +3,7 @@ const { expect } = require('chai');
 
 describe('attack arithmetic/timeLock.sol', function () {
     async function deployContracts() {
-      const TimeLock = await ethers.getContractFactory('contracts/arithmetic/timelock.sol:TimeLock');
+      const TimeLock = await ethers.getContractFactory('contracts/dataset/arithmetic/timelock.sol:TimeLock');
       const victim = await TimeLock.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

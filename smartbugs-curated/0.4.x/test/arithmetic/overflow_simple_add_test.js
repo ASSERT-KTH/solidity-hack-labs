@@ -3,7 +3,7 @@ const { expect } = require('chai');
 
 describe('attack arithmetic/overflow_simple_add.sol', function () {
     async function deployContracts() {
-      const Overflow_Add = await ethers.getContractFactory('contracts/arithmetic/overflow_simple_add.sol:Overflow_Add');
+      const Overflow_Add = await ethers.getContractFactory('contracts/dataset/arithmetic/overflow_simple_add.sol:Overflow_Add');
       const overflow = await Overflow_Add.deploy();  
       await overflow.waitForDeployment();
       const address = await overflow.getAddress();

@@ -8,9 +8,6 @@
 
  contract Token {
 
-    event Transfer(address indexed from, address indexed to, uint value);
-    event Success(string message);
-
    mapping(address => uint) balances;
    uint public totalSupply;
 
@@ -20,10 +17,7 @@
 
    function transfer(address _to, uint _value) public returns (bool) {
      // <yes> <report> ARITHMETIC
-     emit Transfer(msg.sender, _to, _value);
      require(balances[msg.sender] - _value >= 0);
-
-     emit Success("Transfer successful");
      // <yes> <report> ARITHMETIC
      balances[msg.sender] -= _value;
      balances[_to] += _value;
