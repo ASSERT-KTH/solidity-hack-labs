@@ -3,7 +3,6 @@
  * @author: -
  * @vulnerable_at_lines: 54
  */
-import "hardhat/console.sol";
 
 pragma solidity ^0.4.19;
 
@@ -41,8 +40,6 @@ contract PERSONAL_BANK
     public
     payable
     {
-        console.log("Caller balance %s ",balances[msg.sender]);
-        console.log("msg.value %s ",msg.value);
         balances[msg.sender]+= msg.value;
         Log.AddMessage(msg.sender,msg.value,"Put");
     }
@@ -51,10 +48,6 @@ contract PERSONAL_BANK
     public
     payable
     {
-        console.log("Sender balance %s ",balances[msg.sender]);
-        console.log("AMount required %s ",_am);
-        console.log('MinSum is %s', MinSum);
-
         if(balances[msg.sender]>=MinSum && balances[msg.sender]>=_am)
         {
             // <yes> <report> REENTRANCY
