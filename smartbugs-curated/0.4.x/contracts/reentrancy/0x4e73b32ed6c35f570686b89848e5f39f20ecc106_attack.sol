@@ -16,7 +16,7 @@ contract MaliciousContract {
 
         // Call the vulnerable function to start the reentrancy attack
         
-        privateETHCell.Collect.value(msg.value)(1 ether);
+        privateETHCell.Collect(1 ether);
 
         attackInitiated = true;
     }
