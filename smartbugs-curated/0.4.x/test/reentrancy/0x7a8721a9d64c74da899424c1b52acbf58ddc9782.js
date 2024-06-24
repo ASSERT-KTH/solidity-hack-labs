@@ -52,7 +52,7 @@ describe("Reentrancy Attack for 0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol",
     // privateDeposit has a drained account
     expect(victimBalance).to.equal(ethers.parseEther("0")); 
 
-    // 2 original balance + 1 from initial deposit 
+    // 5 original balance + 2 from attacker initial deposit 
     expect(maliciousContractBalance).to.equal(ethers.parseEther("7"));
     
   });
