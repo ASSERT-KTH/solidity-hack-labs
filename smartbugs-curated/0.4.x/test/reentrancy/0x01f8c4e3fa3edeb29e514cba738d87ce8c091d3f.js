@@ -29,7 +29,7 @@ describe("Reentrancy Attack for 0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
     // Initial deposit to PersonalBank contract
     await personalBank.Deposit({ value: ethers.parseEther("2") });
 
-    // Initial deposit from maliciousContract on Personal Bank
+    // Initial deposit from maliciousContract on PersonalBank
     await maliciousContract.deposit({value:  ethers.parseEther("3")});
 
     // Perform reentrancy attack through MaliciousContract, must be =< than initial deposit
