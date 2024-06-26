@@ -11,12 +11,12 @@ contract MaliciousContract{
     }
 
     function attack() public payable{
-        require(msg.value >= 1 ether, "Must addd at least 1 ether");
+        require(msg.value >= 1 ether, "Must send at least 1 ether");
         w_WALLET.Collect(msg.value);
     }
 
     function deposit()  public payable{
-        require(msg.value >= 1 ether, "Must addd at least 1 ether");
+        require(msg.value >= 1 ether, "Must add at least 1 ether");
         w_WALLET.Put.value(msg.value)(1);        
     }
 
