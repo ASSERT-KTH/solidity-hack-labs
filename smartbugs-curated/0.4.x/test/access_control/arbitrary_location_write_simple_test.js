@@ -17,8 +17,8 @@ describe('attack access_control/arbitrary_location_write_simple.sol', function (
   
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);
-      await expect(attacker.test(10, 42)).to.be.reverted;
-      await attacker.attack();
-      await expect(attacker.test(10, 42)).to.not.be.reverted;
+      await expect(attacker.test()).to.be.reverted;
+      await attacker.attack(await attacker.getAddress());
+      await attacker.test();
     });
   });
