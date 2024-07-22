@@ -6,8 +6,6 @@
 
 pragma solidity ^0.4.19;
 
-import "hardhat/console.sol";
-
 contract PENNY_BY_PENNY  
 {
     struct Holder   
@@ -48,13 +46,9 @@ contract PENNY_BY_PENNY
     public
     payable
     {
-        console.log("Start call to PUT");
-        console.log("Input time is : %s on Put", _lockTime);
         var acc = Acc[msg.sender];
         acc.balance += msg.value;
-        console.log("ACC time is : %s on Put", acc.unlockTime);
         if(now+_lockTime>acc.unlockTime)acc.unlockTime=now+_lockTime;
-        console.log("ACC time is : %s on Put", acc.unlockTime);
         Log.AddMessage(msg.sender,msg.value,"Put");
     }
     
@@ -62,10 +56,7 @@ contract PENNY_BY_PENNY
     public
     payable
     {
-        console.log("Start call to Collect");
         var acc = Acc[msg.sender];
-        console.log("ACC time is : %s", acc.unlockTime);
-        console.log("now time is: %s", now);
         if( acc.balance>=MinSum && acc.balance>=_am && now>acc.unlockTime)
         {
             // <yes> <report> REENTRANCY
