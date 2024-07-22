@@ -14,4 +14,9 @@ module.exports = {
       },
     ],
   },
+  networks: {
+    hardhat: {
+      hardfork: "shanghai"
+    }
+  }
 };
