@@ -6,7 +6,7 @@
  */
 
 pragma solidity ^0.4.19;
-import 'hardhat/console.sol';
+
 contract ACCURAL_DEPOSIT
 {
     mapping (address=>uint256) public balances;   
@@ -41,7 +41,6 @@ contract ACCURAL_DEPOSIT
     public
     payable
     {
-        console.log('Sending: %s  from %s', msg.value, msg.sender);
         balances[msg.sender]+= msg.value;
         Log.AddMessage(msg.sender,msg.value,"Put");
     }
@@ -50,23 +49,14 @@ contract ACCURAL_DEPOSIT
     public
     payable
     {
-        console.log('FROM COLLECT FUNCTION');
-        console.log('collecting:        %s ', _am);
-        //console.log('address attacker %s', msg.sender);
-        console.log('HACKER BEFORE:     %s', address(msg.sender).balance);
-        console.log('balance on victim: %s', balances[msg.sender]);
         if(balances[msg.sender]>=MinSum && balances[msg.sender]>=_am)
         {
             // <yes> <report> REENTRANCY
             if(msg.sender.call.value(_am)())
             {
-                console.log('HACKER BEFORE:        %s', address(msg.sender).balance);
-                console.log('balance on victim:    %s', balances[msg.sender]);
                 balances[msg.sender]-=_am;
-                console.log('HACKER AFTER:         %s', address(msg.sender).balance);
                 Log.AddMessage(msg.sender,_am,"Collect");
             }
-            console.log('FALSE');
         }
     }
     
@@ -74,7 +64,6 @@ contract ACCURAL_DEPOSIT
     public 
     payable
     {
-        console.log('fallback function');
         Deposit();
     }
     
