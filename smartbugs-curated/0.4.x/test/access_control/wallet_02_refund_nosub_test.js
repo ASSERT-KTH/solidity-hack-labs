@@ -21,10 +21,6 @@ describe('attack access_control/wallet_02_refund_nosub.sol', function () {
       const victim_addr = await victim.getAddress();
       const attacker_addr = await attacker.getAddress();
       const amount = ethers.parseEther("1.0");
-      // await v.sendTransaction({
-      //   to: victim_addr,
-      //   value: amount,
-      // });
 
       await victim.connect(v).deposit({value: amount});
 
