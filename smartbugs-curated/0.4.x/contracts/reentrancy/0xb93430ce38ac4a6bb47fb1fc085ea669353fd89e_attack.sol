@@ -7,8 +7,8 @@ contract MaliciousContract{
     PrivateBank privateBank;
     
 
-    constructor(address _privateBank) public{
-        privateBank= PrivateBank (_privateBank);
+    constructor(address _victimAddress) public{
+        privateBank= PrivateBank (_victimAddress);
     }
 
    function attack(uint amount) public {

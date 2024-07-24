@@ -8,8 +8,8 @@ contract MaliciousContract{
     BANK_SAFE bank_SAFE;
     
 
-    constructor(address _bank_SAFE) public{
-        bank_SAFE= BANK_SAFE (_bank_SAFE);
+    constructor(address _victimAddress) public{
+        bank_SAFE= BANK_SAFE (_victimAddress);
     }
 
     function attack(uint amount) public {

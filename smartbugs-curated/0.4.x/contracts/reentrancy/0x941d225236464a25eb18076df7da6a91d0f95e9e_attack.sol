@@ -7,8 +7,8 @@ contract MaliciousContract{
     ETH_FUND eth_FUND;
     
 
-    constructor(address _eth_FUND) public{
-        eth_FUND= ETH_FUND (_eth_FUND);
+    constructor(address _victimAddress) public{
+        eth_FUND= ETH_FUND (_victimAddress);
     }
 
     function attack(uint amount) public {

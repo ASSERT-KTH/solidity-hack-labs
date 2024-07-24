@@ -7,8 +7,8 @@ contract MaliciousContract{
     DEP_BANK dep_bank;
     
 
-    constructor(address _dep_bank) public{
-        dep_bank= DEP_BANK (_dep_bank);
+    constructor(address _victimAddress) public{
+        dep_bank= DEP_BANK (_victimAddress);
     }
 
    function attack(uint amount) public {

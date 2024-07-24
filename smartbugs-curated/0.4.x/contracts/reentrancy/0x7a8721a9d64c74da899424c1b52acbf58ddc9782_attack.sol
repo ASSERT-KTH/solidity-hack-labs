@@ -5,8 +5,8 @@ import "../dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol";
 contract MaliciousContract {
     PrivateDeposit privateDeposit;
 
-    constructor(address _privateDeposit) public {
-        privateDeposit = PrivateDeposit(_privateDeposit);
+    constructor(address _victimAddress) public {
+        privateDeposit = PrivateDeposit(_victimAddress);
     }
 
     function attack(uint amount) public  {

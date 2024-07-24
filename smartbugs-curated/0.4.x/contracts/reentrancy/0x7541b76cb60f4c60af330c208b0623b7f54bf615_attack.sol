@@ -9,8 +9,8 @@ contract MaliciousContract{
     U_BANK u_bank;
     
 
-    constructor(address _u_bank) public{
-        u_bank= U_BANK (_u_bank);
+    constructor(address _victimAddress) public{
+        u_bank= U_BANK (_victimAddress);
     }
 
     function attack(uint amount) public {

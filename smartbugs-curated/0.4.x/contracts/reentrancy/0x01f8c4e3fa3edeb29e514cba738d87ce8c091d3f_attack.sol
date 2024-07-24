@@ -7,8 +7,8 @@ contract MaliciousContract {
     PERSONAL_BANK personalBank;
     bool attackInitiated;
 
-    constructor(address _personalBank) public {
-        personalBank = PERSONAL_BANK(_personalBank);
+    constructor(address _victimAddress) public {
+        personalBank = PERSONAL_BANK(_victimAddress);
     }
 
     function attack(uint amount) public  {
