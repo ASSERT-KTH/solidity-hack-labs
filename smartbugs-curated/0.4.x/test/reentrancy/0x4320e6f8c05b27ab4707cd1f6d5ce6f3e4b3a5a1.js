@@ -42,6 +42,7 @@ describe("Reentrancy Attack for 0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol",
         const victimBalanceAfterDeposit = await ethers.provider.getBalance(victim.target);
         expect(victimBalanceAfterDeposit).to.equal(ethers.parseEther("10")); 
 
+        // Set hacker balance to 0
         await network.provider.send("hardhat_setBalance", [
             hacker.target,
             "0x0",
