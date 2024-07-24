@@ -11,9 +11,9 @@ contract MaliciousContract{
         x_WALLET= X_WALLET (_x_WALLET);
     }
 
-    function attack() public payable{
-        require(msg.value >= 1 ether, "Must send at least 1 ether");
-        x_WALLET.Collect(msg.value);
+  function attack(uint amount) public {
+        require(amount >= 1 ether, "Must attempt and attack with at least 1 ether");
+        x_WALLET.Collect(amount);
     }
 
     function deposit()  public payable{
