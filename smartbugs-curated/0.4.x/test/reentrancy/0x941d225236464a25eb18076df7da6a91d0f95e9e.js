@@ -18,7 +18,7 @@ describe("Reentrancy Attack for 0x941d225236464a25eb18076df7da6a91d0f95e9e.sol",
         ETH_FUND = await ethers.getContractFactory("contracts/dataset/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol:ETH_FUND");
         victim = await ETH_FUND.deploy(log.target); // Set Log address on constructor
         await victim.waitForDeployment();
-        
+
         // Deploy MaliciousContract with ETH_FUND address
         MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e_attack.sol:MaliciousContract");
         hacker = await MaliciousContract.deploy(victim.target);
@@ -39,9 +39,17 @@ describe("Reentrancy Attack for 0x941d225236464a25eb18076df7da6a91d0f95e9e.sol",
         const victimBalanceAfterDeposit = await ethers.provider.getBalance(victim.target);
         expect(victimBalanceAfterDeposit).to.equal(ethers.parseEther("7")); 
 
+        //set the hackers balance to 0
+        await network.provider.send("hardhat_setBalance", [
+            hacker.target,
+            "0x0",
+          ]);
+        let hackerBalance = await ethers.provider.getBalance(hacker.target);
+        expect(hackerBalance).to.equal(0);
+
 
         // Perform reentrancy attack through MaliciousContract
-        await hacker.attack({value:  ethers.parseEther("2")});
+        await hacker.attack(ethers.parseEther("2"));
         
         // Check balances after attack
         const victimBalance = await ethers.provider.getBalance(victim.target);
@@ -52,8 +60,8 @@ describe("Reentrancy Attack for 0x941d225236464a25eb18076df7da6a91d0f95e9e.sol",
         // victim has a drained account
         expect(victimBalance).to.equal(ethers.parseEther("0")); 
 
-        // 5 original balance + 2 from  initial deposit + 2 from CashOut fallback function 
-        expect(maliciousContractBalance).to.equal(ethers.parseEther("9"));
+        // 5 original balance + 2 from  initial deposit 
+        expect(maliciousContractBalance).to.equal(ethers.parseEther("7"));
         
     });
     });
