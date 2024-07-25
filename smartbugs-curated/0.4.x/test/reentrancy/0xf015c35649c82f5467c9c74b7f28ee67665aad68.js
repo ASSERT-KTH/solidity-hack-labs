@@ -20,7 +20,7 @@ describe("Reentrancy Attack for 0xf015c35649c82f5467c9c74b7f28ee67665aad68.sol",
     await victim.waitForDeployment();
  
     // Deploy MaliciousContract with MY_BANK address
-    MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888_attack.sol:MaliciousContract");
+    MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68_attack.sol:MaliciousContract");
     hacker = await MaliciousContract.deploy(victim.target);
     
   });
