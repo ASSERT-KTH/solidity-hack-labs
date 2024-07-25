@@ -21,7 +21,7 @@ describe("Reentrancy Attack for 0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol",
         //await victim.setLog(log.target); // Set Log address after deployment
 
         // Deploy MaliciousContract with ETH_VAULT address
-        MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e_attack.sol:MaliciousContract");
+        MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f_attack.sol:MaliciousContract");
         hacker = await MaliciousContract.deploy(victim.target);
         
     });
