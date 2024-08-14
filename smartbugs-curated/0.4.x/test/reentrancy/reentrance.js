@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 describe("Reentrancy Attack for reentrance.sol", function () {  
-    let PrivateBank;
+    let Reentrance;
     let victim;
     let MaliciousContract;
     let hacker;
@@ -11,13 +11,13 @@ describe("Reentrancy Attack for reentrance.sol", function () {
     beforeEach(async function () {
         // Deploy Log contract
 
-        // Deploy PrivateBank contract with Log address
-        PrivateBank = await ethers.getContractFactory("contracts/dataset/reentrancy/reentrance.sol:Reentrance");
-        victim = await PrivateBank.deploy();
+        // Deploy Reentrance contract with Log address
+        Reentrance = await ethers.getContractFactory("contracts/dataset/reentrancy/reentrance.sol:Reentrance");
+        victim = await Reentrance.deploy();
         await victim.waitForDeployment();
         //await victim.setLog(log.target); // Set Log address after deployment
 
-        // Deploy MaliciousContract with PrivateBank address
+        // Deploy MaliciousContract with Reentrance address
         MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/reentrance_attack.sol:MaliciousContract");
         hacker = await MaliciousContract.deploy(victim.target);
         
