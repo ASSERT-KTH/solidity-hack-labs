@@ -32,7 +32,7 @@ describe('attack bad_randomness/blackjack.sol', function () {
     }
 
   
-    it('exploit access control vulnerability', async function () {
+    it('exploit bad randomness vulnerability', async function () {
         const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
         const {victim, attacker} = await loadFixture(deployContracts);

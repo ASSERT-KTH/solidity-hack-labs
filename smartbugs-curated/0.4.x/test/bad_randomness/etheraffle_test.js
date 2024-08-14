@@ -17,7 +17,7 @@ describe('attack bad_randomness/etheraffle.sol', function () {
     }
 
   
-    it('exploit access control vulnerability', async function () {
+    it('exploit bad randomness vulnerability', async function () {
         const {victim, attacker} = await loadFixture(deployContracts);
 
         const victimBalanceBefore = await ethers.provider.getBalance(victim.target);

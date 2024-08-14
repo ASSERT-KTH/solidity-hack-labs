@@ -30,7 +30,7 @@ describe('attack bad_randomness/guess_the_random_number.sol', function () {
     }
 
   
-    it('exploit access control vulnerability', async function () {
+    it('exploit bad randomness vulnerability', async function () {
         const {block, victim, attacker} = await loadFixture(deployContracts);
 
         const victimBalanceBefore = await ethers.provider.getBalance(victim.target);

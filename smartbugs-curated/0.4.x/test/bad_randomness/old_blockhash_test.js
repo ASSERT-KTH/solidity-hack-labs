@@ -12,9 +12,7 @@ describe('attack bad_randomness/old_blockhash.sol', function () {
             value: amount};
         const PredictTheBlockHashChallenge = await ethers.getContractFactory('contracts/dataset/bad_randomness/old_blockhash.sol:PredictTheBlockHashChallenge');
         const victim = await PredictTheBlockHashChallenge.deploy(options);  
-
-        const tx = await victim.deploymentTransaction().wait();
-        const block = await ethers.provider.getBlock(tx.blockNumber);
+        await victim.waitForDeployment();
 
 
         const PredictTheBlockHashChallengeAttacker = await ethers.getContractFactory('contracts/bad_randomness/old_blockhash_attack.sol:PredictTheBlockHashChallengeAttacker');
@@ -26,12 +24,12 @@ describe('attack bad_randomness/old_blockhash.sol', function () {
             value: amount
         });
 
-    return {block, victim, attacker};
+    return {victim, attacker};
     }
 
   
-    it('exploit access control vulnerability', async function () {
-        const {block, victim, attacker} = await loadFixture(deployContracts);
+    it('exploit brad randomness vulnerability', async function () {
+        const {victim, attacker} = await loadFixture(deployContracts);
 
         const victimBalanceBefore = await ethers.provider.getBalance(victim.target);
         expect(victimBalanceBefore).to.equal(amount);

@@ -16,7 +16,7 @@ describe('attack bad_randomness/smart_billions.sol', function () {
     }
 
   
-    it('exploit access control vulnerability', async function () {
+    it('exploit bad randomness vulnerability', async function () {
         const [v, a] = await ethers.getSigners();
 
         const {victim, attacker} = await loadFixture(deployContracts);
