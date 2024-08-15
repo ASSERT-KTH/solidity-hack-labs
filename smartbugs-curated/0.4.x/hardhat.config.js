@@ -14,4 +14,14 @@ module.exports = {
       },
     ],
   },
+  networks: {
+    hardhat: {
+      gas: "auto",
+      mining: {
+        mempool: {
+          order: "fifo"
+        }
+      }
+    }
+  }
 };
