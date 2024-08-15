@@ -16,7 +16,13 @@ module.exports = {
   },
   networks: {
     hardhat: {
-      hardfork: "shanghai"
+      hardfork: "shanghai",
+      gas: "auto",
+      mining: {
+        mempool: {
+          order: "fifo"
+        }
+      }
     }
   }
 };
