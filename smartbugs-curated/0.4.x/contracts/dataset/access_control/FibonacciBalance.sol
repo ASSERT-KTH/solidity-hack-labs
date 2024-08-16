@@ -6,6 +6,7 @@
 
 //added pragma version
 pragma solidity ^0.4.22;
+import "hardhat/console.sol";
 
 contract FibonacciBalance {
 

