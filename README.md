@@ -1,2 +1,5 @@
 # HACK-LABS
-Repository to store our work on recreating attacks for smart contracts
+
+Contains actual smart contract attacker contracts for major benchmarks, starting with smartbugs-curated.
+
+
