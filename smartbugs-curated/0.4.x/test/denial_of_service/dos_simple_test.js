@@ -27,7 +27,7 @@ describe('attack denial_of_service/dos_simple.sol', function () {
         const tx2 = await victim.ifillArray();
 
         await network.provider.send("evm_mine");
-
+        await network.provider.send("evm_setAutomine", [true]);
 
         const receipt1 = await (await tx1).wait();
         expect(receipt1.status).to.equal(1); // Ensure tx1 was successful
