@@ -2,15 +2,9 @@ const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 
 describe('attack front_running/eth_tx_order_dependence_minimal.sol', function () {
-    let owner;
-    let user;
-    let attacker;
-    let snapshotId;
+    let owner, user , attacker;
     async function deployContracts() {
-      const [s1, s2, s3] = await ethers.getSigners();
-      owner = s1;
-      user = s2;
-      attacker = s3;
+      [owner, user, attacker] = await ethers.getSigners();
       const EthTxOrderDependenceMinimal = await ethers.getContractFactory('contracts/dataset/front_running/eth_tx_order_dependence_minimal.sol:EthTxOrderDependenceMinimal');
       const victim = await EthTxOrderDependenceMinimal.connect(owner).deploy();  
       return {victim};
