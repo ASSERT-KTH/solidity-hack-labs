@@ -7,7 +7,7 @@
 pragma solidity ^0.4.22;
 
 contract FindThisHash {
-    bytes32 constant public hash = 0xb5b5b97fafd9855eec9b41f74dfb6c38f5951141f9a3ecd7f44d5479b630ee0a;
+    bytes32 constant public hash = 0x3ea2f1d0abf3fc66cf29eebb70cbd4e7fe762ef8a09bcc06c8edf641230afec0;
 
     constructor() public payable {} // load with ether
 
