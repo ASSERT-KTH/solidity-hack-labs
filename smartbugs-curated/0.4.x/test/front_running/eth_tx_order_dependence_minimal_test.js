@@ -11,7 +11,7 @@ describe('attack front_running/eth_tx_order_dependence_minimal.sol', function ()
     }
 
 
-    it('front running control vulnerability in setReward() function', async function () {
+    it('front running vulnerability in setReward() function', async function () {
       const {victim} = await loadFixture(deployContracts);
 
       const attackerBalanceBefore = await ethers.provider.getBalance(attacker.address);
@@ -49,7 +49,7 @@ describe('attack front_running/eth_tx_order_dependence_minimal.sol', function ()
     });
 
 
-    it('front running control vulnerability in claimReward() function', async function () {
+    it('front running vulnerability in claimReward() function', async function () {
         const {victim} = await loadFixture(deployContracts);
   
         const attackerBalanceBefore = await ethers.provider.getBalance(attacker.address);
