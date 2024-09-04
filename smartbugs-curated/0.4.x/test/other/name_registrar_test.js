@@ -15,7 +15,7 @@ describe('attack other/name_registrar.sol', function () {
     }
 
   
-    it('exploit access control vulnerability', async function () {
+    it('exploit uninitialized storage vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);
 
       const unlocked = await victim.unlocked();
