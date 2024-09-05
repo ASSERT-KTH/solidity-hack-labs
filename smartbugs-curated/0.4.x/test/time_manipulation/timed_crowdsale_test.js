@@ -1,4 +1,4 @@
-const { loadFixture, time } = require('@nomicfoundation/hardhat-network-helpers');
+const { loadFixture, time, mine } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 
 describe('attack time_manipulation/timed_crowdsale.sol', function () {
@@ -16,10 +16,8 @@ describe('attack time_manipulation/timed_crowdsale.sol', function () {
         const saleEndTimestamp = 1546300800;
 
         // // Fast forward time to January 1, 2019 (just after sale end)
-        const timeToIncrease = saleEndTimestamp - (await ethers.provider.getBlock('latest')).timestamp + 1;
-        
-        await ethers.provider.send("evm_increaseTime", [timeToIncrease]); // increase time past the sale end
-        await ethers.provider.send("evm_mine"); // mine a new block
+        await time.setNextBlockTimestamp(saleEndTimestamp);
+        await mine(1);
 
         // // The sale should now be finished due to the time manipulation
         const saleFinished = await victim.isSaleFinished();
