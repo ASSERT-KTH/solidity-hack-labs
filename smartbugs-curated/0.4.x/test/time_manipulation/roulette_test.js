@@ -8,8 +8,8 @@ describe('attack time_manipulation/roulette.sol', function () {
 
         amount =  ethers.parseEther("10");
 
-        const EtherLotto = await ethers.getContractFactory('contracts/dataset/time_manipulation/roulette.sol:Roulette');
-        const victim = await EtherLotto.connect(owner).deploy({value: amount});
+        const Roulette = await ethers.getContractFactory('contracts/dataset/time_manipulation/roulette.sol:Roulette');
+        const victim = await Roulette.connect(owner).deploy({value: amount});
 
     return {victim};
     }
