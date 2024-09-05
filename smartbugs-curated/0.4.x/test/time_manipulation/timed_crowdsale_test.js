@@ -11,6 +11,7 @@ describe('attack time_manipulation/timed_crowdsale.sol', function () {
 
   
     it('exploit time manipulation vulnerability', async function () {
+        await hre.network.provider.send("hardhat_reset");
         const {victim} = await loadFixture(deployContracts);
 
         const saleEndTimestamp = 1546300800;
