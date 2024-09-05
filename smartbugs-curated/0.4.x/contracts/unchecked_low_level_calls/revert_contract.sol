@@ -1,9 +1,9 @@
 pragma solidity 0.4.25;
 
-contract ReturnValueAttacker {
+contract RevertContract {
 
     // Fallback function that will fail on purpose
     function() external payable {
-        revert("I am malicious!");
+        revert("I always revert!");
     }
 }

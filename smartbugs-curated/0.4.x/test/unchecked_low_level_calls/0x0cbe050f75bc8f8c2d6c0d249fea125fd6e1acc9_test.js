@@ -1,11 +1,11 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 
-describe("attack unchecked_low_level_calls/unchecked_return_value.sol", function () {
+describe("attack unchecked_low_level_calls/0x0cbe050f75bc8f8c2d6c0d249fea125fd6e1acc9.sol", function () {
 
   async function deployContracts() {
-    const ReturnValue = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/unchecked_return_value.sol:ReturnValue");
-    const contract = await ReturnValue.deploy();
+    const Caller = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x0cbe050f75bc8f8c2d6c0d249fea125fd6e1acc9.sol:Caller");
+    const contract = await Caller.deploy();
 
     const RevertContract = await ethers.getContractFactory("contracts/unchecked_low_level_calls/revert_contract.sol:RevertContract");
     const revertContract = await RevertContract.deploy();
@@ -23,11 +23,7 @@ describe("attack unchecked_low_level_calls/unchecked_return_value.sol", function
         value: ethers.parseEther("1"),
       })
     ).to.be.revertedWith("I always revert!");
-
-    // Ensure callchecked reverts on failure
-    await expect(contract.callchecked(revertContract.target)).to.be.reverted;
-    // This call does not revert, even though the malicious contract fails
-    await expect(contract.callnotchecked(revertContract.target)).to.not.be.reverted;
+    await expect(contract.callAddress(revertContract.target)).to.not.be.reverted;
 
   });
 });
