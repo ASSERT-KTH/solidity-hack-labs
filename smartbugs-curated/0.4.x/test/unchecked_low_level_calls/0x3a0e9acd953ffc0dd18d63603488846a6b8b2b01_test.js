@@ -75,11 +75,6 @@ describe("attack unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8
     ).to.be.revertedWith("I always revert!");
 
     const amount = ethers.parseEther("2");
-    // // Signer deposits ether to become a holder
-    // await sig.sendTransaction({
-    //     to: contract.target,
-    //     value: amount,
-    // });
 
     await revertContract.connect(sig).sendEther(contract.target, {value: amount});
 
@@ -90,12 +85,10 @@ describe("attack unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8
 
     expect(await ethers.provider.getBalance(contract.target)).to.equal(amount + amount);
 
-    // Expect signer to be in Holders
     expect(await contract.Holders(revertContract.target)).to.equal(amount);
 
     expect(await contract.Holders(owner.address)).to.equal(amount);
 
-    // signer puts the wrong address in the withdraw function
     await contract.connect(owner).WithdrawToHolder(revertContract.target, amount);
 
     expect(await contract.Holders(owner.address)).to.equal(amount);
@@ -103,12 +96,9 @@ describe("attack unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8
 
 
     const revertBalance = await ethers.provider.getBalance(revertContract.target);
-    // the wrong contract doesn't get the ether
     expect(revertBalance).to.equal(0);
 
-    // // the contract still holds the ether
     expect(await ethers.provider.getBalance(contract.target)).to.equal(amount + amount);
-
 
   });
 
