@@ -7,8 +7,8 @@ describe("attack unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec435
 
   async function deployContracts() {
     [owner] = await ethers.getSigners();
-    const WhaleGiveaway2 = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol:WhaleGiveaway2");
-    const contract = await WhaleGiveaway2.connect(owner).deploy();
+    const MultiplicatorX4 = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x3e013fc32a54c4c5b6991ba539dcd0ec4355c859.sol:MultiplicatorX4");
+    const contract = await MultiplicatorX4.connect(owner).deploy();
 
     const RevertContract = await ethers.getContractFactory("contracts/unchecked_low_level_calls/revert_contract.sol:RevertContract");
     const revertContract = await RevertContract.deploy();
