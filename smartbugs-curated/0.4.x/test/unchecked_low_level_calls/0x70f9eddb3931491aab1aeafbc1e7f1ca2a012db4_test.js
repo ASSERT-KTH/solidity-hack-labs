@@ -3,7 +3,7 @@ const { expect } = require('chai');
 
 describe("attack unchecked_low_level_calls/0x70f9eddb3931491aab1aeafbc1e7f1ca2a012db4.sol", function () {
 
-  let onwer;
+  let owner;
 
   async function deployContracts() {
     [owner] = await ethers.getSigners();
