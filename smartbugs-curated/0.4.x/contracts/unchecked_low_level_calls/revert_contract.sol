@@ -13,4 +13,10 @@ contract RevertContract {
     (bool success, ) = _to.call.value(msg.value)("");
     require(success, "Ether transfer failed");
     }
+
+    function withdrawEther(address _from) public {
+        bytes4 data = bytes4(keccak256("withdraw()"));
+        (bool success, ) = _from.call(data);
+        require(success, "Ether transfer failed");
+    }
 }
