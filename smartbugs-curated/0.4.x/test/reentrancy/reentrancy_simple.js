@@ -5,8 +5,6 @@ describe("Reentrancy Attack for reentrancy_simple.sol", function () {
     let victim;
     let MaliciousContract;
     let hacker;
-    let Log;
-    let log;
 
     beforeEach(async function () {
         // Deploy Log contract

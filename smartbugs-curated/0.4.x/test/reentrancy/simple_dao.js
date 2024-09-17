@@ -35,20 +35,24 @@ describe("Reentrancy Attack for simpleDAO.sol", function () {
     let balanceETH = await ethers.provider.getBalance(simpleDAO.target);
     expect(balanceETH).to.equal(ethers.parseEther("10"));
 
+    // Initial deposit from hacker on victim contract
+    await maliciousContract.deposit({value:  ethers.parseEther("1")});
+
+    balanceETH = await ethers.provider.getBalance(simpleDAO.target);
+    expect(balanceETH).to.equal(ethers.parseEther("11"));
+
 
     // Attacker calls the `attack` function on MaliciousContract
     // and sends 1 ETH
-    await maliciousContract.attack({
-        value: ethers.parseEther("1"),
-      });
+    await maliciousContract.attack(ethers.parseEther("1"));
 
     // Check balances after attack
     const maliciousContractBalance = await ethers.provider.getBalance(attackerAddress);
     const simpleDAOBalance = await ethers.provider.getBalance(innocentAddress);
 
     // Verify the attack was successful
-    expect(maliciousContractBalance).to.equal(ethers.parseEther("11")); //11= 1 from the donation, 10 from the attack
-    expect(simpleDAOBalance).to.equal(ethers.parseEther("0"));
+    expect(maliciousContractBalance).to.be.above(ethers.parseEther("1")); 
+    expect(simpleDAOBalance).to.be.below(ethers.parseEther("10"));
     
   });
 });

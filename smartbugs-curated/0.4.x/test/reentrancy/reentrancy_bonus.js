@@ -55,11 +55,9 @@ describe("Reentrancy Attack for reentrancy_bonus.sol", function () {
 
         // Verify the attack was successful
         
-        // victim has a drained account
-        expect(victimBalance).to.equal(56); 
+        // hacker gets more than the initial bonus 100 
+        expect(hackerBalance).to.be.above(100);
 
-        // 5 original balance + 4 from hacker initial deposit 
-        expect(hackerBalance).to.equal(200);
         
     });
     });

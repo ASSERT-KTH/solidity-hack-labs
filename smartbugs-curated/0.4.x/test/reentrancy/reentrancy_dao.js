@@ -55,10 +55,10 @@ describe("Reentrancy Attack for reentrancy_dao.sol", function () {
 
         // Verify the attack was successful
         
-        // victim has a drained account
+        // victim has les money than expected
         expect(victimBalance).to.be.below(ethers.parseEther("5"));
 
-        // 5 original balance + 2 from  initial deposit 
+        // hacker has more than the initial withdrawal 
         expect(hackerBalance).to.be.above(ethers.parseEther("1"));
 
         
