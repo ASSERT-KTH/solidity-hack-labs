@@ -380,3 +380,6 @@ node_modules
 # hardhat
 artifacts
 cache
+
+package-lock.json
+package.json
