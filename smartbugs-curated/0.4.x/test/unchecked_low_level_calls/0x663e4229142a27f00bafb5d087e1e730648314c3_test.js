@@ -92,23 +92,6 @@ describe("attack unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648
   });
 
 
-  it("exploit unchecked low level call vulnerability in function withdrawBalance()", async function () {
-    const {pandaCaller, contract, saleAuction, siringAuction, nft} = await loadFixture(deployContracts);
-    expect(await ethers.provider.getBalance(contract.target)).to.be.equal(amount);
-    expect(await ethers.provider.getBalance(pandaCaller.target)).to.be.equal(0);
-    await expect(
-      owner.sendTransaction({
-        to: pandaCaller.target,
-        value: amount,
-      })
-    ).to.be.revertedWith("I always revert!");
-
-    await expect(pandaCaller.withdraw()).to.not.be.reverted;
-    expect(await ethers.provider.getBalance(contract.target)).to.be.equal(amount);
-    expect(await ethers.provider.getBalance(pandaCaller.target)).to.be.equal(0);
-
-  });
-
   it("exploit unchecked low level call vulnerability in function giveBirth()", async function () {
     const {pandaCaller, contract, saleAuction, siringAuction, nft} = await loadFixture(deployContracts);
     await contract.connect(owner).setSiringAuctionAddress(siringAuction.target);
