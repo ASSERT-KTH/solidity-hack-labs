@@ -25,5 +25,11 @@ module.exports = {
       initialDate: "2018-12-31 11:59:00 PM",
       hardfork: "shanghai",
     }
-  }
+  },
+  mocha: {
+    reporter: './scripts/CustomReporter.js',
+    reporterOptions: {
+      json: false, // Export test results to JSON
+    }
+  },
 };

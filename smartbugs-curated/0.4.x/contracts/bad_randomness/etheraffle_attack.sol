@@ -22,8 +22,6 @@ contract Ethraffle_v4bAttacker {
 
     function chooseWinner() public returns (uint) {
 
-        // console.log("coinbase", block.coinbase);
-        // console.log("difficulty: %d", block.difficulty);
 
         address seed1 = contestants[uint(block.coinbase) % totalTickets];
         address seed2 = contestants[uint(address(this)) % totalTickets];
