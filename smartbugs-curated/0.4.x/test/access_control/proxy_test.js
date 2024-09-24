@@ -34,7 +34,6 @@ describe('attack access_control/proxy.sol', function () {
       const {victim, attacker} = await loadFixture(deployContracts);
       const victim_addr = await victim.getAddress();
       const attacker_addr = await attacker.getAddress();
-      console.log("attacker address: ", attacker_addr);
 
       const victimeBalanceBefore = await ethers.provider.getBalance(victim_addr);
       expect(victimeBalanceBefore).to.equal(amount);
