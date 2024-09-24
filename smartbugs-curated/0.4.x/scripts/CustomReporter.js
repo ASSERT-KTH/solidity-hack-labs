@@ -35,9 +35,16 @@ class CustomReporter extends Spec {
     });
 
     // If any test fails
-    runner.on('fail', () => {
+    runner.on('fail', (test, err) => {
       // Mark the current test file as having failed tests
       allTestsPassed = false;
+      testResults.push({
+        title: test.title,
+        file: currentFile,
+        state: 'failed',
+        error: err.message, // Capture the error message
+        stack: err.stack,   // Capture the stack trace
+      });
     });
 
         // When a test ends, store its result

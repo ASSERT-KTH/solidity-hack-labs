@@ -25,15 +25,15 @@ describe("attack unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648
     const PandaCore = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol:PandaCore");
     const contract = await PandaCore.connect(owner).deploy();
 
-    const GeneScience = await ethers.getContractFactory("contracts/unchecked_low_level_calls/GeneScience.sol:GeneScience");
+    const GeneScience = await ethers.getContractFactory("contracts/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3_attack.sol:GeneScience");
     const geneScience = await GeneScience.connect(owner).deploy();
     await contract.connect(owner).setGeneScienceAddress(geneScience.target);
 
-    const PandaCaller = await ethers.getContractFactory("contracts/unchecked_low_level_calls/PandaCaller.sol:PandaCaller");
+    const PandaCaller = await ethers.getContractFactory("contracts/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3_attack.sol:PandaCaller");
     const pandaCaller = await PandaCaller.connect(owner).deploy(contract.target);
     await contract.connect(owner).setCFO(pandaCaller.target);
 
-    const MyERC721 = await ethers.getContractFactory("contracts/unchecked_low_level_calls/MyERC721.sol:MyERC721");
+    const MyERC721 = await ethers.getContractFactory("contracts/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3_attack.sol:MyERC721");
     const nft = await MyERC721.connect(owner).deploy();
 
     ownerNonce = await owner.getNonce() + 1;

@@ -11,7 +11,10 @@
     }
 
     function attack() public {
-        target.IamMissing();
+        bytes memory data = abi.encodeWithSelector(bytes4(keccak256("IamMissing()")));
+        
+        (bool success, ) = target.call(data);
+        require(success, "Attack failed");
     }
 
     function test() public {

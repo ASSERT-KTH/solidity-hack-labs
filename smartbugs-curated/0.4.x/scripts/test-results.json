@@ -1,9 +1,9 @@
 {
-  "totalTests": 104,
-  "passingTests": 104,
+  "totalTests": 103,
+  "passingTests": 103,
   "failingTests": 0,
-  "totalFiles": 92,
-  "passingFiles": 92,
+  "totalFiles": 91,
+  "passingFiles": 91,
   "failingFiles": 0,
   "testResults": [
     {
@@ -265,12 +265,6 @@
       "state": "passed"
     },
     {
-      "title": "front running vulnerability",
-      "file": "front_running/FindThisHash_test.js",
-      "contractFile": "front_running/FindThisHash.sol",
-      "state": "passed"
-    },
-    {
       "title": "front running vulnerability in setReward() function",
       "file": "front_running/eth_tx_order_dependence_minimal_test.js",
       "contractFile": "front_running/eth_tx_order_dependence_minimal.sol",
@@ -308,158 +302,158 @@
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.js",
-      "contractFile": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.js",
+      "file": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f_test.js",
+      "contractFile": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.js",
-      "contractFile": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.js",
+      "file": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4_test.js",
+      "contractFile": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.js",
-      "contractFile": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.js",
+      "file": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1_test.js",
+      "contractFile": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.js",
-      "contractFile": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.js",
+      "file": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106_test.js",
+      "contractFile": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.js",
-      "contractFile": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.js",
+      "file": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31_test.js",
+      "contractFile": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615.js",
-      "contractFile": "reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615.js",
+      "file": "reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615_test.js",
+      "contractFile": "reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.js",
-      "contractFile": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.js",
+      "file": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782_test.js",
+      "contractFile": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.js",
-      "contractFile": "reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.js",
+      "file": "reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3_test.js",
+      "contractFile": "reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.js",
-      "contractFile": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.js",
+      "file": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344_test.js",
+      "contractFile": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5.js",
-      "contractFile": "reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5.js",
+      "file": "reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5_test.js",
+      "contractFile": "reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.js",
-      "contractFile": "reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.js",
+      "file": "reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e_test.js",
+      "contractFile": "reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.js",
-      "contractFile": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.js",
+      "file": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b_test.js",
+      "contractFile": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.js",
-      "contractFile": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.js",
+      "file": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8_test.js",
+      "contractFile": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.js",
-      "contractFile": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.js",
+      "file": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12_test.js",
+      "contractFile": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e.js",
-      "contractFile": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e.js",
+      "file": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e_test.js",
+      "contractFile": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.js",
-      "contractFile": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.js",
+      "file": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f_test.js",
+      "contractFile": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.js",
-      "contractFile": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.js",
+      "file": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888_test.js",
+      "contractFile": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e.JS",
-      "contractFile": "reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e.JS",
+      "file": "reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e_test.js",
+      "contractFile": "reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.js",
-      "contractFile": "reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.js",
+      "file": "reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68_test.js",
+      "contractFile": "reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/etherstore.js",
-      "contractFile": "reentrancy/etherstore.js",
+      "file": "reentrancy/etherstore_test.js",
+      "contractFile": "reentrancy/etherstore.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/modifier_reentrancy.js",
-      "contractFile": "reentrancy/modifier_reentrancy.js",
+      "file": "reentrancy/modifier_reentrancy_test.js",
+      "contractFile": "reentrancy/modifier_reentrancy.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/reentrance.js",
-      "contractFile": "reentrancy/reentrance.js",
+      "file": "reentrancy/reentrance_test.js",
+      "contractFile": "reentrancy/reentrance.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/reentrancy_bonus.js",
-      "contractFile": "reentrancy/reentrancy_bonus.js",
+      "file": "reentrancy/reentrancy_bonus_test.js",
+      "contractFile": "reentrancy/reentrancy_bonus.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/reentrancy_dao.js",
-      "contractFile": "reentrancy/reentrancy_dao.js",
+      "file": "reentrancy/reentrancy_dao_test.js",
+      "contractFile": "reentrancy/reentrancy_dao.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/reentrancy_simple.js",
-      "contractFile": "reentrancy/reentrancy_simple.js",
+      "file": "reentrancy/reentrancy_simple_test.js",
+      "contractFile": "reentrancy/reentrancy_simple.sol",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
-      "file": "reentrancy/simple_dao.js",
-      "contractFile": "reentrancy/simple_dao.js",
+      "file": "reentrancy/simple_dao_test.js",
+      "contractFile": "reentrancy/simple_dao.sol",
       "state": "passed"
     },
     {

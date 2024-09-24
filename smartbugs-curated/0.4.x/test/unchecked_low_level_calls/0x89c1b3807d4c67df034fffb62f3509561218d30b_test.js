@@ -8,7 +8,7 @@ describe("attack unchecked_low_level_calls/unchecked_return_value.sol", function
     const TownCrier = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol:TownCrier");
     const contract = await TownCrier.connect(owner).deploy();
 
-    const TownCrierCaller = await ethers.getContractFactory("contracts/unchecked_low_level_calls/TownCrierCaller.sol:TownCrierCaller");
+    const TownCrierCaller = await ethers.getContractFactory("contracts/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_attack.sol:TownCrierCaller");
     const caller = await TownCrierCaller.deploy(contract.target);
 
     return {contract, caller}
