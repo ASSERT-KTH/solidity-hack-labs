@@ -22,8 +22,6 @@ Short Addresses | 1 | 0
 Others | 3| 2
 Total | 143 | 91
 
-*unchecked low level calls is still a work in progress, the number might increase.
-
 Details:
 
 - 1 duplicate contract:
