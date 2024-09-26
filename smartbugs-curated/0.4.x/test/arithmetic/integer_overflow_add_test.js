@@ -1,9 +1,13 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack arithmetic/integer_overflow_add.sol', function () {
     async function deployContracts() {
-      const IntegerOverflowAdd = await ethers.getContractFactory('contracts/dataset/arithmetic/integer_overflow_add.sol:IntegerOverflowAdd');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/arithmetic/integer_overflow_add.sol/IntegerOverflowAdd.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const IntegerOverflowAdd = await ethers.getContractFactory(json.abi, json.bytecode);
       const overflow = await IntegerOverflowAdd.deploy();  
       await overflow.waitForDeployment();
       const address = await overflow.getAddress();

@@ -1,5 +1,7 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe("attack unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol", function () {
 
@@ -11,7 +13,9 @@ describe("attack unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85
     const RevertContract = await ethers.getContractFactory("contracts/unchecked_low_level_calls/revert_contract.sol:RevertContract");
     const revertContract = await RevertContract.deploy();
 
-    const PoCGame = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol:PoCGame");
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol/PoCGame.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+    const PoCGame = await ethers.getContractFactory(json.abi, json.bytecode);
     const contract = await PoCGame.connect(owner).deploy(revertContract.target, amount);
 
     return {contract, revertContract}

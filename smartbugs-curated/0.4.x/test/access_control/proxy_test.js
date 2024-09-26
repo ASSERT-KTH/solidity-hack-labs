@@ -1,6 +1,8 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 const { getContractAddress } = require('@ethersproject/address')
+const path = require("path");
+const fs = require("fs");
 
 describe('attack access_control/proxy.sol', function () {
     let victim_sig, attacker_sig, amount;
@@ -19,7 +21,10 @@ describe('attack access_control/proxy.sol', function () {
         to: futureAddress,
         value: amount,
       });
-      const Proxy = await ethers.getContractFactory('contracts/dataset/access_control/proxy.sol:Proxy');
+
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/proxy.sol/Proxy.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const Proxy = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await Proxy.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

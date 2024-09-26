@@ -1,12 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack time_manipulation/ether_lotto.sol', function () {
     let owner, sig1;
     async function deployContracts() {
         [owner, sig1] = await ethers.getSigners();
-
-        const EtherLotto = await ethers.getContractFactory('contracts/dataset/time_manipulation/ether_lotto.sol:EtherLotto');
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/time_manipulation/ether_lotto.sol/EtherLotto.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        const EtherLotto = await ethers.getContractFactory(json.abi, json.bytecode);
         const victim = await EtherLotto.connect(owner).deploy();
 
         const EtherLottoAttacker = await ethers.getContractFactory('contracts/time_manipulation/ether_lotto_attack.sol:EtherLottoAttacker');

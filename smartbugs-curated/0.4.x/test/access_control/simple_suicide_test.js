@@ -1,9 +1,13 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack access_control/simple_suicide.sol', function () {
     async function deployContracts() {
-      const SimpleSuicide = await ethers.getContractFactory('contracts/dataset/access_control/simple_suicide.sol:SimpleSuicide');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/simple_suicide.sol/SimpleSuicide.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const SimpleSuicide = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await SimpleSuicide.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

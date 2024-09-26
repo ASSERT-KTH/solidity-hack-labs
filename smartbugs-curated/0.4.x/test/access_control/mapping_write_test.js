@@ -1,9 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
+
 
 describe('attack access_control/mapping_write.sol', function () {
     async function deployContracts() {
-      const Map = await ethers.getContractFactory('contracts/dataset/access_control/mapping_write.sol:Map');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/mapping_write.sol/Map.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      
+      const Map = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await Map.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

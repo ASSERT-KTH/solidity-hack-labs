@@ -1,5 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const path = require("path");
+const fs = require("fs");
 describe("Reentrancy Attack for 0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol", function () {  
     let PENNY_BY_PENNY;
     let victim;
@@ -10,12 +12,16 @@ describe("Reentrancy Attack for 0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol",
 
     beforeEach(async function () {
         // Deploy Log contract
-        Log = await ethers.getContractFactory("contracts/dataset/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:LogFile");
+        const logPath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol/LogFile.json');
+        const logJson = JSON.parse(fs.readFileSync(logPath));
+        Log = await ethers.getContractFactory(logJson.abi, logJson.bytecode);
         log = await Log.deploy();
         await log.waitForDeployment();
 
         // Deploy PENNY_BY_PENNY contract with Log address
-        PENNY_BY_PENNY = await ethers.getContractFactory("contracts/dataset/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol:PENNY_BY_PENNY");
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol/PENNY_BY_PENNY.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        PENNY_BY_PENNY = await ethers.getContractFactory(json.abi, json.bytecode);
         victim = await PENNY_BY_PENNY.deploy();
         await victim.waitForDeployment();
         await victim.SetLogFile(log.target); // Set Log address after deployment

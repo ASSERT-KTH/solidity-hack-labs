@@ -1,6 +1,8 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 const { ethers } = require('hardhat');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack access_control/phishable.sol', function () {
     let victim_sig;
@@ -10,7 +12,9 @@ describe('attack access_control/phishable.sol', function () {
       const [v, a] = await ethers.getSigners();
       victim_sig = v;
       attacker_sig = a;
-      const Phishable = await ethers.getContractFactory('contracts/dataset/access_control/phishable.sol:Phishable');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/phishable.sol/Phishable.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const Phishable = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await Phishable.deploy(victim_sig.address);  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

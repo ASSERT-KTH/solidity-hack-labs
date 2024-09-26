@@ -1,11 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe("attack unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol", function () {
     let owner, sig;
   async function deployContracts() {
     [owner, sig] = await ethers.getSigners();
-    const airdrop = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol:airdrop");
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol/airdrop.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+    const airdrop = await ethers.getContractFactory(json.abi, json.bytecode);
     const contract = await airdrop.deploy();
 
     const TokenEBU = await ethers.getContractFactory("contracts/unchecked_low_level_calls/TokenEBU.sol:TokenEBU");

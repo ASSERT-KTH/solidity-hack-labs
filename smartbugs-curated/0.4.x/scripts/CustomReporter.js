@@ -7,6 +7,7 @@ const { fail } = require('assert');
 const Spec = Mocha.reporters.Spec;
 const Base = Mocha.reporters.Base; // For styling and symbols
 
+const suffix = '';
 class CustomReporter extends Spec {
   constructor(runner, options) {
     // Call the parent constructor (Spec reporter)
@@ -38,9 +39,12 @@ class CustomReporter extends Spec {
     runner.on('fail', (test, err) => {
       // Mark the current test file as having failed tests
       allTestsPassed = false;
+      const fileName = currentFile.split('/test/')[1];
+        const contractFile = fileName.replace('_test.js', suffix+ '.sol');
       testResults.push({
         title: test.title,
-        file: currentFile,
+        file: fileName,
+        contractFile: contractFile,
         state: 'failed',
         error: err.message, // Capture the error message
         stack: err.stack,   // Capture the stack trace
@@ -52,14 +56,16 @@ class CustomReporter extends Spec {
         // only get the string after 'test' in the title
         // filename = currentFile.split('/');
         const fileName = currentFile.split('/test/')[1];
-        const contractFile = fileName.replace('_test.js', '.sol');
+        const contractFile = fileName.replace('_test.js', suffix + '.sol');
         // console.log(contract_file);
-        testResults.push({
-            title: test.title,
-            file: fileName,
-            contractFile: contractFile,
-            state: test.state,
-        });
+        if (test.state === 'passed') {
+            testResults.push({
+                title: test.title,
+                file: fileName,
+                contractFile: contractFile,
+                state: test.state,
+            });
+        }
      });
 
     // When the suite (test file) ends

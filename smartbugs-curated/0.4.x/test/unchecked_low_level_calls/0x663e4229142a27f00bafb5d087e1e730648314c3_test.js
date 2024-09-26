@@ -1,7 +1,8 @@
 const { loadFixture, mine} = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 const { getContractAddress } = require('@ethersproject/address')
-
+const path = require("path");
+const fs = require("fs");
 
 describe("attack unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol", function () {
 
@@ -21,8 +22,9 @@ describe("attack unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648
       to: futureAddress,
       value: amount,
     });
-
-    const PandaCore = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol:PandaCore");
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol/PandaCore.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+    const PandaCore = await ethers.getContractFactory(json.abi, json.bytecode);
     const contract = await PandaCore.connect(owner).deploy();
 
     const GeneScience = await ethers.getContractFactory("contracts/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3_attack.sol:GeneScience");
@@ -46,8 +48,9 @@ describe("attack unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648
       to: futureAddress,
       value: amount,
     });
-
-    const SaleClockAuction = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol:SaleClockAuction");
+    const salePath = path.join(__dirname, '../../artifacts/contracts/dataset/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol/SaleClockAuction.json');
+    const saleJson = JSON.parse(fs.readFileSync(salePath));
+    const SaleClockAuction = await ethers.getContractFactory(saleJson.abi, saleJson.bytecode);
     const saleAuction = await SaleClockAuction.connect(owner).deploy(nft.target, 10);
 
     ownerNonce = await owner.getNonce() + 1;
@@ -61,7 +64,9 @@ describe("attack unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648
       value: amount,
     });
 
-    const SiringClockAuction = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol:SiringClockAuction");
+    const siringPath = path.join(__dirname, '../../artifacts/contracts/dataset/unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol/SiringClockAuction.json');
+    const siringJson = JSON.parse(fs.readFileSync(siringPath));
+    const SiringClockAuction = await ethers.getContractFactory(siringJson.abi, siringJson.bytecode);
     const siringAuction = await SiringClockAuction.connect(owner).deploy(contract.target, 10);
 
     return {pandaCaller, contract, saleAuction, siringAuction, nft}

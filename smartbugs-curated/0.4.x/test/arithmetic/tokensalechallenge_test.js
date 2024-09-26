@@ -1,5 +1,7 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack arithmetic/tokensalechallenge.sol', function () {
     async function deployContracts() {
@@ -8,7 +10,9 @@ describe('attack arithmetic/tokensalechallenge.sol', function () {
     await attacker.waitForDeployment();
     const address = await attacker.getAddress();
 
-    const TokenSaleChallenge = await ethers.getContractFactory('contracts/dataset/arithmetic/tokensalechallenge.sol:TokenSaleChallenge');
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/arithmetic/tokensalechallenge.sol/TokenSaleChallenge.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+    const TokenSaleChallenge = await ethers.getContractFactory(json.abi, json.bytecode);
     const victim = await TokenSaleChallenge.deploy(address, { value: ethers.parseEther('1') });  
     await victim.waitForDeployment();
 

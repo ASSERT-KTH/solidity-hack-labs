@@ -1,9 +1,13 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack access_control/multiowned_vulnerable.sol', function () {
     async function deployContracts() {
-      const TestContract = await ethers.getContractFactory('contracts/dataset/access_control/multiowned_vulnerable.sol:TestContract');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/multiowned_vulnerable.sol/TestContract.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const TestContract = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await TestContract.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

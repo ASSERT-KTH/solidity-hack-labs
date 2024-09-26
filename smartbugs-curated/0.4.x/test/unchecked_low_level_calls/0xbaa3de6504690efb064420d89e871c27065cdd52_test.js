@@ -1,5 +1,7 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe("attack unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52.sol", function () {
 
@@ -7,7 +9,9 @@ describe("attack unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065
 
   async function deployContracts() {
     [owner] = await ethers.getSigners();
-    const VaultProxy = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52.sol:VaultProxy");
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52.sol/VaultProxy.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+    const VaultProxy = await ethers.getContractFactory(json.abi, json.bytecode);
     const contract = await VaultProxy.connect(owner).deploy();
 
     const RevertContract = await ethers.getContractFactory("contracts/unchecked_low_level_calls/revert_contract.sol:RevertContract");

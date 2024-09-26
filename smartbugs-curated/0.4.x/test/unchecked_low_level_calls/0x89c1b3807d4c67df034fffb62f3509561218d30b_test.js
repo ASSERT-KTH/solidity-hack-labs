@@ -1,11 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe("attack unchecked_low_level_calls/unchecked_return_value.sol", function () {
   let owner;
   async function deployContracts() {
     [owner] = await ethers.getSigners();
-    const TownCrier = await ethers.getContractFactory("contracts/dataset/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol:TownCrier");
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol/TownCrier.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+    const TownCrier = await ethers.getContractFactory(json.abi, json.bytecode);
     const contract = await TownCrier.connect(owner).deploy();
 
     const TownCrierCaller = await ethers.getContractFactory("contracts/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_attack.sol:TownCrierCaller");

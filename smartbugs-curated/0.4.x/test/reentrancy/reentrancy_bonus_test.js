@@ -1,21 +1,22 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const path = require("path");
+const fs = require("fs");
 describe("Reentrancy Attack for reentrancy_bonus.sol", function () {  
     let Reentrancy_bonus;
     let victim;
     let MaliciousContract;
     let hacker;
-    let Log;
-    let log;
 
     beforeEach(async function () {
         // Deploy Log contract
 
         // Deploy PrivateBank contract with Log address
-        Reentrancy_bonus = await ethers.getContractFactory("contracts/dataset/reentrancy/reentrancy_bonus.sol:Reentrancy_bonus");
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/reentrancy_bonus.sol/Reentrancy_bonus.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        Reentrancy_bonus = await ethers.getContractFactory(json.abi, json.bytecode);
         victim = await Reentrancy_bonus.deploy();
         await victim.waitForDeployment();
-        //await victim.setLog(log.target); // Set Log address after deployment
 
         // Deploy MaliciousContract with Reentrancy_bonus address
         MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/reentrancy_bonus_attack.sol:MaliciousContract");

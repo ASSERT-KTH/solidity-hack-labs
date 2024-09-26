@@ -1,11 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack other/open_address_lottery.sol', function () {
   let attacker, participant;
     async function deployContracts() {
       [attacker, participant] = await ethers.getSigners();
-      const OpenAddressLottery = await ethers.getContractFactory('contracts/dataset/other/open_address_lottery.sol:OpenAddressLottery');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/other/open_address_lottery.sol/OpenAddressLottery.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const OpenAddressLottery = await ethers.getContractFactory(json.abi, json.bytecode);
       const contract = await OpenAddressLottery.deploy();  
       await contract.connect(attacker).waitForDeployment();
       return {contract};

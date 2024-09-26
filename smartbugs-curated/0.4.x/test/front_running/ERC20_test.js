@@ -1,11 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack front_running/ERC20.sol', function () {
     let owner, attacker;
     async function deployContracts() {
       [owner, attacker] = await ethers.getSigners();
-      const ERC20 = await ethers.getContractFactory('contracts/dataset/front_running/ERC20.sol:ERC20');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/front_running/ERC20.sol/ERC20.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const ERC20 = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await ERC20.connect(owner).deploy(100);  
       return {victim};
     }

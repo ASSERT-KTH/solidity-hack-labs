@@ -1,16 +1,23 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
-let amount;
+const path = require("path");
+const fs = require("fs");
 
 describe('attack bad_randomness/guess_the_random_number.sol', function () {
+    let amount;
     async function deployContracts() {
         const [v, a] = await ethers.getSigners();
         amount = ethers.parseEther('1');
 
-        const options = {
+        const options = 
+        {
             from: v,
-            value: amount};
-        const GuessTheRandomNumberChallenge = await ethers.getContractFactory('contracts/dataset/bad_randomness/guess_the_random_number.sol:GuessTheRandomNumberChallenge');
+            value: amount
+        };
+
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/bad_randomness/guess_the_random_number.sol/GuessTheRandomNumberChallenge.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        const GuessTheRandomNumberChallenge = await ethers.getContractFactory(json.abi, json.bytecode);
         const victim = await GuessTheRandomNumberChallenge.deploy(options);  
 
         const tx = await victim.deploymentTransaction().wait();

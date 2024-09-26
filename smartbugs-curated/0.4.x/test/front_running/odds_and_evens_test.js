@@ -1,11 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack front_running/odds_and_evens.sol', function () {
     let owner, user, attacker;
     async function deployContracts() {
       [owner, user, attacker] = await ethers.getSigners();
-      const OddsAndEvens = await ethers.getContractFactory('contracts/dataset/front_running/odds_and_evens.sol:OddsAndEvens');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/front_running/odds_and_evens.sol/OddsAndEvens.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const OddsAndEvens = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await OddsAndEvens.connect(owner).deploy();  
       return {victim};
     }

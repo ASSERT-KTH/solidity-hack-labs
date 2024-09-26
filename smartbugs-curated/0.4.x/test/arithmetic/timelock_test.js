@@ -1,9 +1,13 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack arithmetic/timeLock.sol', function () {
     async function deployContracts() {
-      const TimeLock = await ethers.getContractFactory('contracts/dataset/arithmetic/timelock.sol:TimeLock');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/arithmetic/timelock.sol/TimeLock.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const TimeLock = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await TimeLock.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

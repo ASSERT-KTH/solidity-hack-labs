@@ -1,8 +1,12 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack access_control/wallet_04_confused_sign.sol', function () {
     async function deployContracts() {
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/wallet_04_confused_sign.sol/Wallet.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
       const Wallet = await ethers.getContractFactory('contracts/dataset/access_control/wallet_04_confused_sign.sol:Wallet');
       const victim = await Wallet.deploy();  
       await victim.waitForDeployment();

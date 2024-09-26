@@ -1,5 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const path = require("path");
+const fs = require("fs");
 describe("Reentrancy Attack for 0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol", function () {
   let W_WALLET;
   let victim;
@@ -10,12 +12,16 @@ describe("Reentrancy Attack for 0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol",
 
   beforeEach(async function () {
     // Deploy Log contract
-    Log = await ethers.getContractFactory("contracts/dataset/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol:Log");
+    const logPath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol/Log.json');
+    const logJson = JSON.parse(fs.readFileSync(logPath));
+    Log = await ethers.getContractFactory(logJson.abi, logJson.bytecode);
     log = await Log.deploy();
     await log.waitForDeployment();
 
     // Deploy w_WALLET contract with Log address
-    W_WALLET = await ethers.getContractFactory("contracts/dataset/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol:W_WALLET");
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol/W_WALLET.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+    W_WALLET = await ethers.getContractFactory(json.abi, json.bytecode);
     victim = await W_WALLET.deploy(log.target);
     await victim.waitForDeployment();
  

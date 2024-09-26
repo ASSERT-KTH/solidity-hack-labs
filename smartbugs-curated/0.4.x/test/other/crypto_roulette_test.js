@@ -1,11 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack other/crypto_roulette.sol', function () {
   let owner;
     async function deployContracts() {
       [owner] = await ethers.getSigners();
-      const CryptoRoulette = await ethers.getContractFactory('contracts/dataset/other/crypto_roulette.sol:CryptoRoulette');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/other/crypto_roulette.sol/CryptoRoulette.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const CryptoRoulette = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await CryptoRoulette.deploy();  
       await victim.connect(owner).waitForDeployment();
       return {victim};

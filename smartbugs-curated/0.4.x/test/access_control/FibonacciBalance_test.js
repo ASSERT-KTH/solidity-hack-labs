@@ -1,16 +1,24 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack access_control/FibonacciBalance.sol', function () {
     let amount;
     async function deployContracts() {
       const [v] = await ethers.getSigners();
-      const FibonacciLib = await ethers.getContractFactory('contracts/dataset/access_control/FibonacciBalance.sol:FibonacciLib');
+
+      const libPath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/FibonacciBalance.sol/FibonacciLib.json');
+      const libJson = JSON.parse(fs.readFileSync(libPath));
+
+      const FibonacciLib = await ethers.getContractFactory(libJson.abi, libJson.bytecode, v);
       const lib = await FibonacciLib.deploy();  
       await lib.waitForDeployment();
       const address = await lib.getAddress();
 
-      const FibonacciBalance = await ethers.getContractFactory('contracts/dataset/access_control/FibonacciBalance.sol:FibonacciBalance');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/FibonacciBalance.sol/FibonacciBalance.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const FibonacciBalance = await ethers.getContractFactory(json.abi, json.bytecode, v);
       amount = ethers.parseEther("1.0");
       const options = {
         from: v,

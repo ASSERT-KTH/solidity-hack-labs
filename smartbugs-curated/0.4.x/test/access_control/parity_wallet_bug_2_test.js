@@ -1,9 +1,13 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack access_control/parity_wallet_bug_2.sol', function () {
     async function deployContracts() {
-      const WalletLibrary = await ethers.getContractFactory('contracts/dataset/access_control/parity_wallet_bug_2.sol:WalletLibrary');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/parity_wallet_bug_2.sol/WalletLibrary.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const WalletLibrary = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await WalletLibrary.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

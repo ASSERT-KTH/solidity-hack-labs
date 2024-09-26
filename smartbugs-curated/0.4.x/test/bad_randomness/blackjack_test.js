@@ -1,12 +1,15 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
-let victimAmount, attackerAmount;
+const path = require("path");
+const fs = require("fs");
 
 describe('attack bad_randomness/blackjack.sol', function () {
+    let victimAmount, attackerAmount;
     async function deployContracts() {
         const [v, a] = await ethers.getSigners();
-
-        const BlackJack = await ethers.getContractFactory('contracts/dataset/bad_randomness/blackjack.sol:BlackJack');
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/bad_randomness/blackjack.sol/BlackJack.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        const BlackJack = await ethers.getContractFactory(json.abi, json.bytecode);
         const victim = await BlackJack.deploy();
         await victim.waitForDeployment();
         

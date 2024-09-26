@@ -1,628 +1,768 @@
 {
-  "totalTests": 103,
-  "passingTests": 103,
-  "failingTests": 0,
+  "totalTests": 102,
+  "passingTests": 33,
+  "failingTests": 70,
   "totalFiles": 91,
-  "passingFiles": 91,
-  "failingFiles": 0,
+  "passingFiles": 28,
+  "failingFiles": 63,
   "testResults": [
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/FibonacciBalance_test.js",
-      "contractFile": "access_control/FibonacciBalance.sol",
-      "state": "passed"
+      "contractFile": "access_control/FibonacciBalance.bin",
+      "state": "failed",
+      "error": "expected '0x0000000000000000000281526004018082815260' to equal '0x5FbDB2315678afecb367f032d93F642f64180aa3'.",
+      "stack": "AssertionError: expected '0x0000000000000000000281526004018082815260' to equal '0x5FbDB2315678afecb367f032d93F642f64180aa3'.\n    at Context.<anonymous> (test/access_control/FibonacciBalance_test.js:47:35)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/arbitrary_location_write_simple_test.js",
-      "contractFile": "access_control/arbitrary_location_write_simple.sol",
-      "state": "passed"
+      "contractFile": "access_control/arbitrary_location_write_simple.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/access_control/arbitrary_location_write_simple_test.js:26:7)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/incorrect_constructor_name1_test.js",
-      "contractFile": "access_control/incorrect_constructor_name1.sol",
-      "state": "passed"
+      "contractFile": "access_control/incorrect_constructor_name1.bin",
+      "state": "failed",
+      "error": "expected 0 to equal 1000000000000000000.",
+      "stack": "AssertionError: expected 0 to equal 1000000000000000000.\n    at Context.<anonymous> (test/access_control/incorrect_constructor_name1_test.js:47:63)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/incorrect_constructor_name2_test.js",
-      "contractFile": "access_control/incorrect_constructor_name2.sol",
-      "state": "passed"
+      "contractFile": "access_control/incorrect_constructor_name2.bin",
+      "state": "failed",
+      "error": "reverted with reason string 'Attack failed'",
+      "stack": "ProviderError: reverted with reason string 'Attack failed'\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/access_control/incorrect_constructor_name2_test.js:41:7)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/incorrect_constructor_name3_test.js",
-      "contractFile": "access_control/incorrect_constructor_name3.sol",
-      "state": "passed"
+      "contractFile": "access_control/incorrect_constructor_name3.bin",
+      "state": "failed",
+      "error": "reverted with reason string 'Attack failed'",
+      "stack": "ProviderError: reverted with reason string 'Attack failed'\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/access_control/incorrect_constructor_name3_test.js:41:7)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/mapping_write_test.js",
-      "contractFile": "access_control/mapping_write.sol",
-      "state": "passed"
+      "contractFile": "access_control/mapping_write.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/access_control/mapping_write_test.js:27:7)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/multiowned_vulnerable_test.js",
-      "contractFile": "access_control/multiowned_vulnerable.sol",
+      "contractFile": "access_control/multiowned_vulnerable.bin",
       "state": "passed"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/mycontract_test.js",
-      "contractFile": "access_control/mycontract.sol",
-      "state": "passed"
+      "contractFile": "access_control/mycontract.bin",
+      "state": "failed",
+      "error": "expected 0 to equal 1000000000000000000.",
+      "stack": "AssertionError: expected 0 to equal 1000000000000000000.\n    at Context.<anonymous> (test/access_control/mycontract_test.js:55:63)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/parity_wallet_bug_2_test.js",
-      "contractFile": "access_control/parity_wallet_bug_2.sol",
+      "contractFile": "access_control/parity_wallet_bug_2.bin",
       "state": "passed"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/phishable_test.js",
-      "contractFile": "access_control/phishable.sol",
-      "state": "passed"
+      "contractFile": "access_control/phishable.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0x4826533b4897376654bb4d4ad88b7fafd0c98528)\n    at <UnrecognizedContract>.<unknown> (0x99bba657f2bbc93c02d617f8ba121cb8fc104acf)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at Context.<anonymous> (test/access_control/phishable_test.js:47:7)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/proxy_test.js",
-      "contractFile": "access_control/proxy.sol",
+      "contractFile": "access_control/proxy.bin",
       "state": "passed"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/simple_suicide_test.js",
-      "contractFile": "access_control/simple_suicide.sol",
+      "contractFile": "access_control/simple_suicide.bin",
       "state": "passed"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/unprotected0_test.js",
-      "contractFile": "access_control/unprotected0.sol",
+      "contractFile": "access_control/unprotected0.bin",
       "state": "passed"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/wallet_02_refund_nosub_test.js",
-      "contractFile": "access_control/wallet_02_refund_nosub.sol",
-      "state": "passed"
+      "contractFile": "access_control/wallet_02_refund_nosub.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.deposit (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/access_control/wallet_02_refund_nosub_test.js:29:7)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/wallet_03_wrong_constructor_test.js",
-      "contractFile": "access_control/wallet_03_wrong_constructor.sol",
-      "state": "passed"
+      "contractFile": "access_control/wallet_03_wrong_constructor.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.deposit (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/access_control/wallet_03_wrong_constructor_test.js:29:7)"
     },
     {
       "title": "exploit access control vulnerability",
       "file": "access_control/wallet_04_confused_sign_test.js",
-      "contractFile": "access_control/wallet_04_confused_sign.sol",
-      "state": "passed"
+      "contractFile": "access_control/wallet_04_confused_sign.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.deposit (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/access_control/wallet_04_confused_sign_test.js:29:7)"
     },
     {
       "title": "exploit overflow vulnerability",
       "file": "arithmetic/BECToken_test.js",
-      "contractFile": "arithmetic/BECToken.sol",
+      "contractFile": "arithmetic/BECToken.bin",
       "state": "passed"
     },
     {
       "title": "exploit overflow vulnerability",
       "file": "arithmetic/integer_overflow_add_test.js",
-      "contractFile": "arithmetic/integer_overflow_add.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/integer_overflow_add.bin",
+      "state": "failed",
+      "error": "expected 115792089237316195423570985008687907853269984665640564039457584007913129639935 to equal 0.",
+      "stack": "AssertionError: expected 115792089237316195423570985008687907853269984665640564039457584007913129639935 to equal 0.\n    at Context.<anonymous> (test/arithmetic/integer_overflow_add_test.js:26:41)"
     },
     {
       "title": "exploit underflow vulnerability",
       "file": "arithmetic/integer_overflow_benign_1_test.js",
-      "contractFile": "arithmetic/integer_overflow_benign_1.sol",
+      "contractFile": "arithmetic/integer_overflow_benign_1.bin",
       "state": "passed"
     },
     {
       "title": "exploit underflow vulnerability",
       "file": "arithmetic/integer_overflow_minimal_test.js",
-      "contractFile": "arithmetic/integer_overflow_minimal.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/integer_overflow_minimal.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0xdc11f7e700a4c898ae5caddb1082cffa76512add)\n    at <UnrecognizedContract>.<unknown> (0x51a1ceb83b83f1985a81c295d1ff28afef186e02)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/integer_overflow_minimal_test.js:27:7)"
     },
     {
       "title": "exploit overflow vulnerability",
       "file": "arithmetic/integer_overflow_mul_test.js",
-      "contractFile": "arithmetic/integer_overflow_mul.sol",
+      "contractFile": "arithmetic/integer_overflow_mul.bin",
       "state": "passed"
     },
     {
       "title": "exploit underflow vulnerability",
       "file": "arithmetic/integer_overflow_multitx_multifunc_feasible_test.js",
-      "contractFile": "arithmetic/integer_overflow_multitx_multifunc_feasible.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/integer_overflow_multitx_multifunc_feasible.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/integer_overflow_multitx_multifunc_feasible_test.js:26:7)"
     },
     {
       "title": "exploit underflow vulnerability",
       "file": "arithmetic/integer_overflow_multitx_onefunc_feasible_test.js",
-      "contractFile": "arithmetic/integer_overflow_multitx_onefunc_feasible.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/integer_overflow_multitx_onefunc_feasible.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/integer_overflow_multitx_onefunc_feasible_test.js:25:7)"
     },
     {
       "title": "exploit overflow vulnerability",
       "file": "arithmetic/overflow_simple_add_test.js",
-      "contractFile": "arithmetic/overflow_simple_add.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/overflow_simple_add.bin",
+      "state": "failed",
+      "error": "expected 1 to equal 2.",
+      "stack": "AssertionError: expected 1 to equal 2.\n    at Context.<anonymous> (test/arithmetic/overflow_simple_add_test.js:26:43)"
     },
     {
       "title": "exploit overflow add vulnerability",
       "file": "arithmetic/overflow_single_tx_test.js",
-      "contractFile": "arithmetic/overflow_single_tx.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/overflow_single_tx.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.count (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/overflow_single_tx_test.js:24:14)"
     },
     {
       "title": "exploit overflow mul vulnerability",
       "file": "arithmetic/overflow_single_tx_test.js",
-      "contractFile": "arithmetic/overflow_single_tx.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/overflow_single_tx.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.count (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/overflow_single_tx_test.js:32:14)"
     },
     {
       "title": "exploit underflow vulnerability",
       "file": "arithmetic/overflow_single_tx_test.js",
-      "contractFile": "arithmetic/overflow_single_tx.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/overflow_single_tx.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.count (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/overflow_single_tx_test.js:39:14)"
     },
     {
       "title": "exploit overflow add vulnerability locally",
       "file": "arithmetic/overflow_single_tx_test.js",
-      "contractFile": "arithmetic/overflow_single_tx.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/overflow_single_tx.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.count (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/overflow_single_tx_test.js:46:14)"
     },
     {
       "title": "exploit overflow mul vulnerability locally",
       "file": "arithmetic/overflow_single_tx_test.js",
-      "contractFile": "arithmetic/overflow_single_tx.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/overflow_single_tx.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.count (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/overflow_single_tx_test.js:54:14)"
     },
     {
       "title": "exploit underflow vulnerability locally",
       "file": "arithmetic/overflow_single_tx_test.js",
-      "contractFile": "arithmetic/overflow_single_tx.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/overflow_single_tx.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.count (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/overflow_single_tx_test.js:61:14)"
     },
     {
       "title": "exploit overflow vulnerability",
       "file": "arithmetic/timelock_test.js",
-      "contractFile": "arithmetic/timelock.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/timelock.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.lockTime (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/timelock_test.js:26:14)"
     },
     {
       "title": "exploit underflow vulnerability",
       "file": "arithmetic/token_test.js",
-      "contractFile": "arithmetic/token.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/token.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0x86a2ee8faf9a840f7a2c64ca3d51209f9a02081d)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/token_test.js:30:7)"
     },
     {
       "title": "exploit buy overflow vulnerability line 23",
       "file": "arithmetic/tokensalechallenge_test.js",
-      "contractFile": "arithmetic/tokensalechallenge.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/tokensalechallenge.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack_buy (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/tokensalechallenge_test.js:30:7)"
     },
     {
       "title": "exploit the catch the ether vulnerability",
       "file": "arithmetic/tokensalechallenge_test.js",
-      "contractFile": "arithmetic/tokensalechallenge.sol",
-      "state": "passed"
+      "contractFile": "arithmetic/tokensalechallenge.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack_complete (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/arithmetic/tokensalechallenge_test.js:41:5)"
     },
     {
       "title": "exploit bad randomness vulnerability",
       "file": "bad_randomness/blackjack_test.js",
-      "contractFile": "bad_randomness/blackjack.sol",
-      "state": "passed"
+      "contractFile": "bad_randomness/blackjack.bin",
+      "state": "failed",
+      "error": "expected 5000000000000000000 to be above 10000000000000000000.",
+      "stack": "AssertionError: expected 5000000000000000000 to be above 10000000000000000000.\n    at Context.<anonymous> (test/bad_randomness/blackjack_test.js:70:41)"
     },
     {
       "title": "exploit bad randomness vulnerability",
       "file": "bad_randomness/etheraffle_test.js",
-      "contractFile": "bad_randomness/etheraffle.sol",
-      "state": "passed"
+      "contractFile": "bad_randomness/etheraffle.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/bad_randomness/etheraffle_test.js:50:13)"
     },
     {
       "title": "exploit bad randomness vulnerability",
       "file": "bad_randomness/guess_the_random_number_test.js",
-      "contractFile": "bad_randomness/guess_the_random_number.sol",
+      "contractFile": "bad_randomness/guess_the_random_number.bin",
       "state": "passed"
     },
     {
       "title": "exploit brad randomness vulnerability",
       "file": "bad_randomness/old_blockhash_test.js",
-      "contractFile": "bad_randomness/old_blockhash.sol",
-      "state": "passed"
+      "contractFile": "bad_randomness/old_blockhash.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/bad_randomness/old_blockhash_test.js:45:9)"
     },
     {
       "title": "exploit denial of service vulnerability",
       "file": "denial_of_service/auction_test.js",
-      "contractFile": "denial_of_service/auction.sol",
-      "state": "passed"
+      "contractFile": "denial_of_service/auction.bin",
+      "state": "failed",
+      "error": "Expected transaction to be reverted",
+      "stack": "AssertionError: Expected transaction to be reverted\n    at Context.<anonymous> (test/denial_of_service/auction_test.js:34:9)"
     },
     {
       "title": "exploit denial of service vulnerability",
       "file": "denial_of_service/dos_address_test.js",
-      "contractFile": "denial_of_service/dos_address.sol",
+      "contractFile": "denial_of_service/dos_address.bin",
       "state": "passed"
     },
     {
       "title": "exploit denial of service vulnerability",
       "file": "denial_of_service/dos_number_test.js",
-      "contractFile": "denial_of_service/dos_number.sol",
+      "contractFile": "denial_of_service/dos_number.bin",
       "state": "passed"
     },
     {
       "title": "exploit denial of service vulnerability",
       "file": "denial_of_service/dos_simple_test.js",
-      "contractFile": "denial_of_service/dos_simple.sol",
+      "contractFile": "denial_of_service/dos_simple.bin",
       "state": "passed"
     },
     {
       "title": "front running vulnerability",
       "file": "front_running/ERC20_test.js",
-      "contractFile": "front_running/ERC20.sol",
-      "state": "passed"
+      "contractFile": "front_running/ERC20.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.balanceOf (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/front_running/ERC20_test.js:23:35)"
     },
     {
       "title": "front running vulnerability in setReward() function",
       "file": "front_running/eth_tx_order_dependence_minimal_test.js",
-      "contractFile": "front_running/eth_tx_order_dependence_minimal.sol",
+      "contractFile": "front_running/eth_tx_order_dependence_minimal.bin",
       "state": "passed"
     },
     {
       "title": "front running vulnerability in claimReward() function",
       "file": "front_running/eth_tx_order_dependence_minimal_test.js",
-      "contractFile": "front_running/eth_tx_order_dependence_minimal.sol",
+      "contractFile": "front_running/eth_tx_order_dependence_minimal.bin",
       "state": "passed"
     },
     {
       "title": "front running vulnerability",
       "file": "front_running/odds_and_evens_test.js",
-      "contractFile": "front_running/odds_and_evens.sol",
-      "state": "passed"
+      "contractFile": "front_running/odds_and_evens.bin",
+      "state": "failed",
+      "error": "expected 2000000000000000000 to equal 200000000000000000.",
+      "stack": "AssertionError: expected 2000000000000000000 to equal 200000000000000000.\n    at Context.<anonymous> (test/front_running/odds_and_evens_test.js:44:34)"
     },
     {
       "title": "exploit uninitialized storage vulnerability",
       "file": "other/crypto_roulette_test.js",
-      "contractFile": "other/crypto_roulette.sol",
-      "state": "passed"
+      "contractFile": "other/crypto_roulette.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.play (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/other/crypto_roulette_test.js:39:18)"
     },
     {
       "title": "exploit uninitialized storage vulnerability",
       "file": "other/name_registrar_test.js",
-      "contractFile": "other/name_registrar.sol",
+      "contractFile": "other/name_registrar.bin",
       "state": "passed"
     },
     {
       "title": "exploit uninitialized storage vulnerability",
       "file": "other/open_address_lottery_test.js",
-      "contractFile": "other/open_address_lottery.sol",
-      "state": "passed"
+      "contractFile": "other/open_address_lottery.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.forceReseed (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/other/open_address_lottery_test.js:34:19)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f_test.js",
-      "contractFile": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
+      "contractFile": "reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.bin",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4_test.js",
-      "contractFile": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4.bin",
+      "state": "failed",
+      "error": "expected 7000000000000000000 to be below 6000000000000000000.",
+      "stack": "AssertionError: expected 7000000000000000000 to be below 6000000000000000000.\n    at Context.<anonymous> (test/reentrancy/0x23a91059fdc9579a9fbd0edc5f2ea0bfdb70deb4_test.js:68:37)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1_test.js",
-      "contractFile": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.sol",
+      "contractFile": "reentrancy/0x4320e6f8c05b27ab4707cd1f6d5ce6f3e4b3a5a1.bin",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106_test.js",
-      "contractFile": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol",
+      "contractFile": "reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.bin",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31_test.js",
-      "contractFile": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol",
+      "contractFile": "reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.bin",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615_test.js",
-      "contractFile": "reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0x666d0c3da3dbc946d5128d06115bb4eed4595580)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.Put (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/reentrancy/0x7541b76cb60f4c60af330c208b0623b7f54bf615_test.js:36:5)"
     },
     {
-      "title": "should successfully drain funds through reentrancy attack",
+      "title": "\"before each\" hook for \"should successfully drain funds through reentrancy attack\"",
       "file": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782_test.js",
-      "contractFile": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.constructor (unknown)\n    at <UnrecognizedContract>.constructor (unknown)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at ContractFactory.deploy (node_modules/ethers/src.ts/contract/factory.ts:111:24)\n    at Context.<anonymous> (test/reentrancy/0x7a8721a9d64c74da899424c1b52acbf58ddc9782_test.js:25:14)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3_test.js",
-      "contractFile": "reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0x286b8decd5ed79c962b2d8f4346cd97ff0e2c352)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.Put (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/reentrancy/0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3_test.js:36:5)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344_test.js",
-      "contractFile": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.bin",
+      "state": "failed",
+      "error": "expected 10000000000000000000 to be below 6000000000000000000.",
+      "stack": "AssertionError: expected 10000000000000000000 to be below 6000000000000000000.\n    at Context.<anonymous> (test/reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344_test.js:70:38)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5_test.js",
-      "contractFile": "reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0x2a590c461db46bca129e8dbe5c3998a8ff402e76)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.Put (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/reentrancy/0x93c32845fae42c83a70e5f06214c8433665c2ab5_test.js:38:5)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e_test.js",
-      "contractFile": "reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e.bin",
+      "state": "failed",
+      "error": "expected 7000000000000000000 to be below 5000000000000000000.",
+      "stack": "AssertionError: expected 7000000000000000000 to be below 5000000000000000000.\n    at Context.<anonymous> (test/reentrancy/0x941d225236464a25eb18076df7da6a91d0f95e9e_test.js:67:37)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b_test.js",
-      "contractFile": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.Put (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/reentrancy/0x96edbe868531bd23a6c05e9d0c424ea64fb1b78b_test.js:37:9)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8_test.js",
-      "contractFile": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.sol",
+      "contractFile": "reentrancy/0xaae1f51cf3339f18b6d3f3bdc75a5facd744b0b8.bin",
       "state": "passed"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12_test.js",
-      "contractFile": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.bin",
+      "state": "failed",
+      "error": "expected 7000000000000000000 to be below 5000000000000000000.",
+      "stack": "AssertionError: expected 7000000000000000000 to be below 5000000000000000000.\n    at Context.<anonymous> (test/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12_test.js:68:37)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e_test.js",
-      "contractFile": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e.bin",
+      "state": "failed",
+      "error": "expected 7000000000000000000 to be below 6000000000000000000.",
+      "stack": "AssertionError: expected 7000000000000000000 to be below 6000000000000000000.\n    at Context.<anonymous> (test/reentrancy/0xb93430ce38ac4a6bb47fb1fc085ea669353fd89e_test.js:68:37)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f_test.js",
-      "contractFile": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.bin",
+      "state": "failed",
+      "error": "expected 9000000000000000000 to be below 6000000000000000000.",
+      "stack": "AssertionError: expected 9000000000000000000 to be below 6000000000000000000.\n    at Context.<anonymous> (test/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f_test.js:68:37)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888_test.js",
-      "contractFile": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.Put (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888_test.js:37:5)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e_test.js",
-      "contractFile": "reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0xbbc18b580256a82dc0f9a86152b8b22e7c1c8005)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.Put (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/reentrancy/0xcead721ef5b11f1a7b530171aab69b16c5e66b6e_test.js:36:5)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68_test.js",
-      "contractFile": "reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0x24432a08869578aaf4d1eada12e1e78f171b1a2b)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.Put (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68_test.js:36:5)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/etherstore_test.js",
-      "contractFile": "reentrancy/etherstore.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/etherstore.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.depositFunds (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/reentrancy/etherstore_test.js:32:9)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/modifier_reentrancy_test.js",
-      "contractFile": "reentrancy/modifier_reentrancy.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/modifier_reentrancy.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.tokenBalance (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/reentrancy/modifier_reentrancy_test.js:38:36)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/reentrance_test.js",
-      "contractFile": "reentrancy/reentrance.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/reentrance.bin",
+      "state": "failed",
+      "error": "expected 9000000000000000000 to be below 8000000000000000000.",
+      "stack": "AssertionError: expected 9000000000000000000 to be below 8000000000000000000.\n    at Context.<anonymous> (test/reentrancy/reentrance_test.js:60:37)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/reentrancy_bonus_test.js",
-      "contractFile": "reentrancy/reentrancy_bonus.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/reentrancy_bonus.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/reentrancy/reentrancy_bonus_test.js:51:9)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/reentrancy_dao_test.js",
-      "contractFile": "reentrancy/reentrancy_dao.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/reentrancy_dao.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.deposit (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/reentrancy/reentrancy_dao_test.js:30:9)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/reentrancy_simple_test.js",
-      "contractFile": "reentrancy/reentrancy_simple.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/reentrancy_simple.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.addToBalance (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/reentrancy/reentrancy_simple_test.js:29:9)"
     },
     {
       "title": "should successfully drain funds through reentrancy attack",
       "file": "reentrancy/simple_dao_test.js",
-      "contractFile": "reentrancy/simple_dao.sol",
-      "state": "passed"
+      "contractFile": "reentrancy/simple_dao.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/reentrancy/simple_dao_test.js:50:5)"
     },
     {
       "title": "exploit time manipulation vulnerability",
       "file": "time_manipulation/ether_lotto_test.js",
-      "contractFile": "time_manipulation/ether_lotto.sol",
-      "state": "passed"
+      "contractFile": "time_manipulation/ether_lotto.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.play (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/time_manipulation/ether_lotto_test.js:33:20)"
     },
     {
       "title": "exploit time manipulation vulnerability",
       "file": "time_manipulation/roulette_test.js",
-      "contractFile": "time_manipulation/roulette.sol",
+      "contractFile": "time_manipulation/roulette.bin",
       "state": "passed"
     },
     {
       "title": "exploit time manipulation vulnerability",
       "file": "time_manipulation/timed_crowdsale_test.js",
-      "contractFile": "time_manipulation/timed_crowdsale.sol",
+      "contractFile": "time_manipulation/timed_crowdsale.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e_test.js",
-      "contractFile": "unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.wager (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at waitForPendingTransaction (node_modules/@nomicfoundation/hardhat-chai-matchers/src/internal/emit.ts:28:17)\n    at Context.<anonymous> (test/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e_test.js:40:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2_test.js",
-      "contractFile": "unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2.bin",
+      "state": "failed",
+      "error": "Expected transaction NOT to be reverted",
+      "stack": "AssertionError: Expected transaction NOT to be reverted\n    at Context.<anonymous> (test/unchecked_low_level_calls/0x2972d548497286d18e92b5fa1f8f9139e5653fd2_test.js:41:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability in WithdrawToken()",
       "file": "unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa_test.js",
-      "contractFile": "unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa.sol",
+      "contractFile": "unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability in WithdrawToHolder()",
       "file": "unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa_test.js",
-      "contractFile": "unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa.sol",
+      "contractFile": "unchecked_low_level_calls/0x39cfd754c85023648bf003bea2dd498c5612abfa.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability in WithdrawToken()",
       "file": "unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01_test.js",
-      "contractFile": "unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol",
+      "contractFile": "unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability in WithdrawToHolder()",
       "file": "unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01_test.js",
-      "contractFile": "unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol",
+      "contractFile": "unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3_test.js",
-      "contractFile": "unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.bin",
+      "state": "failed",
+      "error": "Expected transaction NOT to be reverted",
+      "stack": "AssertionError: Expected transaction NOT to be reverted\n    at Context.<anonymous> (test/unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3_test.js:41:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152_test.js",
-      "contractFile": "unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.bin",
+      "state": "failed",
+      "error": "Expected transaction NOT to be reverted",
+      "stack": "AssertionError: Expected transaction NOT to be reverted\n    at Context.<anonymous> (test/unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152_test.js:41:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984_test.js",
-      "contractFile": "unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.bin",
+      "state": "failed",
+      "error": "Expected transaction NOT to be reverted",
+      "stack": "AssertionError: Expected transaction NOT to be reverted\n    at Context.<anonymous> (test/unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984_test.js:33:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability in WithdrawToken()",
       "file": "unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839_test.js",
-      "contractFile": "unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.bin",
+      "state": "failed",
+      "error": "InvalidJump",
+      "stack": "ProviderError: InvalidJump\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at staticCallResult (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:337:22)\n    at staticCall (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:303:24)\n    at Proxy.Holders (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:351:41)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839_test.js:47:12)"
     },
     {
       "title": "exploit unchecked low level call vulnerability in function withdrawAuctionBalances()",
       "file": "unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3_test.js",
-      "contractFile": "unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol",
+      "contractFile": "unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability in function giveBirth()",
       "file": "unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3_test.js",
-      "contractFile": "unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol",
+      "contractFile": "unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_test.js",
-      "contractFile": "unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason string",
+      "stack": "Error: Transaction reverted without a reason string\n    at <UnrecognizedContract>.<unknown> (0xc351628eb244ec633d5f21fbd6621e1a683b1181)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.wager (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at waitForPendingTransaction (node_modules/@nomicfoundation/hardhat-chai-matchers/src/internal/emit.ts:28:17)\n    at Context.<anonymous> (test/unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4_test.js:40:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability in line 192",
       "file": "unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_test.js",
-      "contractFile": "unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at waitForPendingTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-chai-matchers/src/internal/emit.ts:28:17)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_test.js:45:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability in line 180",
       "file": "unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_test.js",
-      "contractFile": "unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.bin",
+      "state": "failed",
+      "error": "Transaction reverted without a reason",
+      "stack": "ProviderError: Transaction reverted without a reason\n    at EdrProviderWrapper.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:455:19)\n    at HardhatEthersSigner.sendTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.request (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at waitForPendingTransaction (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/node_modules/@nomicfoundation/hardhat-chai-matchers/src/internal/emit.ts:28:17)\n    at Context.<anonymous> (/home/mokita/sc_study/solidity-hack-labs/smartbugs-curated/0.4.x/test/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_test.js:83:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability in WithdrawToken()",
       "file": "unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35_test.js",
-      "contractFile": "unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol",
+      "contractFile": "unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability in WithdrawToHolder()",
       "file": "unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35_test.js",
-      "contractFile": "unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol",
+      "contractFile": "unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0xa1fceeff3acc57d257b917e30c4df661401d6431_test.js",
-      "contractFile": "unchecked_low_level_calls/0xa1fceeff3acc57d257b917e30c4df661401d6431.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0xa1fceeff3acc57d257b917e30c4df661401d6431.bin",
+      "state": "failed",
+      "error": "expected 1000000000000000000 to equal 999999999999999990.",
+      "stack": "AssertionError: expected 1000000000000000000 to equal 999999999999999990.\n    at Context.<anonymous> (test/unchecked_low_level_calls/0xa1fceeff3acc57d257b917e30c4df661401d6431_test.js:43:48)"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea2c3ae_test.js",
-      "contractFile": "unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea2c3ae.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea2c3ae.bin",
+      "state": "failed",
+      "error": "Expected transaction NOT to be reverted",
+      "stack": "AssertionError: Expected transaction NOT to be reverted\n    at Context.<anonymous> (test/unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea2c3ae_test.js:41:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77_test.js",
-      "contractFile": "unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77.sol",
+      "contractFile": "unchecked_low_level_calls/0xb11b2fed6c9354f7aa2f658d3b4d7b31d8a13b77.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7_test.js",
-      "contractFile": "unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7.bin",
+      "state": "failed",
+      "error": "Expected transaction NOT to be reverted, but it reverted with reason 'Ether transfer failed'",
+      "stack": "AssertionError: Expected transaction NOT to be reverted, but it reverted with reason 'Ether transfer failed'\n    at Context.<anonymous> (test/unchecked_low_level_calls/0xb7c5c5aa4d42967efe906e1b66cb8df9cebf04f7_test.js:40:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52_test.js",
-      "contractFile": "unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52.sol",
+      "contractFile": "unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c_test.js",
-      "contractFile": "unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c.sol",
+      "contractFile": "unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c.bin",
       "state": "passed"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0xd5967fed03e85d1cce44cab284695b41bc675b5c_test.js",
-      "contractFile": "unchecked_low_level_calls/0xd5967fed03e85d1cce44cab284695b41bc675b5c.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0xd5967fed03e85d1cce44cab284695b41bc675b5c.bin",
+      "state": "failed",
+      "error": "Expected transaction NOT to be reverted",
+      "stack": "AssertionError: Expected transaction NOT to be reverted\n    at Context.<anonymous> (test/unchecked_low_level_calls/0xd5967fed03e85d1cce44cab284695b41bc675b5c_test.js:41:5)"
     },
     {
       "title": "exploit unchecked low level call vulnerability",
       "file": "unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220_test.js",
-      "contractFile": "unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220.sol",
-      "state": "passed"
+      "contractFile": "unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220.bin",
+      "state": "failed",
+      "error": "Expected transaction NOT to be reverted",
+      "stack": "AssertionError: Expected transaction NOT to be reverted\n    at Context.<anonymous> (test/unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220_test.js:42:5)"
     }
   ]
 }

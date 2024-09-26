@@ -1,5 +1,7 @@
 const { loadFixture, time } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack time_manipulation/roulette.sol', function () {
     let owner, sig1, amount;
@@ -7,8 +9,9 @@ describe('attack time_manipulation/roulette.sol', function () {
         [owner, sig1] = await ethers.getSigners();
 
         amount =  ethers.parseEther("10");
-
-        const Roulette = await ethers.getContractFactory('contracts/dataset/time_manipulation/roulette.sol:Roulette');
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/time_manipulation/roulette.sol/Roulette.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        const Roulette = await ethers.getContractFactory(json.abi, json.bytecode);
         const victim = await Roulette.connect(owner).deploy({value: amount});
 
     return {victim};

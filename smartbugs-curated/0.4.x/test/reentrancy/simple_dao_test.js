@@ -1,13 +1,16 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require("chai");
-const { BigNumber } = require("ethers");
 const { ethers } = require("hardhat");
+const path = require("path");
+const fs = require("fs");
 
 describe("Reentrancy Attack for simpleDAO.sol", function () {
 
     async function deployContracts() {
     // Deploy SimpleDAO contract
-    const SimpleDAOFactory = await ethers.getContractFactory('contracts/dataset/reentrancy/simple_dao.sol:SimpleDAO');
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/simple_dao.sol/SimpleDAO.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+    const SimpleDAOFactory = await ethers.getContractFactory(json.abi, json.bytecode);
     const simpleDAO = await SimpleDAOFactory.deploy();
     await simpleDAO.waitForDeployment();
 

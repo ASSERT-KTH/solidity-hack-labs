@@ -1,5 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const path = require("path");
+const fs = require("fs");
 describe("Reentrancy Attack for 0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol", function () {  
     let ETH_VAULT;
     let victim;
@@ -10,12 +12,16 @@ describe("Reentrancy Attack for 0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol",
 
     beforeEach(async function () {
         // Deploy Log contract
-        Log = await ethers.getContractFactory("contracts/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol:Log");
+        const logPath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol/Log.json');
+        const logJson = JSON.parse(fs.readFileSync(logPath));
+        Log = await ethers.getContractFactory(logJson.abi, logJson.bytecode);
         log = await Log.deploy();
         await log.waitForDeployment();
 
         // Deploy ETH_VAULT contract with Log address
-        ETH_VAULT = await ethers.getContractFactory("contracts/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol:ETH_VAULT");
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol/ETH_VAULT.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        ETH_VAULT = await ethers.getContractFactory(json.abi, json.bytecode);
         victim = await ETH_VAULT.deploy(log.target);
         await victim.waitForDeployment();
         //await victim.setLog(log.target); // Set Log address after deployment

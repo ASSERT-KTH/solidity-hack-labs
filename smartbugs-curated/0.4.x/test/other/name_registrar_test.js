@@ -1,9 +1,13 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack other/name_registrar.sol', function () {
     async function deployContracts() {
-      const NameRegistrar = await ethers.getContractFactory('contracts/dataset/other/name_registrar.sol:NameRegistrar');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/other/name_registrar.sol/NameRegistrar.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+      const NameRegistrar = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await NameRegistrar.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

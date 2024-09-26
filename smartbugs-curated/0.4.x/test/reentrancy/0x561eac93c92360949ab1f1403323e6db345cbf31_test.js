@@ -1,5 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const path = require("path");
+const fs = require("fs");
 describe("Reentrancy Attack for 0x561eac93c92360949ab1f1403323e6db345cbf31.sol", function () {  
     let BANK_SAFE;
     let victim;
@@ -10,12 +12,16 @@ describe("Reentrancy Attack for 0x561eac93c92360949ab1f1403323e6db345cbf31.sol",
 
     beforeEach(async function () {
         // Deploy Log contract
-        Log = await ethers.getContractFactory("contracts/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol:LogFile");
+        const logPath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol/LogFile.json');
+        const logJson = JSON.parse(fs.readFileSync(logPath));
+        Log = await ethers.getContractFactory(logJson.abi, logJson.bytecode);
         log = await Log.deploy();
         await log.waitForDeployment();
 
         // Deploy BANK_SAFE contract with Log address
-        BANK_SAFE = await ethers.getContractFactory("contracts/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol:BANK_SAFE");
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0x561eac93c92360949ab1f1403323e6db345cbf31.sol/BANK_SAFE.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        BANK_SAFE = await ethers.getContractFactory(json.abi, json.bytecode);
         victim = await BANK_SAFE.deploy();
         await victim.waitForDeployment();
         await victim.SetLogFile(log.target); // Set Log address after deployment

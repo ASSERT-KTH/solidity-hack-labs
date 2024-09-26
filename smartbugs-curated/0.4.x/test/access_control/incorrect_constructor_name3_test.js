@@ -1,9 +1,14 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack access_control/incorrect_constructor_name3.sol', function () {
     async function deployContracts() {
-      const Missing = await ethers.getContractFactory('contracts/dataset/access_control/incorrect_constructor_name3.sol:Missing');
+      const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/incorrect_constructor_name3.sol/Missing.json');
+      const json = JSON.parse(fs.readFileSync(codePath));
+
+      const Missing = await ethers.getContractFactory(json.abi, json.bytecode);
       const victim = await Missing.deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();

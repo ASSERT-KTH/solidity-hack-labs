@@ -1,5 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const path = require("path");
+const fs = require("fs");
 describe("Reentrancy Attack for 0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol", function () {
   let PrivateETHCell;
   let victim;
@@ -10,12 +12,16 @@ describe("Reentrancy Attack for 0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol",
 
   beforeEach(async function () {
     // Deploy LogFile contract
-    Log = await ethers.getContractFactory("contracts/dataset/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol:LogFile");
+    const logPath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol/LogFile.json');
+    const logJson = JSON.parse(fs.readFileSync(logPath));
+    Log = await ethers.getContractFactory(logJson.abi, logJson.bytecode);
     log = await Log.deploy();
     await log.waitForDeployment();
 
     // Deploy PrivateETHCell contract with LogFile address
-    PrivateETHCell = await ethers.getContractFactory("contracts/dataset/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol:PRIVATE_ETH_CELL");
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0x4e73b32ed6c35f570686b89848e5f39f20ecc106.sol/PRIVATE_ETH_CELL.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+    PrivateETHCell = await ethers.getContractFactory(json.abi, json.bytecode);
     victim = await PrivateETHCell.deploy();
     await victim.waitForDeployment();
     await victim.SetLogFile(log.target); // Set LogFile address after deployment

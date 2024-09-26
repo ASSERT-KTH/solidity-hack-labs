@@ -1,9 +1,13 @@
 const { loadFixture, time, mine } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack time_manipulation/timed_crowdsale.sol', function () {
     async function deployContracts() {
-        const TimedCrowdsale = await ethers.getContractFactory('contracts/dataset/time_manipulation/timed_crowdsale.sol:TimedCrowdsale');
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/time_manipulation/timed_crowdsale.sol/TimedCrowdsale.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        const TimedCrowdsale = await ethers.getContractFactory(json.abi, json.bytecode);
         const victim = await TimedCrowdsale.deploy();
 
     return {victim};

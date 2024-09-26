@@ -1,5 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const path = require("path");
+const fs = require("fs");
 describe("Reentrancy Attack for etherstore.sol", function () {  
     let EtherStore;
     let victim;
@@ -12,7 +14,9 @@ describe("Reentrancy Attack for etherstore.sol", function () {
         // Deploy Log contract
 
         // Deploy EtherStore contract with Log address
-        EtherStore = await ethers.getContractFactory("contracts/dataset/reentrancy/etherstore.sol:EtherStore");
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/etherstore.sol/EtherStore.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        EtherStore = await ethers.getContractFactory(json.abi, json.bytecode);
         victim = await EtherStore.deploy();
         await victim.waitForDeployment();
         //await victim.setLog(log.target); // Set Log address after deployment

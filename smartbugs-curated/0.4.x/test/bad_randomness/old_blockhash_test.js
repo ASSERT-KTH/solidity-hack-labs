@@ -1,16 +1,21 @@
 const { loadFixture, mine } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
-let amount;
+const path = require("path");
+const fs = require("fs");
 
 describe('attack bad_randomness/old_blockhash.sol', function () {
+    let amount;
     async function deployContracts() {
         const [v, a] = await ethers.getSigners();
         amount = ethers.parseEther('1');
 
         const options = {
             from: v,
-            value: amount};
-        const PredictTheBlockHashChallenge = await ethers.getContractFactory('contracts/dataset/bad_randomness/old_blockhash.sol:PredictTheBlockHashChallenge');
+            value: amount
+        };
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/bad_randomness/old_blockhash.sol/PredictTheBlockHashChallenge.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        const PredictTheBlockHashChallenge = await ethers.getContractFactory(json.abi, json.bytecode);
         const victim = await PredictTheBlockHashChallenge.deploy(options);  
         await victim.waitForDeployment();
 

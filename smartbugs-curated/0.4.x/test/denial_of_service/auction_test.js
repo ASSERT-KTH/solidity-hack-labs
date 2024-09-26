@@ -1,10 +1,13 @@
-const { loadFixture, mine } = require('@nomicfoundation/hardhat-network-helpers');
+const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack denial_of_service/auction.sol', function () {
     async function deployContracts() {
-
-        const DosAuction = await ethers.getContractFactory('contracts/dataset/denial_of_service/auction.sol:DosAuction');
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/denial_of_service/auction.sol/DosAuction.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        const DosAuction = await ethers.getContractFactory(json.abi, json.bytecode);
         const victim = await DosAuction.deploy();
         await victim.waitForDeployment();
 

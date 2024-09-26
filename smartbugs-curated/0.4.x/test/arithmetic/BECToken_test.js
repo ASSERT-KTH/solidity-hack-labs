@@ -1,9 +1,14 @@
 const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack arithmetic/BECToken.sol', function () {
     async function deployContracts() {
-    const BECToken = await ethers.getContractFactory('contracts/dataset/arithmetic/BECToken.sol:BecToken');
+    const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/arithmetic/BECToken.sol/BecToken.json');
+    const json = JSON.parse(fs.readFileSync(codePath));
+
+    const BECToken = await ethers.getContractFactory(json.abi, json.bytecode);
     const victim = await BECToken.deploy();  
     await victim.waitForDeployment();
 

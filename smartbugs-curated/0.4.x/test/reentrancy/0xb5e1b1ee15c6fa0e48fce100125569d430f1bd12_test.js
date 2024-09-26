@@ -1,5 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const path = require("path");
+const fs = require("fs");
 describe("Reentrancy Attack for 0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol", function () {  
     let Private_Bank;
     let victim;
@@ -10,12 +12,16 @@ describe("Reentrancy Attack for 0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol",
 
     beforeEach(async function () {
         // Deploy Log contract
-        Log = await ethers.getContractFactory("contracts/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol:Log");
+        const logPath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol/Log.json');
+        const logJson = JSON.parse(fs.readFileSync(logPath));
+        Log = await ethers.getContractFactory(logJson.abi, logJson.bytecode);
         log = await Log.deploy();
         await log.waitForDeployment();
 
         // Deploy Private_Bank contract with Log address
-        Private_Bank = await ethers.getContractFactory("contracts/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol:Private_Bank");
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol/Private_Bank.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        Private_Bank = await ethers.getContractFactory(json.abi, json.bytecode);
         victim = await Private_Bank.deploy(log.target);
         await victim.waitForDeployment();
         //await victim.setLog(log.target); // Set Log address after deployment

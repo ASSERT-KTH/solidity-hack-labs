@@ -1,10 +1,13 @@
-const { loadFixture, mine } = require('@nomicfoundation/hardhat-network-helpers');
+const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
+const path = require("path");
+const fs = require("fs");
 
 describe('attack bad_randomness/etheraffle.sol', function () {
     async function deployContracts() {
-
-        const Ethraffle_v4b = await ethers.getContractFactory('contracts/dataset/bad_randomness/etheraffle.sol:Ethraffle_v4b');
+        const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/bad_randomness/etheraffle.sol/Ethraffle_v4b.json');
+        const json = JSON.parse(fs.readFileSync(codePath));
+        const Ethraffle_v4b = await ethers.getContractFactory(json.abi, json.bytecode);
         const victim = await Ethraffle_v4b.deploy();
         await victim.waitForDeployment();
 
