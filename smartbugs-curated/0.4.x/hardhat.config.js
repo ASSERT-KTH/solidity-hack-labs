@@ -94,7 +94,7 @@ module.exports = {
   mocha: {
     reporter: './scripts/CustomReporter.js',
     reporterOptions: {
-      json: false, // Export test results to JSON
+      json: true, // Export test results to JSON
     }
   },
 };

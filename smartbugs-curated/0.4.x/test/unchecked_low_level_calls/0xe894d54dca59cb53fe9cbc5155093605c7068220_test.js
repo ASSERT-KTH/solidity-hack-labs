@@ -15,8 +15,16 @@ describe("attack unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c70
     const TokenEBU = await ethers.getContractFactory("contracts/unchecked_low_level_calls/TokenEBU.sol:TokenEBU");
     const token = await TokenEBU.connect(owner).deploy(1, "EBU", "EBU");
 
-    return {contract, token}
+    const SuccessContract = await ethers.getContractFactory("contracts/unchecked_low_level_calls/success_contract.sol:SuccessContract");
+    const success_contract = await SuccessContract.deploy();
+
+    return {contract, token, success_contract}
   };
+
+  it('sanity check: unchecked_low_level_calls/0xe894d54dca59cb53fe9cbc5155093605c7068220.sol', async function () {
+    const {contract, token, success_contract} = await loadFixture(deployContracts);
+    await expect(contract.transfer(contract.target, success_contract.target, [contract.target], 0, 0)).to.not.be.reverted;
+  });
 
   it("exploit unchecked low level call vulnerability", async function () {
     const {contract, token} = await loadFixture(deployContracts);

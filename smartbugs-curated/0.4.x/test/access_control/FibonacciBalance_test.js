@@ -32,6 +32,12 @@ describe('attack access_control/FibonacciBalance.sol', function () {
       return {lib, victim, attacker};
     }
 
+    it('sanity check: access_control/FibonacciBalance.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      const fibonacciLibrary = await victim.fibonacciLibrary();
+      expect(fibonacciLibrary).to.not.be.empty;
+    });
+
     it('exploit access control vulnerability', async function () {
       const {lib, victim, attacker} = await loadFixture(deployContracts);
       const victim_addr = victim.target;

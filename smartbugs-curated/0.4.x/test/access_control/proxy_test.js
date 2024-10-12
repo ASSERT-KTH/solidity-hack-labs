@@ -35,6 +35,16 @@ describe('attack access_control/proxy.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: access_control/proxy.sol', async function () {
+      const {victim, attacker} = await loadFixture(deployContracts);
+      const attackerInterface = new ethers.Interface([
+        "function benign()"
+      ]);
+
+      const data = attackerInterface.encodeFunctionData("benign");
+      await expect( victim.forward(attacker.target, data)).to.not.be.reverted;
+    });
+
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);
       const victim_addr = await victim.getAddress();

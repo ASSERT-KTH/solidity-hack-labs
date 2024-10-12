@@ -18,6 +18,10 @@ describe('attack arithmetic/overflow_simple_add.sol', function () {
       return {overflow, attacker};
     }
 
+    it('sanity check: arithmetic/overflow_simple_add.sol', async function () {
+      const {overflow} = await loadFixture(deployContracts);
+      expect(await overflow.balance()).to.equal(1);
+    });
   
     it('exploit overflow vulnerability', async function () {
       const {overflow, attacker} = await loadFixture(deployContracts);

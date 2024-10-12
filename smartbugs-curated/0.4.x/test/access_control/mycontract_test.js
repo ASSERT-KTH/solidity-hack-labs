@@ -9,9 +9,7 @@ describe('attack access_control/mycontract.sol', function () {
   let attacker_sig;
   let amount;
     async function deployContracts() {
-      const [v, a] = await ethers.getSigners();
-      victim_sig = v;
-      attacker_sig = a;
+      [victim_sig, attacker_sig] = await ethers.getSigners();
       const ownerNonce = await victim_sig.getNonce() + 1;
       const futureAddress = getContractAddress({
         from: victim_sig.address,
@@ -26,7 +24,7 @@ describe('attack access_control/mycontract.sol', function () {
       const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/mycontract.sol/MyContract.json');
       const json = JSON.parse(fs.readFileSync(codePath));
       const MyContract = await ethers.getContractFactory(json.abi, json.bytecode);
-      const victim = await MyContract.deploy();  
+      const victim = await MyContract.connect(victim_sig).deploy();  
       await victim.waitForDeployment();
       const victim_addr = await victim.getAddress();
 
@@ -35,6 +33,11 @@ describe('attack access_control/mycontract.sol', function () {
       await attacker.waitForDeployment();
       return {victim, attacker};
     }
+
+    it('sanity check: access_control/mycontract.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.connect(victim_sig).sendTo(victim_sig.address, 0)).to.not.be.reverted;
+    });
 
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

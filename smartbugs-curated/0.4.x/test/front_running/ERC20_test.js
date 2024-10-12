@@ -14,6 +14,12 @@ describe('attack front_running/ERC20.sol', function () {
       return {victim};
     }
 
+    it('sanity check: front_running/ERC20.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      const ownerBalance = await victim.balanceOf(owner.address);
+      expect(ownerBalance).to.be.equal(100);
+    });
+
 
     it('front running vulnerability', async function () {
       const {victim} = await loadFixture(deployContracts);

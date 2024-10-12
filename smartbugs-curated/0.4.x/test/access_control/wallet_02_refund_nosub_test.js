@@ -18,6 +18,11 @@ describe('attack access_control/wallet_02_refund_nosub.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: access_control/wallet_02_refund_nosub.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.deposit({value: 1})).to.not.be.reverted;
+    });
+
   
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

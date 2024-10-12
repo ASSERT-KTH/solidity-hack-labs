@@ -18,6 +18,11 @@ describe("attack unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e0
     return {contract, revertContract}
   };
 
+  it('sanity check: unchecked_low_level_calls/0x8fd1e427396ddb511533cf9abdbebd0a7e08da35.sol', async function () {
+    const {contract, revertContract} = await loadFixture(deployContracts);
+    await expect(contract.initTokenBank()).to.not.be.reverted;
+  });
+
   it("exploit unchecked low level call vulnerability in WithdrawToken()", async function () {
     const {contract, revertContract} = await loadFixture(deployContracts);
 

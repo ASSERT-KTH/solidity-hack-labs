@@ -24,6 +24,10 @@ describe("Reentrancy Attack for reentrancy_simple.sol", function () {
         
     });
 
+    it('sanity check: reentrancy/reentrancy_simple.sol', async function () {
+        await expect(victim.addToBalance({value:0})).to.not.be.reverted;
+    });
+
     it("should successfully drain funds through reentrancy attack", async function () {
         // Initial deposit to victim contract
         await victim.addToBalance( {value: ethers.parseEther("5") });

@@ -19,6 +19,11 @@ describe('attack arithmetic/tokensalechallenge.sol', function () {
     return {victim, attacker};
     }
 
+    it('sanity check: arithmetic/tokensalechallenge.sol', async function () {
+    const {victim} = await loadFixture(deployContracts);
+    expect(await victim.isComplete()).to.be.false;
+    });
+
   
     it('exploit buy overflow vulnerability line 23', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

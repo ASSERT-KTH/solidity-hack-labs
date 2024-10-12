@@ -18,6 +18,10 @@ describe('attack arithmetic/integer_overflow_benign_1.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: arithmetic/integer_overflow_benign_1.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      expect(await victim.count()).to.equal(1);
+    });
   
     it('exploit underflow vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

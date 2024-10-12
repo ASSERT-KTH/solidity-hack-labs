@@ -24,6 +24,14 @@ describe("Reentrancy Attack for reentrancy_bonus.sol", function () {
         
     });
 
+    it('sanity check: reentrancy/reentrancy_bonus.sol', async function () {
+      await network.provider.send("hardhat_setBalance", [
+        victim.target,
+        "0x0100" ,
+      ]);
+      await expect(victim.getFirstWithdrawalBonus(hacker.target)).to.not.be.reverted;
+    });
+
     it("should successfully drain funds through reentrancy attack", async function () {
         // Add funds to the contract by sending ether directly
         await network.provider.send("hardhat_setBalance", [

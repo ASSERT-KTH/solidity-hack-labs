@@ -18,6 +18,11 @@ describe("attack unchecked_low_level_calls/unchecked_return_value.sol", function
     return {contract, caller}
   };
 
+  it('sanity check: unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b_attack.sol', async function () {
+    const {contract, revertContract} = await loadFixture(deployContracts);
+    await expect(contract.connect(owner).suspend()).to.not.be.reverted;
+  });
+
   it("exploit unchecked low level call vulnerability in line 192", async function () {
     const {contract, caller} = await loadFixture(deployContracts);
     const SGX_ADDRESS = "0x18513702cCd928F2A3eb63d900aDf03c9cc81593";

@@ -23,6 +23,10 @@ describe("Reentrancy Attack for simpleDAO.sol", function () {
     return {simpleDAO, maliciousContract}
     }
 
+    it('sanity check: reentrancy/simpleDAO.sol', async function () {
+      const {simpleDAO, maliciousContract} = await loadFixture(deployContracts);
+      await expect(simpleDAO.donate(simpleDAO.target, {value:0})).to.not.be.reverted;
+    });
 
   it("should successfully drain funds through reentrancy attack", async function () {
     const {simpleDAO, maliciousContract} = await loadFixture(deployContracts);

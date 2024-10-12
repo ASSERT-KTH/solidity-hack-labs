@@ -22,6 +22,10 @@ describe('attack arithmetic/token.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: arithmetic/token.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      expect(await victim.balanceOf(victim.target)).to.equal(0);
+    });
   
     it('exploit underflow vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

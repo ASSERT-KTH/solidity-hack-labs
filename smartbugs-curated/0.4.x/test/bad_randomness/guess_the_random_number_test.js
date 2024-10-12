@@ -36,6 +36,10 @@ describe('attack bad_randomness/guess_the_random_number.sol', function () {
     return {block, victim, attacker};
     }
 
+    it('sanity check: bad_randomness/guess_the_random_number.sol', async function () {
+        const {victim} = await loadFixture(deployContracts);
+        expect(await victim.isComplete()).to.be.false;
+    });
   
     it('exploit bad randomness vulnerability', async function () {
         const {block, victim, attacker} = await loadFixture(deployContracts);

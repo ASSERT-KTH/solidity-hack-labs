@@ -19,6 +19,12 @@ describe('attack arithmetic/BECToken.sol', function () {
     return {victim, attacker};
     }
 
+    it('sanity check: arithmetic/BECToken.sol', async function () {
+    const {victim} = await loadFixture(deployContracts);
+    const name = await victim.name();
+    expect(name).to.equal('BeautyChain');
+    });
+
   
     it('exploit overflow vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

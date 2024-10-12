@@ -20,6 +20,11 @@ describe("attack unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618ae
     return {contract, revertContract}
   };
 
+  it('sanity check: unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.sol', async function () {
+    const {contract, revertContract} = await loadFixture(deployContracts);
+    await expect(contract.connect(owner).withdrawEther()).to.not.be.reverted;
+  });
+
   it("exploit unchecked low level call vulnerability", async function () {
     const {contract, revertContract} = await loadFixture(deployContracts);
     const amount = ethers.parseEther("1");

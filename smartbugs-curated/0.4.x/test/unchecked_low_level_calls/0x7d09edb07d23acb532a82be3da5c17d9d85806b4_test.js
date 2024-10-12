@@ -21,6 +21,11 @@ describe("attack unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85
     return {contract, revertContract}
   };
 
+  it('sanity check: unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol', async function () {
+    const {contract, revertContract} = await loadFixture(deployContracts);
+    await expect(contract.connect(owner).OpenToThePublic()).to.not.be.reverted;
+  });
+
   it("exploit unchecked low level call vulnerability", async function () {
     const {contract, revertContract} = await loadFixture(deployContracts);
     await expect(

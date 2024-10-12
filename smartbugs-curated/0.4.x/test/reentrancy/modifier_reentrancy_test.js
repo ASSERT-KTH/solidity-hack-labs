@@ -24,6 +24,10 @@ describe("Reentrancy Attack for modifier_reentrancy.sol", function () {
         
     });
 
+    it('sanity check: reentrancy/modifier_reentrancy.sol', async function () {
+        expect(await victim.tokenBalance(victim.target)).to.be.equal(0);
+    });
+
     it("should successfully drain funds through reentrancy attack", async function () {
 
 

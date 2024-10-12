@@ -20,6 +20,12 @@ describe('attack access_control/mapping_write.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: access_control/mapping_write.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.set(1, 1)).to.not.be.reverted;
+      expect(await victim.get(1)).to.equal(1);
+    });
+
   
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

@@ -18,6 +18,11 @@ describe('attack arithmetic/timeLock.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: arithmetic/timeLock.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.deposit({value:1})).to.not.be.reverted;
+    });
+
   
     it('exploit overflow vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

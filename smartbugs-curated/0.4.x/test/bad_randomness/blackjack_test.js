@@ -34,6 +34,11 @@ describe('attack bad_randomness/blackjack.sol', function () {
     return {victim, attacker};
     }
 
+    it('sanity check: bad_randomness/blackjack.sol', async function () {
+        const {victim} = await loadFixture(deployContracts);
+        expect(await victim.maxBet()).to.equal(ethers.parseEther('5'));
+    });
+
   
     it('exploit bad randomness vulnerability', async function () {
         const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))

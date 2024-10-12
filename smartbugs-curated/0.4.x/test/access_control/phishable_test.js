@@ -25,6 +25,11 @@ describe('attack access_control/phishable.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: access_control/phishable.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.connect(victim_sig).withdrawAll(victim_sig.address)).to.not.be.reverted;
+    });
+
   
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

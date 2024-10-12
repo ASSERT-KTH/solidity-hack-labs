@@ -19,6 +19,9 @@ contract ProxyAttacker {
         receiver.transfer(address(this).balance);
     }
 
+    function benign() public {
+    }
+
     function() public payable {}
 
 }

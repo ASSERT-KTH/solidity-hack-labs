@@ -72,6 +72,11 @@ describe("attack unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648
     return {pandaCaller, contract, saleAuction, siringAuction, nft}
   };
 
+  it('sanity check: unchecked_low_level_calls/0x663e4229142a27f00bafb5d087e1e730648314c3.sol', async function () {
+    const {contract, revertContract} = await loadFixture(deployContracts);
+    await expect(contract.connect(owner).init()).to.not.be.reverted;
+  });
+
   it("exploit unchecked low level call vulnerability in function withdrawAuctionBalances()", async function () {
     const {pandaCaller, contract, saleAuction, siringAuction, nft} = await loadFixture(deployContracts);
     await expect(

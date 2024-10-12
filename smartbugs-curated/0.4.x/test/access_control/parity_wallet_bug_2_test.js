@@ -18,6 +18,12 @@ describe('attack access_control/parity_wallet_bug_2.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: access_control/parity_wallet_bug_2.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      const m = await victim.m_required();
+      expect(m).to.equal(0);
+    });
+
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);
       const amount = ethers.parseEther("1");

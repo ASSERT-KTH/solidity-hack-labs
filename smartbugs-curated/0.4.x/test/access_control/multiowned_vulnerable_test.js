@@ -4,11 +4,13 @@ const path = require("path");
 const fs = require("fs");
 
 describe('attack access_control/multiowned_vulnerable.sol', function () {
+    let owner;
     async function deployContracts() {
+      [owner] = await ethers.getSigners();
       const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/access_control/multiowned_vulnerable.sol/TestContract.json');
       const json = JSON.parse(fs.readFileSync(codePath));
       const TestContract = await ethers.getContractFactory(json.abi, json.bytecode);
-      const victim = await TestContract.deploy();  
+      const victim = await TestContract.connect(owner).deploy();  
       await victim.waitForDeployment();
       const address = await victim.getAddress();
 
@@ -18,14 +20,18 @@ describe('attack access_control/multiowned_vulnerable.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: access_control/multiowned_vulnerable.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.connect(owner).withdrawAll()).to.not.be.reverted;
+    });
+
   
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);
-      const [v] = await ethers.getSigners();
       const victim_addr = await victim.getAddress();
       const attacker_addr = await attacker.getAddress();
       const amount = ethers.parseEther("1.0");
-      await v.sendTransaction({
+      await owner.sendTransaction({
         to: victim_addr,
         value: amount,
       });

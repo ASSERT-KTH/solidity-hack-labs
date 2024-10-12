@@ -13,6 +13,11 @@ describe('attack time_manipulation/timed_crowdsale.sol', function () {
     return {victim};
     }
 
+    it('sanity check: time_manipulation/timed_crowdsale.sol', async function () {
+        const {victim} = await deployContracts();
+        const saleFinished = await victim.isSaleFinished();
+        expect(saleFinished).to.be.false;
+    });
   
     it('exploit time manipulation vulnerability', async function () {
         await hre.network.provider.send("hardhat_reset");
