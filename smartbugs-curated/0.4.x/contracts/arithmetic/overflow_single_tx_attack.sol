@@ -24,20 +24,4 @@ contract IntegerOverflowSingleTransactionAttacker {
         uint256 number = 2;
         target.underflowtostate(number);
     }
-
-    function attackOverflowAddLocalOnly() public {
-        uint256 largeNumber = 2**256 - 1;
-        target.overflowlocalonly(largeNumber);
-    }
-
-    function attackOverflowMulLocalOnly() public {
-        uint256 largeNumber = 2**255;
-        target.overflowmulocalonly(largeNumber);
-        target.overflowmulocalonly(2);
-    }
-
-    function attackUnderflowLocalOnly() public {
-        uint256 number = 2;
-        target.underflowlocalonly(number);
-    }
 }

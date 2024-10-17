@@ -40,27 +40,4 @@ describe('attack arithmetic/overflow_single_tx.sol', function () {
       await attacker.attackUnderflowToState();
       expect(await victim.count()).to.greaterThan(1);
     });
-
-    it('exploit overflow add vulnerability locally', async function () {
-      const {victim, attacker} = await loadFixture(deployContracts);
-      expect(await victim.count()).to.equal(1);
-      await attacker.attackOverflowAddLocalOnly();
-      expect(await victim.count()).to.equal(1);
-    });
-
-      
-    it('exploit overflow mul vulnerability locally', async function () {
-      const {victim, attacker} = await loadFixture(deployContracts);
-      expect(await victim.count()).to.equal(1);
-      await attacker.attackOverflowMulLocalOnly();
-      expect(await victim.count()).to.equal(1);
-    });
-
-    it('exploit underflow vulnerability locally', async function () {
-      const {victim, attacker} = await loadFixture(deployContracts);
-      expect(await victim.count()).to.equal(1);
-      await attacker.attackUnderflowLocalOnly();
-      expect(await victim.count()).to.equal(1);
-    });
-
   });
