@@ -19,6 +19,8 @@ class CustomReporter extends Spec {
     let allTestsPassed = true;
     let allFiles = 0;
     const testResults = [];
+    let failedSanity = 0;
+    const failedSanityTests = [];
 
     const exportOptions = options.reporterOptions || {};
     const exportToJson = exportOptions.json || false;
@@ -49,6 +51,18 @@ class CustomReporter extends Spec {
         error: err.message, // Capture the error message
         stack: err.stack,   // Capture the stack trace
       });
+
+      if (test.title.includes('sanity check')) {
+        failedSanity += 1;
+        failedSanityTests.push({
+          title: test.title,
+          file: fileName,
+          contractFile: contractFile,
+          state: 'failed',
+          error: err.message,
+          stack: err.stack,
+        });
+      }
     });
 
         // When a test ends, store its result
@@ -83,9 +97,11 @@ class CustomReporter extends Spec {
 
         const formattedMessage = Base.color('green', `Total passing test files: ${passingFiles}/${allFiles}`);
         const formattedMessage2 = Base.color('fail', `Total failed files: ${failedFiles}/${allFiles}`);
+        const formattedMessage3 = Base.color('fail', `Total failed sanity tests: ${failedSanity}/${allFiles}`);
         // // Log the formatted message
         console.log(`${formattedMessage}`);
         console.log(`${formattedMessage2}`);
+        console.log(`${formattedMessage3}`);
 
         if (exportToJson) {
             // Prepare the data to be exported to JSON
@@ -96,6 +112,8 @@ class CustomReporter extends Spec {
                 totalFiles: allFiles,
                 passingFiles: passingFiles,
                 failingFiles: failedFiles,
+                failedSanity: failedSanity,
+                failedSanityTests: failedSanityTests,
                 testResults: testResults,
             };
 

@@ -20,7 +20,7 @@ describe('attack access_control/simple_suicide.sol', function () {
       return {victim, attacker};
     }
 
-    it('sanity check: access_control/unprotected0.sol', async function () {
+    it('sanity check: access_control/simple_suicide.sol', async function () {
       const {victim} = await loadFixture(deployContracts);
       await expect(victim.connect(owner).sudicideAnyone(owner)).to.not.be.reverted;
     });

@@ -36,7 +36,7 @@ describe('attack access_control/mycontract.sol', function () {
 
     it('sanity check: access_control/mycontract.sol', async function () {
       const {victim} = await loadFixture(deployContracts);
-      await expect(victim.connect(victim_sig).sendTo(victim_sig.address, 0)).to.not.be.reverted;
+      await expect(victim.connect(victim_sig).sendTo(victim_sig.address, 1)).to.not.be.reverted;
     });
 
     it('exploit access control vulnerability', async function () {

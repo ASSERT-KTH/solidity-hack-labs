@@ -33,7 +33,7 @@ describe("Reentrancy Attack for 0x8c7777c45481dba411450c228cb692ac3d550344.sol",
     });
 
     it('sanity check: reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.sol', async function () {
-      await expect(victim.Deposit({ value: 0 })).to.not.be.reverted;
+      await expect(victim.Deposit({ value: ethers.parseEther("10") })).to.not.be.reverted;
     });
 
     it("should successfully drain funds through reentrancy attack", async function () {
