@@ -1,0 +1,150 @@
+{
+  "totalTests": 18,
+  "passingTests": 2,
+  "failingTests": 16,
+  "totalFiles": 13,
+  "passingFiles": 0,
+  "failingFiles": 13,
+  "testResults": [
+    {
+      "title": "exploit overflow vulnerability",
+      "file": "arithmetic/BECToken_test.js",
+      "contractFile": "arithmetic/BECToken.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at BecToken.batchTransfer (contracts/dataset/arithmetic/BECToken.sol:264)\n    at BecTokenAttacker.attack (contracts/arithmetic/BECToken_attack.sol:15)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/BECToken_test.js:29:7)"
+    },
+    {
+      "title": "sanity check: arithmetic/integer_overflow_1.sol",
+      "file": "arithmetic/integer_overflow_1_test.js",
+      "contractFile": "arithmetic/integer_overflow_1.sol",
+      "state": "passed"
+    },
+    {
+      "title": "exploit overflow vulnerability",
+      "file": "arithmetic/integer_overflow_1_test.js",
+      "contractFile": "arithmetic/integer_overflow_1.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at Overflow.add (contracts/dataset/arithmetic/integer_overflow_1.sol:14)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.add (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/integer_overflow_1_test.js:46:7)"
+    },
+    {
+      "title": "exploit overflow vulnerability",
+      "file": "arithmetic/integer_overflow_add_test.js",
+      "contractFile": "arithmetic/integer_overflow_add.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowAdd.run (contracts/dataset/arithmetic/integer_overflow_add.sol:17)\n    at IntegerOverflowAddAttacker.attack (contracts/arithmetic/integer_overflow_add_attack.sol:17)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/integer_overflow_add_test.js:25:7)"
+    },
+    {
+      "title": "sanity check: arithmetic/integer_overflow_mapping_sym_1.sol",
+      "file": "arithmetic/integer_overflow_mapping_sym_1.js",
+      "contractFile": "arithmetic/integer_overflow_mapping_sym_1.js",
+      "state": "passed"
+    },
+    {
+      "title": "exploit overflow vulnerability",
+      "file": "arithmetic/integer_overflow_mapping_sym_1.js",
+      "contractFile": "arithmetic/integer_overflow_mapping_sym_1.js",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowMappingSym1.init (contracts/dataset/arithmetic/integer_overflow_mapping_sym_1.sol:16)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.init (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/integer_overflow_mapping_sym_1.js:56:7)"
+    },
+    {
+      "title": "exploit underflow vulnerability",
+      "file": "arithmetic/integer_overflow_minimal_test.js",
+      "contractFile": "arithmetic/integer_overflow_minimal.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowMinimal.run (contracts/dataset/arithmetic/integer_overflow_minimal.sol:17)\n    at IntegerOverflowMinimalAttacker.attack (contracts/arithmetic/integer_overflow_minimal_attack.sol:16)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/integer_overflow_minimal_test.js:27:7)"
+    },
+    {
+      "title": "exploit overflow vulnerability",
+      "file": "arithmetic/integer_overflow_mul_test.js",
+      "contractFile": "arithmetic/integer_overflow_mul.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowMul.run (contracts/dataset/arithmetic/integer_overflow_mul.sol:17)\n    at IntegerOverflowMulAttacker.attack (contracts/arithmetic/integer_overflow_mul_attack.sol:14)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/integer_overflow_mul_test.js:26:7)"
+    },
+    {
+      "title": "exploit underflow vulnerability",
+      "file": "arithmetic/integer_overflow_multitx_multifunc_feasible_test.js",
+      "contractFile": "arithmetic/integer_overflow_multitx_multifunc_feasible.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowMultiTxMultiFuncFeasible.run (contracts/dataset/arithmetic/integer_overflow_multitx_multifunc_feasible.sol:25)\n    at IntegerOverflowMultiTxMultiFuncFeasibleAttacker.attack (contracts/arithmetic/integer_overflow_multitx_multifunc_feasible_attack.sol:15)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/integer_overflow_multitx_multifunc_feasible_test.js:26:7)"
+    },
+    {
+      "title": "exploit underflow vulnerability",
+      "file": "arithmetic/integer_overflow_multitx_onefunc_feasible_test.js",
+      "contractFile": "arithmetic/integer_overflow_multitx_onefunc_feasible.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowMultiTxOneFuncFeasible.run (contracts/dataset/arithmetic/integer_overflow_multitx_onefunc_feasible.sol:22)\n    at IntegerOverflowMultiTxOneFuncFeasibleAttacker.attack (contracts/arithmetic/integer_overflow_multitx_onefunc_feasible_attack.sol:15)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/integer_overflow_multitx_onefunc_feasible_test.js:25:7)"
+    },
+    {
+      "title": "exploit overflow vulnerability",
+      "file": "arithmetic/overflow_simple_add_test.js",
+      "contractFile": "arithmetic/overflow_simple_add.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at Overflow_Add.add (contracts/dataset/arithmetic/overflow_simple_add.sol:14)\n    at Overflow_AddAttacker.attack (contracts/arithmetic/overflow_simple_add_attack.sol:18)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/overflow_simple_add_test.js:27:7)"
+    },
+    {
+      "title": "exploit overflow add vulnerability",
+      "file": "arithmetic/overflow_single_tx_test.js",
+      "contractFile": "arithmetic/overflow_single_tx.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowSingleTransaction.overflowaddtostate (contracts/dataset/arithmetic/overflow_single_tx.sol:18)\n    at IntegerOverflowSingleTransactionAttacker.attackOverflowAddToState (contracts/arithmetic/overflow_single_tx_attack.sol:14)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attackOverflowAddToState (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/overflow_single_tx_test.js:25:7)"
+    },
+    {
+      "title": "exploit overflow mul vulnerability",
+      "file": "arithmetic/overflow_single_tx_test.js",
+      "contractFile": "arithmetic/overflow_single_tx.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowSingleTransaction.overflowmultostate (contracts/dataset/arithmetic/overflow_single_tx.sol:24)\n    at IntegerOverflowSingleTransactionAttacker.attackOverflowMulToState (contracts/arithmetic/overflow_single_tx_attack.sol:20)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attackOverflowMulToState (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/overflow_single_tx_test.js:33:7)"
+    },
+    {
+      "title": "exploit underflow vulnerability",
+      "file": "arithmetic/overflow_single_tx_test.js",
+      "contractFile": "arithmetic/overflow_single_tx.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at IntegerOverflowSingleTransaction.underflowtostate (contracts/dataset/arithmetic/overflow_single_tx.sol:30)\n    at IntegerOverflowSingleTransactionAttacker.attackUnderflowToState (contracts/arithmetic/overflow_single_tx_attack.sol:25)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attackUnderflowToState (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/overflow_single_tx_test.js:40:7)"
+    },
+    {
+      "title": "exploit overflow vulnerability",
+      "file": "arithmetic/timelock_test.js",
+      "contractFile": "arithmetic/timelock.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at TimeLock.increaseLockTime (contracts/dataset/arithmetic/timelock.sol:22)\n    at TimeLockAttacker.attack (contracts/arithmetic/timelock_attack.sol:20)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/timelock_test.js:41:7)"
+    },
+    {
+      "title": "exploit underflow vulnerability",
+      "file": "arithmetic/token_test.js",
+      "contractFile": "arithmetic/token.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at Token.transfer (contracts/dataset/arithmetic/token.sol:20)\n    at TokenAttacker.attack (contracts/arithmetic/token_attack.sol:15)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/token_test.js:30:7)"
+    },
+    {
+      "title": "exploit buy overflow vulnerability line 23",
+      "file": "arithmetic/tokensalechallenge_test.js",
+      "contractFile": "arithmetic/tokensalechallenge.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at TokenSaleChallenge.buy (contracts/dataset/arithmetic/tokensalechallenge.sol:23)\n    at TokenSaleChallengeAttacker.attack_buy (contracts/arithmetic/tokensalechallenge_attack.sol:11)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack_buy (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/tokensalechallenge_test.js:30:7)"
+    },
+    {
+      "title": "exploit the catch the ether vulnerability",
+      "file": "arithmetic/tokensalechallenge_test.js",
+      "contractFile": "arithmetic/tokensalechallenge.sol",
+      "state": "failed",
+      "error": "VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)",
+      "stack": "Error: VM Exception while processing transaction: reverted with panic code 0x11 (Arithmetic operation overflowed outside of an unchecked block)\n    at TokenSaleChallenge.buy (contracts/dataset/arithmetic/tokensalechallenge.sol:23)\n    at TokenSaleChallengeAttacker.attack_buy (contracts/arithmetic/tokensalechallenge_attack.sol:11)\n    at TokenSaleChallengeAttacker.attack_complete (contracts/arithmetic/tokensalechallenge_attack.sol:15)\n    at EdrProviderWrapper.request (node_modules/hardhat/src/internal/hardhat-network/provider/provider.ts:446:41)\n    at HardhatEthersSigner.sendTransaction (node_modules/@nomicfoundation/hardhat-ethers/src/signers.ts:125:18)\n    at send (node_modules/ethers/src.ts/contract/contract.ts:313:20)\n    at Proxy.attack_complete (node_modules/ethers/src.ts/contract/contract.ts:352:16)\n    at Context.<anonymous> (test/arithmetic/tokensalechallenge_test.js:41:5)"
+    }
+  ]
+}
