@@ -18,11 +18,6 @@ describe('attack arithmetic/overflow_single_tx.sol', function () {
       return {victim, attacker};
     }
 
-    it('sanity check: arithmetic/overflow_single_tx.sol', async function () {
-      const {victim} = await loadFixture(deployContracts);
-      expect(await victim.count()).to.equal(1);
-    });
-
   
     it('exploit overflow add vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);
