@@ -22,6 +22,9 @@ describe('attack arithmetic/integer_overflow_multitx_multifunc_feasible.sol', fu
     it('sanity check: arithmetic/integer_overflow_multitx_multifunc_feasible.sol', async function () {
       const {victim} = await loadFixture(deployContracts);
       expect(await victim.count()).to.equal(1);
+      await victim.init();
+      await victim.run(1);
+      expect(await victim.count()).to.equal(0);
     });
 
   

@@ -1,4 +1,4 @@
-const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
+const { loadFixture, time } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 const path = require("path");
 const fs = require("fs");
@@ -19,8 +19,13 @@ describe('attack arithmetic/timeLock.sol', function () {
     }
 
     it('sanity check: arithmetic/timeLock.sol', async function () {
+      const [sig] = await ethers.getSigners();
       const {victim} = await loadFixture(deployContracts);
-      await expect(victim.deposit({value:1})).to.not.be.reverted;
+      await expect(victim.connect(sig).deposit({value:1})).to.not.be.reverted;
+      await victim.connect(sig).increaseLockTime(1);
+      await time.increase(3600 * 24 * 8);
+      await expect(victim.connect(sig).withdraw()).to.not.be.reverted;
+      expect(await victim.balances(sig.address)).to.equal(0);
     });
 
   

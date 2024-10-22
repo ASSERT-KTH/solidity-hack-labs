@@ -18,9 +18,25 @@ describe('attack arithmetic/overflow_single_tx.sol', function () {
       return {victim, attacker};
     }
 
-    it('sanity check: arithmetic/overflow_single_tx.sol', async function () {
+    it('sanity check: arithmetic/overflow_single_tx.sol add', async function () {
       const {victim} = await loadFixture(deployContracts);
       expect(await victim.count()).to.equal(1);
+      await victim.overflowaddtostate(1);
+      expect(await victim.count()).to.equal(2);
+    });
+
+    it('sanity check: arithmetic/overflow_single_tx.sol mul', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      expect(await victim.count()).to.equal(1);
+      await victim.overflowmultostate(2);
+      expect(await victim.count()).to.equal(2);
+    });
+
+    it('sanity check: arithmetic/overflow_single_tx.sol sub', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      expect(await victim.count()).to.equal(1);
+      await victim.underflowtostate(1);
+      expect(await victim.count()).to.equal(0);
     });
 
   

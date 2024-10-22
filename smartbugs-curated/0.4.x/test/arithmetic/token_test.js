@@ -5,14 +5,15 @@ const fs = require("fs");
 
 describe('attack arithmetic/token.sol', function () {
     let to_address;
+    let owner;
     async function deployContracts() {
       const randomPrivateKey = ethers.Wallet.createRandom().privateKey;
-
+      [owner] = await ethers.getSigners();
       to_address = ethers.computeAddress(randomPrivateKey);
       const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/arithmetic/token.sol/Token.json');
       const json = JSON.parse(fs.readFileSync(codePath));
       const Token = await ethers.getContractFactory(json.abi, json.bytecode);
-      const victim = await Token.deploy(1);  
+      const victim = await Token.connect(owner).deploy(1);  
       await victim.waitForDeployment();
       const address = await victim.getAddress();
 
@@ -24,7 +25,11 @@ describe('attack arithmetic/token.sol', function () {
 
     it('sanity check: arithmetic/token.sol', async function () {
       const {victim} = await loadFixture(deployContracts);
+      expect(await victim.balanceOf(owner.address)).to.equal(1);
       expect(await victim.balanceOf(victim.target)).to.equal(0);
+      await victim.transfer(victim.target, 1);
+      expect(await victim.balanceOf(owner.address)).to.equal(0);
+      expect(await victim.balanceOf(victim.target)).to.equal(1);
     });
   
     it('exploit underflow vulnerability', async function () {

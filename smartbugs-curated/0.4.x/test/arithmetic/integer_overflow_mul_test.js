@@ -22,6 +22,8 @@ describe('attack arithmetic/integer_overflow_mul.sol', function () {
     it('sanity check: arithmetic/integer_overflow_mul.sol', async function () {
       const {overflow} = await loadFixture(deployContracts);
       expect(await overflow.count()).to.equal(2);
+      await overflow.run(2);
+      expect(await overflow.count()).to.equal(4);
     });
   
     it('exploit overflow vulnerability', async function () {

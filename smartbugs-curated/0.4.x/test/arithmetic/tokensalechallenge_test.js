@@ -21,7 +21,11 @@ describe('attack arithmetic/tokensalechallenge.sol', function () {
 
     it('sanity check: arithmetic/tokensalechallenge.sol', async function () {
     const {victim} = await loadFixture(deployContracts);
-    expect(await victim.isComplete()).to.be.false;
+    const [sig] = await ethers.getSigners();
+    await expect(victim.connect(sig).buy(1, {value: ethers.parseEther('1')})).to.not.be.reverted;
+    expect(await victim.balanceOf(sig.address)).to.equal(1);
+    await expect(victim.connect(sig).sell(1)).to.not.be.reverted;
+    expect(await victim.balanceOf(sig.address)).to.equal(0);
     });
 
   

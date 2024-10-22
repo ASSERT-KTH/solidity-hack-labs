@@ -4,12 +4,14 @@ const path = require("path");
 const fs = require("fs");
 
 describe('attack arithmetic/BECToken.sol', function () {
+  let owner;
     async function deployContracts() {
+      [owner] = await ethers.getSigners();
     const codePath = path.join(__dirname, '../../artifacts/contracts/dataset/arithmetic/BECToken.sol/BecToken.json');
     const json = JSON.parse(fs.readFileSync(codePath));
 
     const BECToken = await ethers.getContractFactory(json.abi, json.bytecode);
-    const victim = await BECToken.deploy();  
+    const victim = await BECToken.connect(owner).deploy();  
     await victim.waitForDeployment();
 
     const BecTokenAttacker = await ethers.getContractFactory('contracts/arithmetic/BECToken_attack.sol:BecTokenAttacker');
@@ -21,8 +23,15 @@ describe('attack arithmetic/BECToken.sol', function () {
 
     it('sanity check: arithmetic/BECToken.sol', async function () {
     const {victim} = await loadFixture(deployContracts);
-    const name = await victim.name();
-    expect(name).to.equal('BeautyChain');
+    const balance = await victim.balanceOf(victim.target);
+    expect(balance).to.equal(0);
+    const ownerBalance = await victim.balanceOf(await owner.address);
+    expect(ownerBalance).to.equal(await victim.totalSupply());
+    await victim.batchTransfer([victim.target], 10);
+    const newBalance = await victim.balanceOf(victim.target);
+    expect(newBalance).to.equal(10);
+    const newOwnerBalance = await victim.balanceOf(await owner.address);
+    expect(newOwnerBalance).to.equal(ownerBalance - newBalance);
     });
 
   
