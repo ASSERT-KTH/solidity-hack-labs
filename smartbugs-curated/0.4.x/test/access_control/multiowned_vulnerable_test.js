@@ -22,6 +22,7 @@ describe('attack access_control/multiowned_vulnerable.sol', function () {
 
     it('sanity check: access_control/multiowned_vulnerable.sol', async function () {
       const {victim} = await loadFixture(deployContracts);
+      await expect(victim.connect(owner).newOwner(owner.address)).to.not.be.reverted;
       await expect(victim.connect(owner).withdrawAll()).to.not.be.reverted;
     });
 

@@ -22,6 +22,7 @@ describe('attack access_control/arbitrary_location_write_simple.sol', function (
     it('sanity check: access_control/arbitrary_location_write_simple.sol', async function () {
       const {victim} = await loadFixture(deployContracts);
       await expect(victim.PushBonusCode(1)).to.not.be.reverted;
+      await expect(victim.PopBonusCode()).to.not.be.reverted;
     });
 
   
