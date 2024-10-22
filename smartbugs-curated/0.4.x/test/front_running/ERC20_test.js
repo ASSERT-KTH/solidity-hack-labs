@@ -16,8 +16,9 @@ describe('attack front_running/ERC20.sol', function () {
 
     it('sanity check: front_running/ERC20.sol', async function () {
       const {victim} = await loadFixture(deployContracts);
-      const ownerBalance = await victim.balanceOf(owner.address);
-      expect(ownerBalance).to.be.equal(100);
+      await expect(victim.connect(owner).approve(attacker.address, 100)).to.not.be.reverted;
+      await expect(victim.connect(owner).approve(attacker.address, 10)).to.not.be.reverted;
+      await expect(victim.connect(attacker).transferFrom(owner.address, attacker.address, 10)).to.not.be.reverted;
     });
 
 
@@ -32,7 +33,7 @@ describe('attack front_running/ERC20.sol', function () {
       await network.provider.send("evm_setAutomine", [false]);
       await network.provider.send("evm_setIntervalMining", [0]);
 
-      // owner tries to restify the allowance
+      // owner tries to rectify the allowance
       const tx1 = await victim.connect(owner).approve(attacker.address, 10, {gasPrice: 767532034});
 
       // attacker sees tx1's gasPrice and increases its tx gasPrice to become retrieve the tokens before tx1 is mined
