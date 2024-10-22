@@ -17,7 +17,7 @@ describe('attack other/open_address_lottery.sol', function () {
 
     it('sanity check: other/open_address_lottery.sol', async function () {
       const {contract} = await loadFixture(deployContracts);
-      await expect(contract.luckyNumberOfAddress(contract.target)).to.not.be.reverted;
+      await expect(contract.connect(participant).participate({value: ethers.parseEther("1")})).to.not.be.reverted;
     });
   
     it('exploit uninitialized storage vulnerability', async function () {
