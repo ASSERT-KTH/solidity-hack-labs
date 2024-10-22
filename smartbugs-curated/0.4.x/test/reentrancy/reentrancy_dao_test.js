@@ -26,7 +26,10 @@ describe("Reentrancy Attack for reentrancy_dao.sol", function () {
     });
 
     it('sanity check: reentrancy/reentrancy_dao.sol', async function () {
-        await expect(victim.deposit({value:0})).to.not.be.reverted;
+        await expect(victim.deposit({value:ethers.parseEther('1')})).to.not.be.reverted;
+        expect(await ethers.provider.getBalance(victim.target)).to.equal(ethers.parseEther('1'));
+        await expect(victim.withdrawAll()).to.not.be.reverted;
+        expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
     });
 
     it("should successfully drain funds through reentrancy attack", async function () {

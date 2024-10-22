@@ -28,7 +28,10 @@ describe("Reentrancy Attack for etherstore.sol", function () {
     });
 
     it('sanity check: reentrancy/etherstore.sol', async function () {
-        await expect(victim.depositFunds({ value: 0 })).to.not.be.reverted;
+        await expect(victim.depositFunds({ value: ethers.parseEther('1') })).to.not.be.reverted;
+        expect(await ethers.provider.getBalance(victim.target)).to.equal(ethers.parseEther("1"));
+        await expect(victim.withdrawFunds(ethers.parseEther('1'))).to.not.be.reverted;
+        expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
     });
 
     it("should successfully drain funds through reentrancy attack", async function () {

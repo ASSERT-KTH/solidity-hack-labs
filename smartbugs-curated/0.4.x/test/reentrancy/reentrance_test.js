@@ -25,7 +25,12 @@ describe("Reentrancy Attack for reentrance.sol", function () {
     });
 
     it('sanity check: reentrancy/reentrance.sol', async function () {
-        await expect(victim.donate(victim.target, {value:0})).to.not.be.reverted;
+        const [sig] = await ethers.getSigners();
+        expect(await victim.balanceOf(sig.address)).to.equal(0);
+        await expect(victim.connect(sig).donate(sig.address, {value: ethers.parseEther('1')})).to.not.be.reverted;
+        expect(await victim.balanceOf(sig.address)).to.equal(ethers.parseEther('1'));
+        await expect(victim.connect(sig).withdraw(ethers.parseEther('1'))).to.not.be.reverted
+        expect(await victim.balanceOf(sig.address)).to.equal(0);
     });
 
 
