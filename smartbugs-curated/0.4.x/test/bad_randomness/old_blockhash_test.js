@@ -35,7 +35,9 @@ describe('attack bad_randomness/old_blockhash.sol', function () {
     it('sanity check: bad_randomness/old_blockhash.sol', async function () {
         const {victim} = await loadFixture(deployContracts);
         const bytes = ethers.randomBytes(32);
-        expect(await victim.lockInGuess(bytes, {value: ethers.parseEther("1")})).to.not.be.reverted;
+        await expect(victim.lockInGuess(bytes, {value: ethers.parseEther("1")})).to.not.be.reverted;
+        await mine(257);
+        await expect(victim.settle()).to.not.be.reverted;
     });
 
   

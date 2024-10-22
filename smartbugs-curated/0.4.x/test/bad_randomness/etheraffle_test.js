@@ -21,7 +21,7 @@ describe('attack bad_randomness/etheraffle.sol', function () {
 
     it('sanity check: bad_randomness/etheraffle.sol', async function () {
         const {victim} = await loadFixture(deployContracts);
-        expect(await victim.prize()).to.equal(ethers.parseEther('2.5'));
+        await expect(victim.buyTickets({value: ethers.parseEther('1')})).to.not.be.reverted;
     });
   
     it('exploit bad randomness vulnerability', async function () {
