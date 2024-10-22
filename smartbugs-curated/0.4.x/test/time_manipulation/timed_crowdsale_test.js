@@ -25,11 +25,11 @@ describe('attack time_manipulation/timed_crowdsale.sol', function () {
 
         const saleEndTimestamp = 1546300800;
 
-        // // Fast forward time to January 1, 2019 (just after sale end)
+        // Fast forward time to January 1, 2019 (just after sale end)
         await time.setNextBlockTimestamp(saleEndTimestamp);
         await mine(1);
 
-        // // The sale should now be finished due to the time manipulation
+        // The sale should now be finished due to the time manipulation
         const saleFinished = await victim.isSaleFinished();
         expect(saleFinished).to.be.true;
     });

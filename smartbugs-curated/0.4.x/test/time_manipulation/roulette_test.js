@@ -23,6 +23,7 @@ describe('attack time_manipulation/roulette.sol', function () {
             to: victim.target,
             value: amount
         })).to.not.be.reverted;
+        expect(await ethers.provider.getBalance(victim.target)).to.be.gt(0);
     });
 
   

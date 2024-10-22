@@ -20,8 +20,9 @@ describe('attack time_manipulation/ether_lotto.sol', function () {
     }
 
     it('sanity check: time_manipulation/ether_lotto.sol', async function () {
-        const {victim, attacker} = await loadFixture(deployContracts);
+        const {victim} = await loadFixture(deployContracts);
         await expect(victim.play({value:10})).to.not.be.reverted;
+        expect(await ethers.provider.getBalance(victim.target)).to.be.gt(0);
     });
   
     it('exploit time manipulation vulnerability', async function () {
