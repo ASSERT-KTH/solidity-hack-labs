@@ -22,8 +22,10 @@ describe("attack unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e0450
   };
 
   it('sanity check: unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e045076ef3.sol', async function () {
-    const {contract, token, success_contract} = await loadFixture(deployContracts);
-    await expect(contract.transfer(contract.target, success_contract.target, [contract.target], 0)).to.not.be.reverted;
+    const {contract, success_contract} = await loadFixture(deployContracts);
+    const amount = ethers.parseEther("1");
+    await expect(contract.connect(owner).transfer(owner.address, success_contract.target, [contract.target], amount)).to.not.be.reverted;
+    expect(await success_contract.balanceOf(contract.target)).to.be.equal(amount);
   });
 
   it("exploit unchecked low level call vulnerability", async function () {
@@ -45,7 +47,7 @@ describe("attack unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e0450
 
     const val = 10;
 
-    // it does not revert cause the return value o all is not checked
+    // it does not revert cause the return value of call is not checked
     await expect(contract.transfer(from, token.target, to, val)).not.be.reverted;
     // the second transfer does not happen
     expect(await token.balanceOf(owner)).to.be.equal(amount - BigInt(val));

@@ -15,12 +15,20 @@ describe("attack unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8
     const RevertContract = await ethers.getContractFactory("contracts/unchecked_low_level_calls/revert_contract.sol:RevertContract");
     const revertContract = await RevertContract.deploy();
 
-    return {contract, revertContract}
+    const TokenEBU = await ethers.getContractFactory("contracts/unchecked_low_level_calls/TokenEBU.sol:TokenEBU");
+    const token = await TokenEBU.connect(owner).deploy(10, "EBU", "EBU");
+
+    return {contract, revertContract, token}
   };
 
   it('sanity check: unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol', async function () {
-    const {contract, revertContract} = await loadFixture(deployContracts);
+    const {contract, token} = await loadFixture(deployContracts);
+    const ownerBalance = await token.balanceOf(owner.address);
+    await expect(token.connect(owner).transfer(contract.target, 10)).to.not.be.reverted;
+    expect(await token.balanceOf(contract.target)).to.equal(10);
     await expect(contract.initTokenBank()).to.not.be.reverted;
+    await expect(contract.connect(owner).WithdrawToken(token.target, 10, owner.address)).to.not.be.reverted;
+    expect(await token.balanceOf(owner.address)).to.equal(ownerBalance);
   });
 
   it("exploit unchecked low level call vulnerability in WithdrawToken()", async function () {
