@@ -19,8 +19,8 @@ Details per category (following the [DASP taxonomy](https://dasp.co/)):
 | Front Running            | 4               | 3         |
 | Time Manipulation        | 5               | 3         |
 | Short Addresses          | 1               | 0         |
-| Others                   | 3               | 3         |
-| Total                    | 143             | 92        |
+| Others                   | 3               | 2         |
+| Total                    | 143             | 91        |
 
 Details:
 
