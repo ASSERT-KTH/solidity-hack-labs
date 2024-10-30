@@ -17,6 +17,15 @@ describe('attack time_manipulation/roulette.sol', function () {
     return {victim};
     }
 
+    it('sanity check: time_manipulation/roulette.sol', async function () {
+        const {victim} = await loadFixture(deployContracts);
+        await expect( owner.sendTransaction({
+            to: victim.target,
+            value: amount
+        })).to.not.be.reverted;
+        expect(await ethers.provider.getBalance(victim.target)).to.be.gt(0);
+    });
+
   
     it('exploit time manipulation vulnerability', async function () {
         const {victim} = await loadFixture(deployContracts);

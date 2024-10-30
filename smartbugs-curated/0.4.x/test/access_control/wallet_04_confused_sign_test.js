@@ -18,6 +18,12 @@ describe('attack access_control/wallet_04_confused_sign.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: access_control/wallet_04_confused_sign.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.deposit({value: 1})).to.not.be.reverted;
+      await expect(victim.withdraw(1)).to.not.be.reverted;
+    });
+
   
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

@@ -2,6 +2,7 @@ const { loadFixture } = require('@nomicfoundation/hardhat-network-helpers');
 const { expect } = require('chai');
 const path = require("path");
 const fs = require("fs");
+const { exec } = require('child_process');
 
 describe('attack bad_randomness/blackjack.sol', function () {
     let victimAmount, attackerAmount;
@@ -33,6 +34,12 @@ describe('attack bad_randomness/blackjack.sol', function () {
 
     return {victim, attacker};
     }
+
+    it('sanity check: bad_randomness/blackjack.sol', async function () {
+        const {victim} = await loadFixture(deployContracts);
+        // expect(await victim.maxBet()).to.equal(ethers.parseEther('5'));
+        await expect(victim.deal({value: ethers.parseEther('1')})).to.not.be.reverted;
+    });
 
   
     it('exploit bad randomness vulnerability', async function () {

@@ -14,6 +14,11 @@ describe('attack front_running/odds_and_evens.sol', function () {
       return {victim};
     }
 
+    it('sanity check: front_running/odds_and_evens.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.connect(user).play(0, {value: ethers.parseEther("1")})).to.not.be.reverted;
+    });
+
 
     it('front running vulnerability', async function () {
       const {victim} = await loadFixture(deployContracts);

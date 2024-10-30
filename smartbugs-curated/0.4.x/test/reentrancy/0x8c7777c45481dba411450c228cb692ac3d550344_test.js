@@ -2,6 +2,7 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const path = require("path");
 const fs = require("fs");
+const exp = require("constants");
 describe("Reentrancy Attack for 0x8c7777c45481dba411450c228cb692ac3d550344.sol", function () {  
     let ETH_VAULT;
     let victim;
@@ -30,6 +31,13 @@ describe("Reentrancy Attack for 0x8c7777c45481dba411450c228cb692ac3d550344.sol",
         MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344_attack.sol:MaliciousContract");
         hacker = await MaliciousContract.deploy(victim.target);
         
+    });
+
+    it('sanity check: reentrancy/0x8c7777c45481dba411450c228cb692ac3d550344.sol', async function () {
+      await expect(victim.Deposit({ value: ethers.parseEther("10") })).to.not.be.reverted;
+      expect(await ethers.provider.getBalance(victim.target)).to.equal(ethers.parseEther("10"));
+      await expect(victim.CashOut(ethers.parseEther("10"))).to.not.be.reverted;
+      expect(await ethers.provider.getBalance(victim.target)).to.equal(ethers.parseEther("0"));
     });
 
     it("should successfully drain funds through reentrancy attack", async function () {

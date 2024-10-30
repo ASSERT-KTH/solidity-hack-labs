@@ -15,7 +15,7 @@ const fs = require('fs');
 // }
 
 // const patches = getPatches(validPatchesPath);
-// // remove empyt string from the list
+// // remove empty string from the list
 // const index = patches.indexOf("");
 // if (index > -1) {
 //   patches.splice(index, 1);
@@ -31,8 +31,12 @@ const fs = require('fs');
 
 //     let filtered = [];
 //     filtered.push(path.join(config.paths.sources, "unchecked_low_level_calls/revert_contract.sol"));
+//     filtered.push(path.join(config.paths.sources, "unchecked_low_level_calls/success_contract.sol"));
 //     filtered.push(path.join(config.paths.sources, "unchecked_low_level_calls/TokenEBU.sol"));
 //     for (let i = 0; i < patches.length; i++) {
+//       if (patches[i] === "patch,main contract") {
+//         continue;
+//       }
 //       filename = path.join(patches[i].split("/")[1], patches[i].split("/")[2]);
 //       filename = filename.replace(".sol", "_attack.sol");
 //       filePath = path.join(config.paths.sources, filename);
@@ -94,7 +98,7 @@ module.exports = {
   mocha: {
     reporter: './scripts/CustomReporter.js',
     reporterOptions: {
-      json: false, // Export test results to JSON
+      json: true, // Export test results to JSON
     }
   },
 };

@@ -32,8 +32,16 @@ describe('attack bad_randomness/old_blockhash.sol', function () {
     return {victim, attacker};
     }
 
+    it('sanity check: bad_randomness/old_blockhash.sol', async function () {
+        const {victim} = await loadFixture(deployContracts);
+        const bytes = ethers.randomBytes(32);
+        await expect(victim.lockInGuess(bytes, {value: ethers.parseEther("1")})).to.not.be.reverted;
+        await mine(257);
+        await expect(victim.settle()).to.not.be.reverted;
+    });
+
   
-    it('exploit brad randomness vulnerability', async function () {
+    it('exploit bad randomness vulnerability', async function () {
         const {victim, attacker} = await loadFixture(deployContracts);
 
         const victimBalanceBefore = await ethers.provider.getBalance(victim.target);

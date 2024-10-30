@@ -18,6 +18,12 @@ describe('attack access_control/wallet_03_wrong_constructor.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: access_control/wallet_03_wrong_constructor.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.deposit({value: 1})).to.not.be.reverted;
+      await expect(victim.withdraw(1)).to.not.be.reverted;
+    });
+
   
     it('exploit access control vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

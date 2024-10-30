@@ -14,6 +14,13 @@ describe('attack front_running/eth_tx_order_dependence_minimal.sol', function ()
       return {victim};
     }
 
+    it('sanity check: front_running/eth_tx_order_dependence_minimal.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.connect(owner).setReward({value:2})).to.not.be.reverted;
+      await expect(victim.connect(owner).setReward({value:1})).to.not.be.reverted;
+      await expect(victim.connect(attacker).claimReward(1)).to.not.be.reverted;
+    });
+
 
     it('front running vulnerability in setReward() function', async function () {
       const {victim} = await loadFixture(deployContracts);

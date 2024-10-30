@@ -19,6 +19,10 @@ describe('attack bad_randomness/etheraffle.sol', function () {
     return {victim, attacker};
     }
 
+    it('sanity check: bad_randomness/etheraffle.sol', async function () {
+        const {victim} = await loadFixture(deployContracts);
+        await expect(victim.buyTickets({value: ethers.parseEther('1')})).to.not.be.reverted;
+    });
   
     it('exploit bad randomness vulnerability', async function () {
         const {victim, attacker} = await loadFixture(deployContracts);

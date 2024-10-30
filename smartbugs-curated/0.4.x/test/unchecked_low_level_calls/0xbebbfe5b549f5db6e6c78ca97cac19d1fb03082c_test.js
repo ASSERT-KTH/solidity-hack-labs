@@ -17,8 +17,18 @@ describe("attack unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb0
     const RevertContract = await ethers.getContractFactory("contracts/unchecked_low_level_calls/revert_contract.sol:RevertContract");
     const revertContract = await RevertContract.deploy();
 
-    return {contract, revertContract}
+    const SuccessContract = await ethers.getContractFactory("contracts/unchecked_low_level_calls/success_contract.sol:SuccessContract");
+    const successContract = await SuccessContract.deploy();
+
+    return {contract, revertContract, successContract}
   };
+
+  it('sanity check: unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb03082c.sol', async function () {
+    const {contract, successContract} = await loadFixture(deployContracts);
+    const amount = ethers.parseEther("1");
+    await expect(contract.connect(owner).proxy(successContract.target, "0x", {value: amount})).to.not.be.reverted;
+    expect(await ethers.provider.getBalance(successContract.target)).to.be.equal(amount);
+  });
 
   it("exploit unchecked low level call vulnerability", async function () {
     const {contract, revertContract} = await loadFixture(deployContracts);
@@ -49,7 +59,7 @@ describe("attack unchecked_low_level_calls/0xbebbfe5b549f5db6e6c78ca97cac19d1fb0
     expect(await contract.Owner()).to.be.equal(owner.address);
     expect(await contract.Deposits(owner.address)).to.be.equal(0);
     const OwnerBalance = await ethers.provider.getBalance(owner.address);
-    //withdraw won't return the funds sincet the deposit is zero
+    //withdraw won't return the funds since the deposit is zero
     const tx = await contract.connect(owner).withdraw(amount);
     const receipt = await tx.wait();
     expect(await ethers.provider.getBalance(owner.address)).to.be.equal(OwnerBalance - receipt.gasUsed * tx.gasPrice);

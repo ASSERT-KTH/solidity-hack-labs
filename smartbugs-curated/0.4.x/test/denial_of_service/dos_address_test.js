@@ -14,6 +14,11 @@ describe('attack denial_of_service/dos_address.sol', function () {
     return {victim};
     }
 
+    it('sanity check: denial_of_service/dos_address.sol', async function () {
+        const {victim} = await loadFixture(deployContracts);
+        expect(await victim.iWin()).to.be.false;
+    });
+
   
     it('exploit denial of service vulnerability', async function () {
         const {victim} = await loadFixture(deployContracts);

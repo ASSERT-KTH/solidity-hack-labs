@@ -1,7 +1,5 @@
 pragma solidity 0.4.25;
 
-import "hardhat/console.sol";
-
 contract RevertContract {
 
     // Fallback function that will fail on purpose

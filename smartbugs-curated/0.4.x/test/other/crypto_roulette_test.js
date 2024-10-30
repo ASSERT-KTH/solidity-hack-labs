@@ -15,6 +15,11 @@ describe('attack other/crypto_roulette.sol', function () {
       return {victim};
     }
 
+    it('sanity check: other/crypto_roulette.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      await expect(victim.play(10, {value: ethers.parseEther("0.1")})).to.not.be.reverted;
+    });
+
   
     it('exploit uninitialized storage vulnerability', async function () {
       const {victim} = await loadFixture(deployContracts);

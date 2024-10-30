@@ -19,6 +19,11 @@ describe('attack denial_of_service/auction.sol', function () {
     return {victim, attacker};
     }
 
+    it('sanity check: denial_of_service/auction.sol', async function () {
+        const {victim} = await loadFixture(deployContracts);
+        await expect(victim.bid({value:1})).to.not.be.reverted;
+    });
+
   
     it('exploit denial of service vulnerability', async function () {
         const {victim, attacker} = await loadFixture(deployContracts);

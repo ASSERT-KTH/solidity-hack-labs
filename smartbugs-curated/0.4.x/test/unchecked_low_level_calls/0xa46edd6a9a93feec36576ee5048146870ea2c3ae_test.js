@@ -15,8 +15,18 @@ describe("attack unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea
     const TokenEBU = await ethers.getContractFactory("contracts/unchecked_low_level_calls/TokenEBU.sol:TokenEBU");
     const token = await TokenEBU.connect(owner).deploy(1, "EBU", "EBU");
 
-    return {contract, token}
+    const SuccessContract = await ethers.getContractFactory("contracts/unchecked_low_level_calls/success_contract.sol:SuccessContract");
+    const success_contract = await SuccessContract.deploy();
+
+    return {contract, token, success_contract}
   };
+
+  it('sanity check: unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea2c3ae.sol', async function () {
+    const {contract, success_contract} = await loadFixture(deployContracts);
+    const amount = ethers.parseEther("1");
+    await expect(contract.connect(owner).transfer(owner.address, success_contract.target, [contract.target], [amount])).to.not.be.reverted;
+    expect(await success_contract.balanceOf(contract.target)).to.be.equal(amount);
+  });
 
   it("exploit unchecked low level call vulnerability", async function () {
     const {contract, token} = await loadFixture(deployContracts);
@@ -37,7 +47,7 @@ describe("attack unchecked_low_level_calls/0xa46edd6a9a93feec36576ee5048146870ea
 
     const val = [10, 10];
 
-    // it does not revert cause the return value o all is not checked
+    // it does not revert cause the return value of call is not checked
     await expect(contract.transfer(from, token.target, to, val)).not.be.reverted;
     // the second transfer does not happen
     expect(await token.balanceOf(owner)).to.be.equal(amount - BigInt(10));

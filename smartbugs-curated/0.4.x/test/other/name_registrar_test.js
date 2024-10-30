@@ -18,6 +18,11 @@ describe('attack other/name_registrar.sol', function () {
       return {victim, attacker};
     }
 
+    it('sanity check: other/name_registrar.sol', async function () {
+      const {victim} = await loadFixture(deployContracts);
+      const unlocked = await victim.unlocked();
+      expect(unlocked).to.be.false;
+    });
   
     it('exploit uninitialized storage vulnerability', async function () {
       const {victim, attacker} = await loadFixture(deployContracts);

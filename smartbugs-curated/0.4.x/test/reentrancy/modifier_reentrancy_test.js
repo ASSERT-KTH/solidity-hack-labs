@@ -5,6 +5,7 @@ const fs = require("fs");
 describe("Reentrancy Attack for modifier_reentrancy.sol", function () {  
     let ModifierEntrancy;
     let victim;
+    let contract;
     let MaliciousContract;
     let hacker;
 
@@ -18,10 +19,18 @@ describe("Reentrancy Attack for modifier_reentrancy.sol", function () {
         victim = await ModifierEntrancy.deploy();
         await victim.waitForDeployment();
 
+        const Bank = await ethers.getContractFactory("contracts/reentrancy/modifier_reentrancy_benign.sol:BankBenign");
+        contract = await Bank.deploy(victim.target);
+
         // Deploy MaliciousContract with ModifierEntrancy address
         MaliciousContract = await ethers.getContractFactory("contracts/reentrancy/modifier_reentrancy_attack.sol:MaliciousContract");
         hacker = await MaliciousContract.deploy(victim.target);
         
+    });
+
+    it('sanity check: reentrancy/modifier_reentrancy.sol', async function () {
+        await expect(contract.airDrop()).to.not.be.reverted;
+        expect(await victim.tokenBalance(contract.target)).to.equal("20");
     });
 
     it("should successfully drain funds through reentrancy attack", async function () {

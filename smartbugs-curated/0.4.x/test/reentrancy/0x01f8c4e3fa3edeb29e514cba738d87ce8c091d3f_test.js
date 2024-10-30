@@ -31,6 +31,13 @@ describe("Reentrancy Attack for 0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
     hacker = await MaliciousContract.deploy(victim.target);
   });
 
+  it('sanity check: reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol', async function () {
+    await expect(victim.Deposit({ value: ethers.parseEther('1') })).to.not.be.reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(ethers.parseEther('1'));
+    await expect(victim.Collect(ethers.parseEther('1'))).to.not.be.reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+  });
+
   it("should successfully drain funds through reentrancy attack", async function () {
     // Initial deposit to victim contract
     await victim.Deposit({ value: ethers.parseEther("5") });

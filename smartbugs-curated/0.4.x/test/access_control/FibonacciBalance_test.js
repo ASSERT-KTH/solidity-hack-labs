@@ -32,6 +32,23 @@ describe('attack access_control/FibonacciBalance.sol', function () {
       return {lib, victim, attacker};
     }
 
+    it('sanity check: access_control/FibonacciBalance.sol', async function () {
+      const [v] = await ethers.getSigners();
+      const {victim} = await loadFixture(deployContracts);
+      const fibonacciLibrary = await victim.fibonacciLibrary();
+      expect(fibonacciLibrary).to.not.be.empty;
+      // await expect(victim.withdraw()).to.not.be.reverted;
+      const abi = ["function setFibonacci(uint n)"];
+      const iface = new ethers.Interface(abi);
+    
+      const data = iface.encodeFunctionData("setFibonacci", [1]);
+      await expect(v.sendTransaction({
+        to: victim.target,
+        data: data,
+      })).not.be.reverted;
+  
+    });
+
     it('exploit access control vulnerability', async function () {
       const {lib, victim, attacker} = await loadFixture(deployContracts);
       const victim_addr = victim.target;

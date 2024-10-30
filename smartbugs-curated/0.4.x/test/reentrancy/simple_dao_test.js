@@ -23,6 +23,14 @@ describe("Reentrancy Attack for simpleDAO.sol", function () {
     return {simpleDAO, maliciousContract}
     }
 
+    it('sanity check: reentrancy/simpleDAO.sol', async function () {
+      const [sig] = await ethers.getSigners();
+      const {simpleDAO} = await loadFixture(deployContracts);
+      await expect(simpleDAO.connect(sig).donate(sig.address, {value:ethers.parseEther('1')})).to.not.be.reverted;
+      expect(await ethers.provider.getBalance(simpleDAO.target)).to.equal(ethers.parseEther('1'));
+      await expect(simpleDAO.connect(sig).withdraw(ethers.parseEther('1'))).to.not.be.reverted;
+      expect(await ethers.provider.getBalance(simpleDAO.target)).to.equal(0);
+    });
 
   it("should successfully drain funds through reentrancy attack", async function () {
     const {simpleDAO, maliciousContract} = await loadFixture(deployContracts);
