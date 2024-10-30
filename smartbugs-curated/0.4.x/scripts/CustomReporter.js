@@ -18,10 +18,12 @@ class CustomReporter extends Spec {
     let currentFile = null;
     let allTestsPassed = true;
     let allFiles = 0;
-    const testResults = [];
     let failedSanity = 0;
     const failedSanityTests = [];
-
+    let passedSanity = 0;
+    const passedResults = [];
+    const failedResults = [];
+    
     const exportOptions = options.reporterOptions || {};
     const exportToJson = exportOptions.json || false;
 
@@ -42,45 +44,41 @@ class CustomReporter extends Spec {
       // Mark the current test file as having failed tests
       allTestsPassed = false;
       const fileName = currentFile.split('/test/')[1];
-        const contractFile = fileName.replace('_test.js', suffix+ '.sol');
-      testResults.push({
-        title: test.title,
-        file: fileName,
-        contractFile: contractFile,
-        state: 'failed',
-        error: err.message, // Capture the error message
-        stack: err.stack,   // Capture the stack trace
-      });
-
-      if (test.title.includes('sanity check')) {
-        failedSanity += 1;
-        failedSanityTests.push({
+      const contractFile = fileName.replace('_test.js', suffix+ '.sol');
+      const result ={
           title: test.title,
           file: fileName,
           contractFile: contractFile,
-          state: 'failed',
+          state: test.state,
           error: err.message,
           stack: err.stack,
-        });
+        }
+      if (test.title.includes('sanity check')) {
+        failedSanity += 1;
+        failedSanityTests.push(result);
+      }
+      else {
+        failedResults.push(result);
       }
     });
 
-        // When a test ends, store its result
-    runner.on('test end', (test) => {
-        // only get the string after 'test' in the title
-        // filename = currentFile.split('/');
-        const fileName = currentFile.split('/test/')[1];
-        const contractFile = fileName.replace('_test.js', suffix + '.sol');
-        // console.log(contract_file);
-        if (test.state === 'passed') {
-            testResults.push({
-                title: test.title,
-                file: fileName,
-                contractFile: contractFile,
-                state: test.state,
-            });
-        }
-     });
+    // If any test passes
+    runner.on('pass', (test) => {
+      const fileName = currentFile.split('/test/')[1];
+      const contractFile = fileName.replace('_test.js', suffix + '.sol');
+      const result = {
+        title: test.title,
+        file: fileName,
+        contractFile: contractFile,
+        state: test.state,
+      };
+      if (test.title.includes('sanity check')) {
+        passedSanity += 1;
+      }
+      else {
+        passedResults.push(result);
+      }
+    });
 
     // When the suite (test file) ends
     runner.on('suite end', (suite) => {
@@ -113,8 +111,10 @@ class CustomReporter extends Spec {
                 passingFiles: passingFiles,
                 failingFiles: failedFiles,
                 failedSanity: failedSanity,
+                passedSanity: passedSanity,
                 failedSanityTests: failedSanityTests,
-                testResults: testResults,
+                passedResults: passedResults,
+                failedResults: failedResults,
             };
 
             // Write to JSON file
