@@ -1,0 +1,2 @@
+class HardhatRunnerError(Exception):
+    pass
