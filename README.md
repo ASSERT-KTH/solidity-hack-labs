@@ -1,7 +1,8 @@
 # HACK-LABS
 
 Contains actual smart contract attacker contracts for major benchmarks, starting with smartbugs-curated.
-
+It includes an evaluation [tool](https://github.com/ASSERT-KTH/solidity-hack-labs/tree/main/evaluator) for automated patch assessment.
+The tool allows you to test patched contracts from the dataset against these exploits to evaluate the effectiveness of the applied patches.
 
 ### Smartbugs-Curated Dataset
 Total contracts: 143
