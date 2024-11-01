@@ -9,8 +9,8 @@ contract BankBenign {
         modifierEntrancyInstance = ModifierEntrancy(_victimAddress);
     }
 
-    function supportsToken() external pure returns(bytes32){
-        return(keccak256(abi.encodePacked("Nu Token")));
+    function supportsToken() external pure returns (bytes32) {
+        return (keccak256(abi.encodePacked("Nu Token")));
     }
 
     function airDrop() public {

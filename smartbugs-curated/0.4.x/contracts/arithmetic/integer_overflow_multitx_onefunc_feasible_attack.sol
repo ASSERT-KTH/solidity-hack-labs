@@ -5,7 +5,9 @@ import "../dataset/arithmetic/integer_overflow_multitx_onefunc_feasible.sol";
 contract IntegerOverflowMultiTxOneFuncFeasibleAttacker {
     IntegerOverflowMultiTxOneFuncFeasible public target;
 
-    function IntegerOverflowMultiTxOneFuncFeasibleAttacker(address _targetAddress) public {
+    function IntegerOverflowMultiTxOneFuncFeasibleAttacker(
+        address _targetAddress
+    ) public {
         target = IntegerOverflowMultiTxOneFuncFeasible(_targetAddress);
     }
 

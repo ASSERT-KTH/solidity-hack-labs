@@ -24,12 +24,12 @@ module.exports = {
     hardhat: {
       initialDate: "2018-12-31 11:59:00 PM",
       hardfork: "shanghai",
-    }
+    },
   },
   mocha: {
-    reporter: './scripts/CustomReporter.js',
+    reporter: "./scripts/CustomReporter.js",
     reporterOptions: {
       json: true, // Export test results to JSON
-    }
+    },
   },
 };

