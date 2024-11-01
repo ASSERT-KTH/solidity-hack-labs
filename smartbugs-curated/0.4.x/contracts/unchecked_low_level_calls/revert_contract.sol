@@ -1,15 +1,14 @@
 pragma solidity 0.4.25;
 
 contract RevertContract {
-
     // Fallback function that will fail on purpose
     function() external payable {
         revert("I always revert!");
     }
 
     function sendEther(address _to) public payable {
-    (bool success, ) = _to.call.value(msg.value)("");
-    require(success, "Ether transfer failed");
+        (bool success, ) = _to.call.value(msg.value)("");
+        require(success, "Ether transfer failed");
     }
 
     function withdrawEther(address _from) public {

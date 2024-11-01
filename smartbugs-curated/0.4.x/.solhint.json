@@ -1,7 +1,22 @@
 {
-  "extends": "solhint:recommended",
+  "extends": "solhint:default",
   "rules": {
-    "compiler-version": "off"
+    "avoid-tx-origin": "warn",
+    "const-name-snakecase": "warn",
+    "contract-name-camelcase": "warn",
+    "event-name-camelcase": "warn",
+    "explicit-types": "warn",
+    "func-name-mixedcase": "warn",
+    "func-param-name-mixedcase": "warn",
+    "imports-on-top": "warn",
+    "modifier-name-mixedcase": "warn",
+    "no-console": "warn",
+    "no-global-import": "warn",
+    "no-unused-vars": "warn",
+    "quotes": "warn",
+    "use-forbidden-name": "warn",
+    "var-name-mixedcase": "warn",
+    "visibility-modifier-order": "warn"
   }
 
 }

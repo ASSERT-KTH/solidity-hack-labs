@@ -31,6 +31,5 @@ contract SuccessContract {
     }
 
     // it should accept any call without reverting
-    function() external payable {
-    }
+    function() external payable {}
 }

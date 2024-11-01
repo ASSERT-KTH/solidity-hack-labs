@@ -3,7 +3,6 @@ pragma solidity ^0.4.9;
 import "../dataset/bad_randomness/blackjack.sol";
 
 contract BlackJackAttacker {
-
     BlackJack blackjack;
 
     function BlackJackAttacker(address _target) {
@@ -12,10 +11,11 @@ contract BlackJackAttacker {
 
     // using Deck for *;
 
-    function() external payable {
-    }
+    function() external payable {}
 
-    function _calculateScore(uint8[] memory cards) internal view returns (uint8, uint8) {
+    function _calculateScore(
+        uint8[] memory cards
+    ) internal view returns (uint8, uint8) {
         uint8 score = 0;
         uint8 scoreBig = 0; // in case of Ace there could be 2 different scores
         bool bigAceUsed = false;
@@ -34,11 +34,10 @@ contract BlackJackAttacker {
     }
 
     function play() public payable {
-
         uint8[] memory playerCards = new uint8[](2);
         playerCards[0] = Deck.deal(address(this), 0);
         playerCards[1] = Deck.deal(address(this), 2);
-        
+
         (uint8 score, uint8 scoreBig) = _calculateScore(playerCards);
 
         if (scoreBig == 21 || score == 21) {
@@ -47,5 +46,4 @@ contract BlackJackAttacker {
             msg.sender.transfer(msg.value);
         }
     }
-
 }

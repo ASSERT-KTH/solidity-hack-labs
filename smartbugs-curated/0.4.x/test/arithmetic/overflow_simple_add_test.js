@@ -18,10 +18,10 @@ describe("attack arithmetic/overflow_simple_add.sol", function () {
     await overflow.waitForDeployment();
     const address = await overflow.getAddress();
 
-    const Overflow_AddAttacker = await ethers.getContractFactory(
-      "contracts/arithmetic/overflow_simple_add_attack.sol:Overflow_AddAttacker",
+    const OverflowAddAttacker = await ethers.getContractFactory(
+      "contracts/arithmetic/overflow_simple_add_attack.sol:OverflowAddAttacker",
     );
-    const attacker = await Overflow_AddAttacker.deploy(address);
+    const attacker = await OverflowAddAttacker.deploy(address);
     await attacker.waitForDeployment();
     return { overflow, attacker };
   }

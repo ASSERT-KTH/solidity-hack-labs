@@ -17,10 +17,10 @@ describe("attack bad_randomness/etheraffle.sol", function () {
     const victim = await Ethraffle_v4b.deploy();
     await victim.waitForDeployment();
 
-    const Ethraffle_v4bAttacker = await ethers.getContractFactory(
-      "contracts/bad_randomness/etheraffle_attack.sol:Ethraffle_v4bAttacker",
+    const EthraffleV4bAttacker = await ethers.getContractFactory(
+      "contracts/bad_randomness/etheraffle_attack.sol:EthraffleV4bAttacker",
     );
-    const attacker = await Ethraffle_v4bAttacker.deploy(victim.target);
+    const attacker = await EthraffleV4bAttacker.deploy(victim.target);
     await attacker.waitForDeployment();
 
     return { victim, attacker };

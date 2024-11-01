@@ -1,10 +1,8 @@
 pragma solidity ^0.4.9;
 
-
 import "../dataset/access_control/parity_wallet_bug_2.sol";
 
 contract WalletLibraryAttacker {
-
     WalletLibrary target;
 
     function WalletLibraryAttacker(address _target) {

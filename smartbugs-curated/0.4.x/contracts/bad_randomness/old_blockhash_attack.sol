@@ -3,7 +3,6 @@ pragma solidity ^0.4.24;
 import "../dataset/bad_randomness/old_blockhash.sol";
 
 contract PredictTheBlockHashChallengeAttacker {
-
     PredictTheBlockHashChallenge target;
 
     function PredictTheBlockHashChallengeAttacker(address _target) public {
@@ -18,7 +17,5 @@ contract PredictTheBlockHashChallengeAttacker {
         target.settle();
     }
 
-    function() public payable {
-    }
-
+    function() public payable {}
 }

