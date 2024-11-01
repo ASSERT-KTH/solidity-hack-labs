@@ -9,19 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     
     - name: Environment
-      uses: actions/setup-node@v3
-    
-    - name: Cache Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: 'smartbugs-curated/0.4.x/node_modules'
-        key: node-modules-${{ hashFiles('**/package-lock.json') }}
+      uses: actions/setup-node@v4
+
     - name: Install Dependencies
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
       run: |
         cd smartbugs-curated/0.4.x
         npm ci
@@ -29,3 +22,18 @@ jobs:
       run: |
         cd smartbugs-curated/0.4.x
         npx hardhat test
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+          
+      - name: Install dependencies
+        working-directory: smartbugs-curated/0.4.x
+        run: npm ci
+        
+      - name: Run lint
+        working-directory: smartbugs-curated/0.4.x
+        run: npm run lint
