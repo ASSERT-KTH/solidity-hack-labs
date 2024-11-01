@@ -6,12 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
     "hardhat": "^2.22.5"
   },
   "dependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0"
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-solidity": "^1.4.1",
+    "solhint": "^5.0.3"
   }
 }
