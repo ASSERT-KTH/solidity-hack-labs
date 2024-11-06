@@ -1,4 +1,7 @@
-require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-ethers");
+require("@nomicfoundation/hardhat-chai-matchers");
+require("@nomicfoundation/hardhat-verify");
+require("@nomicfoundation/hardhat-network-helpers");
 
 module.exports = {
   solidity: {

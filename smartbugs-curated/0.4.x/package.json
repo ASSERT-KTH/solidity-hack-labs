@@ -18,12 +18,16 @@
   "devDependencies": {
     "eslint": "^9.13.0",
     "globals": "^15.11.0",
-    "hardhat": "^2.22.5"
-  },
-  "dependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "prettier": "^3.3.3",
     "prettier-plugin-solidity": "^1.4.1",
     "solhint": "^5.0.3"
+  },
+  "dependencies": {
+    "hardhat": "^2.22.5",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "ethers": "^6.0.0"
   }
 }
