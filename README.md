@@ -100,4 +100,4 @@ Contributions are welcome! Please check our contribution guidelines before submi
 
 ## 🙏 Acknowledgements
 
-- [SmartBugs](https://github.com/smartbugs/smartbugs) - For the smart contract vulnerability dataset
+- [SmartBugs](https://github.com/smartbugs) - For the smart contract vulnerability dataset
