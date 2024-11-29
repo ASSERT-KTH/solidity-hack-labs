@@ -81,10 +81,9 @@ describe("Reentrancy Attack for 0x7b368c4e805c3870b6c49a3f1f49f69af8662cf3.sol",
 
     // Verify the attack was successful
 
-    // victim has lost more than the 3 ethers from withdraw (10 -3 = 7)
-    expect(victimBalance).to.be.below(ethers.parseEther("7"));
+    expect(victimBalance).to.be.below(ethers.parseEther("5"));
 
-    //hacker has more than the withdrawn amount
-    expect(maliciousContractBalance).to.be.above(ethers.parseEther("3"));
+    //hacker has more than the deposited amount
+    expect(maliciousContractBalance).to.be.above(ethers.parseEther("5"));
   });
 });

@@ -78,9 +78,9 @@ describe("Reentrancy Attack for 0x561eac93c92360949ab1f1403323e6db345cbf31.sol",
     // Verify the attack was successful
 
     // victim has a drained account
-    expect(victimBalance).to.be.below(ethers.parseEther("6"));
+    expect(victimBalance).to.be.below(ethers.parseEther("5"));
 
-    // 5 original balance + 3 from hacker initial deposit
-    expect(maliciousContractBalance).to.be.above(ethers.parseEther("2"));
+    // the hacker withdraws more than what he deposited
+    expect(maliciousContractBalance).to.be.above(ethers.parseEther("3"));
   });
 });
