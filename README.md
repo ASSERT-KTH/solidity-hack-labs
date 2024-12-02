@@ -43,7 +43,7 @@ The following table summarizes why certain contracts in our dataset could not be
 
 | Challenge Type              | Number of Contracts |
 |----------------------------|-------------------|
-| Not Exploitable            | 31                |
+| Not Exploitable            | 30                |
 | Missing Methods            | 9                 |
 | Mislabeled Solidity Version| 7                 |
 | Exceeded Time Limit        | 3                 |
