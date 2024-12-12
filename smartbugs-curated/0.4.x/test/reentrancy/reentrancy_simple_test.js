@@ -29,13 +29,19 @@ describe("Reentrancy Attack for reentrancy_simple.sol", function () {
   });
 
   it("sanity check: reentrancy/reentrancy_simple.sol", async function () {
-    await expect(victim.addToBalance({ value: ethers.parseEther("1") })).to.not
-      .be.reverted;
-    expect(await ethers.provider.getBalance(victim.target)).to.equal(
-      ethers.parseEther("1"),
-    );
-    await expect(victim.withdrawBalance()).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    const amount = ethers.parseEther("1");
+    await expect(victim.connect(a).addToBalance({ value: amount })).to.not.be
+      .reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(a.address);
+    const tx = await victim.connect(a).withdrawBalance();
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore + amount - gasFee,
+    );
   });
 
   it("should successfully drain funds through reentrancy attack", async function () {

@@ -4,7 +4,7 @@
  * @vulnerable_at_lines: 18,19,20,21,22
  */
 
-pragma solidity ^0.4.25;
+pragma solidity ^0.4.24;
 
 contract DosNumber {
 

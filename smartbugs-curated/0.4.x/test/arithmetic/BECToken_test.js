@@ -28,15 +28,21 @@ describe("attack arithmetic/BECToken.sol", function () {
 
   it("sanity check: arithmetic/BECToken.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
+    const [v, a] = await ethers.getSigners();
     const balance = await victim.balanceOf(victim.target);
     expect(balance).to.equal(0);
     const ownerBalance = await victim.balanceOf(await owner.address);
     expect(ownerBalance).to.equal(await victim.totalSupply());
-    await victim.batchTransfer([victim.target], 10);
-    const newBalance = await victim.balanceOf(victim.target);
+    await victim.batchTransfer([a.address], 10);
+    const newBalance = await victim.balanceOf(a.address);
     expect(newBalance).to.equal(10);
     const newOwnerBalance = await victim.balanceOf(await owner.address);
     expect(newOwnerBalance).to.equal(ownerBalance - newBalance);
+    await victim.connect(a).batchTransfer([owner.address], 5);
+    expect(await victim.balanceOf(a.address)).to.equal(5);
+    expect(await victim.balanceOf(owner.address)).to.equal(
+      newOwnerBalance + BigInt(5),
+    );
   });
 
   it("exploit overflow vulnerability", async function () {

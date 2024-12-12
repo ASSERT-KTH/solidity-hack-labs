@@ -29,7 +29,8 @@ describe("attack arithmetic/integer_overflow_1.sol", function () {
     let storage = await ethers.provider.getStorage(overflow.target, 0);
     let value = Number(storage);
     expect(value).to.be.equal(0);
-    await overflow.add(1);
+    const [v, a] = await ethers.getSigners();
+    await overflow.connect(a).add(1);
     storage = await ethers.provider.getStorage(overflow.target, 0);
     value = Number(storage);
     expect(value).to.be.equal(1);

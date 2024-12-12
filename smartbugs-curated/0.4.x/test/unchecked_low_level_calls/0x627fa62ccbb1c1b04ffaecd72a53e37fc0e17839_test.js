@@ -63,6 +63,17 @@ describe("attack unchecked_low_level_calls/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e
       ethers.parseEther("10"),
     );
     expect(await successContract.balanceOf(successContract.target)).to.equal(0);
+
+    await sig.sendTransaction({
+      to: contract.target,
+      value: amount,
+    });
+
+    expect(await ethers.provider.getBalance(contract.target)).to.equal(
+      amount + amount,
+    );
+
+    expect(await contract.Holders(sig.address)).to.equal(amount);
   });
 
   it("exploit unchecked low level call vulnerability in WithdrawToken()", async function () {

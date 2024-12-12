@@ -21,11 +21,12 @@ describe("attack denial_of_service/dos_number.sol", function () {
 
   it("sanity check: denial_of_service/dos_number.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
+    const [v, a] = await ethers.getSigners();
     for (let i = 0; i < 4; i++) {
-      await victim.insertNnumbers(1, 350);
+      await victim.connect(a).insertNnumbers(1, 350);
     }
-    await expect(victim.insertNnumbers(1, 101)).to.not.be.reverted;
-    await expect(victim.clearDOS()).to.not.be.reverted;
+    await expect(victim.connect(a).insertNnumbers(1, 101)).to.not.be.reverted;
+    await expect(victim.connect(a).clearDOS()).to.not.be.reverted;
   });
 
   it("exploit denial of service vulnerability", async function () {

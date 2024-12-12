@@ -40,14 +40,18 @@ describe("Reentrancy Attack for 0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol",
   });
 
   it("sanity check: reentrancy/0xbaf51e761510c1a11bf48dd87c0307ac8a8c8a4f.sol", async function () {
-    await expect(victim.Deposit({ value: ethers.parseEther("10") })).to.not.be
+    const [v, a] = await ethers.getSigners();
+    const amount = ethers.parseEther("10");
+    await expect(victim.connect(a).Deposit({ value: amount })).to.not.be
       .reverted;
-    expect(await ethers.provider.getBalance(victim.target)).to.equal(
-      ethers.parseEther("10"),
-    );
-    await expect(victim.CashOut(ethers.parseEther("10"))).to.not.be.reverted;
-    expect(await ethers.provider.getBalance(victim.target)).to.equal(
-      ethers.parseEther("0"),
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(a.address);
+    const tx = await victim.connect(a).CashOut(amount);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore + amount - gasFee,
     );
   });
 

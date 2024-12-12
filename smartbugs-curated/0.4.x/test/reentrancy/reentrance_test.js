@@ -29,19 +29,20 @@ describe("Reentrancy Attack for reentrance.sol", function () {
   });
 
   it("sanity check: reentrancy/reentrance.sol", async function () {
-    const [sig] = await ethers.getSigners();
-    expect(await victim.balanceOf(sig.address)).to.equal(0);
-    await expect(
-      victim
-        .connect(sig)
-        .donate(sig.address, { value: ethers.parseEther("1") }),
-    ).to.not.be.reverted;
-    expect(await victim.balanceOf(sig.address)).to.equal(
-      ethers.parseEther("1"),
+    const [v, a] = await ethers.getSigners();
+    const amount = ethers.parseEther("1");
+    expect(await victim.balanceOf(a.address)).to.equal(0);
+    await expect(victim.connect(a).donate(a.address, { value: amount })).to.not
+      .be.reverted;
+    expect(await victim.balanceOf(a.address)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(a.address);
+    const tx = await victim.connect(a).withdraw(amount);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await victim.balanceOf(a.address)).to.equal(0);
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore + amount - gasFee,
     );
-    await expect(victim.connect(sig).withdraw(ethers.parseEther("1"))).to.not.be
-      .reverted;
-    expect(await victim.balanceOf(sig.address)).to.equal(0);
   });
 
   it("should successfully drain funds through reentrancy attack", async function () {

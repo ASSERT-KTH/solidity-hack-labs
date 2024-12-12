@@ -4,7 +4,7 @@
  * @vulnerable_at_lines: 14
  */
 
-pragma solidity 0.4.25;
+pragma solidity 0.4.24;
 
 contract Overflow_Add {
     uint public balance = 1;

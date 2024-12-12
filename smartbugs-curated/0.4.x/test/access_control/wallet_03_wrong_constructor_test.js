@@ -2,6 +2,7 @@ const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
 const { expect } = require("chai");
 const path = require("path");
 const fs = require("fs");
+const { on } = require("events");
 
 describe("attack access_control/wallet_03_wrong_constructor.sol", function () {
   async function deployContracts() {
@@ -25,8 +26,20 @@ describe("attack access_control/wallet_03_wrong_constructor.sol", function () {
 
   it("sanity check: access_control/wallet_03_wrong_constructor.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.deposit({ value: 1 })).to.not.be.reverted;
-    await expect(victim.withdraw(1)).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    const amount = ethers.parseEther("2");
+    await expect(victim.connect(a).deposit({ value: amount })).to.not.be
+      .reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(a.address);
+    const oneEther = ethers.parseEther("1");
+    const tx = await victim.connect(a).withdraw(oneEther);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(oneEther);
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore - gasFee + oneEther,
+    );
   });
 
   it("exploit access control vulnerability", async function () {

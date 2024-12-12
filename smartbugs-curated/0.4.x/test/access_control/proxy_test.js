@@ -42,6 +42,7 @@ describe("attack access_control/proxy.sol", function () {
 
   it("sanity check: access_control/proxy.sol", async function () {
     const { victim, attacker } = await loadFixture(deployContracts);
+
     const attackerInterface = new ethers.Interface(["function benign()"]);
 
     const data = attackerInterface.encodeFunctionData("benign");

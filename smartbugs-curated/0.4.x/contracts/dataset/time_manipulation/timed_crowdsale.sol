@@ -4,7 +4,7 @@
  * @vulnerable_at_lines: 13
  */
 
-pragma solidity ^0.4.25;
+pragma solidity ^0.4.24;
 
 contract TimedCrowdsale {
   // Sale should finish exactly at January 1, 2019

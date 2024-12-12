@@ -4,7 +4,7 @@
  * @vulnerable_at_lines: 12,18,20,22
  */
 
-pragma solidity ^0.4.25;
+pragma solidity ^0.4.24;
 
 // Based on TheRun contract deployed at 0xcac337492149bDB66b088bf5914beDfBf78cCC18.
 contract RandomNumberGenerator {

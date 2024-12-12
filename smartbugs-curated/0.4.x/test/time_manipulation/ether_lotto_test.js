@@ -26,7 +26,9 @@ describe("attack time_manipulation/ether_lotto.sol", function () {
 
   it("sanity check: time_manipulation/ether_lotto.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.play({ value: 10 })).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    const amount = 10;
+    await expect(victim.connect(a).play({ value: amount })).to.not.be.reverted;
     expect(await ethers.provider.getBalance(victim.target)).to.be.gte(0);
   });
 

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.25;
+pragma solidity ^0.4.24;
 
 import "../dataset/access_control/arbitrary_location_write_simple.sol";
 contract WalletAttacker {

@@ -26,7 +26,7 @@ describe("attack time_manipulation/roulette.sol", function () {
   it("sanity check: time_manipulation/roulette.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
     await expect(
-      owner.sendTransaction({
+      sig1.sendTransaction({
         to: victim.target,
         value: amount,
       }),

@@ -40,13 +40,19 @@ describe("Reentrancy Attack for 0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol",
   });
 
   it("sanity check: reentrancy/0xb5e1b1ee15c6fa0e48fce100125569d430f1bd12.sol", async function () {
-    await expect(victim.Deposit({ value: ethers.parseEther("10") })).to.not.be
+    const [v, a] = await ethers.getSigners();
+    const amount = ethers.parseEther("10");
+    await expect(victim.connect(a).Deposit({ value: amount })).to.not.be
       .reverted;
-    expect(await ethers.provider.getBalance(victim.target)).to.equal(
-      ethers.parseEther("10"),
-    );
-    await expect(victim.CashOut(ethers.parseEther("10"))).to.not.be.reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(a.address);
+    const tx = await victim.connect(a).CashOut(amount);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore + amount - gasFee,
+    );
   });
 
   it("should successfully drain funds through reentrancy attack", async function () {

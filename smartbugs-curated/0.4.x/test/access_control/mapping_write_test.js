@@ -26,14 +26,19 @@ describe("attack access_control/mapping_write.sol", function () {
 
   it("sanity check: access_control/mapping_write.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.set(1, 1)).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    await expect(victim.connect(a).set(1, 1)).to.not.be.reverted;
     expect(await victim.get(1)).to.equal(1);
   });
 
   it("exploit access control vulnerability", async function () {
     const { victim, attacker } = await loadFixture(deployContracts);
+    await network.provider.send("hardhat_setBalance", [victim.target, "0x1"]);
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(1);
     await expect(attacker.withdraw_from_victim()).to.be.reverted;
     await attacker.attack(attacker.getAddress());
     await attacker.withdraw_from_victim();
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(attacker.target)).to.equal(1);
   });
 });

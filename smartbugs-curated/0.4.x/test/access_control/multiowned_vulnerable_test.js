@@ -30,9 +30,28 @@ describe("attack access_control/multiowned_vulnerable.sol", function () {
 
   it("sanity check: access_control/multiowned_vulnerable.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.connect(owner).newOwner(owner.address)).to.not.be
+    const [v, a, b] = await ethers.getSigners();
+    await expect(victim.connect(owner).newOwner(a.address)).to.not.be.reverted;
+    expect(await victim.owners(a.address)).to.equal(owner.address);
+
+    await expect(victim.connect(owner).deleteOwner(a.address)).to.not.be
       .reverted;
-    await expect(victim.connect(owner).withdrawAll()).to.not.be.reverted;
+    expect(Number(await victim.owners(a.address))).to.equal(0);
+
+    const amount = ethers.parseEther("1.0");
+    await b.sendTransaction({
+      to: victim.target,
+      value: amount,
+    });
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(owner.address);
+    const tx = await victim.connect(owner).withdrawAll();
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(owner.address)).to.equal(
+      balanceBefore - gasFee + amount,
+    );
   });
 
   it("exploit access control vulnerability", async function () {

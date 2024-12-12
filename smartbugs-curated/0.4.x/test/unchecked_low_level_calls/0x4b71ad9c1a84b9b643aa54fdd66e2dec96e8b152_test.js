@@ -31,12 +31,14 @@ describe("attack unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e
   it("sanity check: unchecked_low_level_calls/0x4b71ad9c1a84b9b643aa54fdd66e2dec96e8b152.sol", async function () {
     const { contract, success_contract } = await loadFixture(deployContracts);
     await expect(
-      contract.transfer(
-        owner.address,
-        success_contract.target,
-        [contract.target],
-        10,
-      ),
+      contract
+        .connect(sig)
+        .transfer(
+          owner.address,
+          success_contract.target,
+          [contract.target],
+          10,
+        ),
     ).to.not.be.reverted;
     expect(await success_contract.balanceOf(contract.target)).to.equal(10);
   });

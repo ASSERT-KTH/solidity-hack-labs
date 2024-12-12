@@ -31,8 +31,9 @@ describe("attack unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618ae
 
   it("sanity check: unchecked_low_level_calls/0x52d2e0f9b01101a59b38a3d05c80b7618aeed984.sol", async function () {
     const { contract, successContract } = await loadFixture(deployContracts);
-    await expect(contract.connect(owner).getTokens(2, successContract.target))
-      .to.not.be.reverted;
+    const [_, sig] = await ethers.getSigners();
+    await expect(contract.connect(sig).getTokens(2, successContract.target)).to
+      .not.be.reverted;
   });
 
   it("exploit unchecked low level call vulnerability", async function () {

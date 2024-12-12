@@ -4,7 +4,9 @@ const path = require("path");
 const fs = require("fs");
 
 describe("attack arithmetic/overflow_single_tx.sol", function () {
+  let v, a;
   async function deployContracts() {
+    [v, a] = await ethers.getSigners();
     const codePath = path.join(
       __dirname,
       "../../artifacts/contracts/dataset/arithmetic/overflow_single_tx.sol/IntegerOverflowSingleTransaction.json",
@@ -31,21 +33,21 @@ describe("attack arithmetic/overflow_single_tx.sol", function () {
   it("sanity check: arithmetic/overflow_single_tx.sol add", async function () {
     const { victim } = await loadFixture(deployContracts);
     expect(await victim.count()).to.equal(1);
-    await victim.overflowaddtostate(1);
+    await victim.connect(a).overflowaddtostate(1);
     expect(await victim.count()).to.equal(2);
   });
 
   it("sanity check: arithmetic/overflow_single_tx.sol mul", async function () {
     const { victim } = await loadFixture(deployContracts);
     expect(await victim.count()).to.equal(1);
-    await victim.overflowmultostate(2);
+    await victim.connect(a).overflowmultostate(2);
     expect(await victim.count()).to.equal(2);
   });
 
   it("sanity check: arithmetic/overflow_single_tx.sol sub", async function () {
     const { victim } = await loadFixture(deployContracts);
     expect(await victim.count()).to.equal(1);
-    await victim.underflowtostate(1);
+    await victim.connect(a).underflowtostate(1);
     expect(await victim.count()).to.equal(0);
   });
 

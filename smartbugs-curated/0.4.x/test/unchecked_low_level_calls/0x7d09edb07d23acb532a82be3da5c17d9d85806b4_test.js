@@ -40,6 +40,7 @@ describe("attack unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85
 
   it("sanity check: unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85806b4.sol", async function () {
     const { successPoC, successContract } = await loadFixture(deployContracts);
+    const [v, a] = await ethers.getSigners();
     const donatedValue = await ethers.provider.getStorage(successPoC.target, 8);
     expect(Number(donatedValue)).to.be.equal(0);
     await expect(successPoC.connect(owner).AdjustDifficulty(amount))
@@ -47,16 +48,16 @@ describe("attack unchecked_low_level_calls/0x7d09edb07d23acb532a82be3da5c17d9d85
       .withArgs(amount);
     await successPoC.connect(owner).OpenToThePublic();
 
-    await expect(successPoC.connect(owner).wager({ value: amount }))
+    await expect(successPoC.connect(a).wager({ value: amount }))
       .to.emit(successPoC, "Wager")
-      .withArgs(amount, owner.address);
+      .withArgs(amount, a.address);
 
     expect(await ethers.provider.getBalance(successPoC.target)).to.be.equal(
       amount,
     );
-    await expect(successPoC.connect(owner).play())
+    await expect(successPoC.connect(a).play())
       .to.emit(successPoC, "Lose")
-      .withArgs(amount / BigInt(2), owner.address);
+      .withArgs(amount / BigInt(2), a.address);
 
     expect(await ethers.provider.getBalance(successPoC.target)).to.be.equal(
       amount / BigInt(2),

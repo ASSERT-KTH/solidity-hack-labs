@@ -7,7 +7,6 @@ describe("Reentrancy Attack for 0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
   let victim;
   let MaliciousContract;
   let hacker;
-  let LogFile;
   let log;
 
   beforeEach(async function () {
@@ -40,13 +39,19 @@ describe("Reentrancy Attack for 0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol",
   });
 
   it("sanity check: reentrancy/0x01f8c4e3fa3edeb29e514cba738d87ce8c091d3f.sol", async function () {
-    await expect(victim.Deposit({ value: ethers.parseEther("1") })).to.not.be
+    const [v, a] = await ethers.getSigners();
+    const amount = ethers.parseEther("1");
+    await expect(victim.connect(a).Deposit({ value: amount })).to.not.be
       .reverted;
-    expect(await ethers.provider.getBalance(victim.target)).to.equal(
-      ethers.parseEther("1"),
-    );
-    await expect(victim.Collect(ethers.parseEther("1"))).to.not.be.reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(a.address);
+    const tx = await victim.connect(a).Collect(amount);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
     expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore + amount - gasFee,
+    );
   });
 
   it("should successfully drain funds through reentrancy attack", async function () {

@@ -27,13 +27,13 @@ describe("attack arithmetic/timeLock.sol", function () {
   }
 
   it("sanity check: arithmetic/timeLock.sol", async function () {
-    const [sig] = await ethers.getSigners();
+    const [v, a] = await ethers.getSigners();
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.connect(sig).deposit({ value: 1 })).to.not.be.reverted;
-    await victim.connect(sig).increaseLockTime(1);
+    await expect(victim.connect(a).deposit({ value: 1 })).to.not.be.reverted;
+    await victim.connect(a).increaseLockTime(1);
     await time.increase(3600 * 24 * 8);
-    await expect(victim.connect(sig).withdraw()).to.not.be.reverted;
-    expect(await victim.balances(sig.address)).to.equal(0);
+    await expect(victim.connect(a).withdraw()).to.not.be.reverted;
+    expect(await victim.balances(a.address)).to.equal(0);
   });
 
   it("exploit overflow vulnerability", async function () {

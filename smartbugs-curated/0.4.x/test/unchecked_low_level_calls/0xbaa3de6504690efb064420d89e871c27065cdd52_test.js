@@ -32,9 +32,10 @@ describe("attack unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065
   it("sanity check: unchecked_low_level_calls/0xbaa3de6504690efb064420d89e871c27065cdd52.sol", async function () {
     const { contract, successContract } = await loadFixture(deployContracts);
     const amount = ethers.parseEther("1");
+    const [_, a] = await ethers.getSigners();
     await expect(
       contract
-        .connect(owner)
+        .connect(a)
         .proxy(successContract.target, "0x", { value: amount }),
     ).to.not.be.reverted;
     expect(

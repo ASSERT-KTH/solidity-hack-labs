@@ -35,7 +35,8 @@ describe("Reentrancy Attack for modifier_reentrancy.sol", function () {
   });
 
   it("sanity check: reentrancy/modifier_reentrancy.sol", async function () {
-    await expect(contract.airDrop()).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    await expect(contract.connect(a).airDrop()).to.not.be.reverted;
     expect(await victim.tokenBalance(contract.target)).to.equal("20");
   });
 

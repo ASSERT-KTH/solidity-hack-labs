@@ -19,7 +19,13 @@ describe("attack denial_of_service/dos_address.sol", function () {
 
   it("sanity check: denial_of_service/dos_address.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    expect(await victim.iWin()).to.be.false;
+    const [v, a] = await ethers.getSigners();
+    expect(await victim.connect(a).iWin()).to.be.false;
+    for (let i = 0; i < 5; i++) {
+      await expect(victim.connect(a).addCreditors()).to.not.be.reverted;
+    }
+    await expect(victim.connect(a).emptyCreditors()).to.not.be.reverted;
+    expect(await victim.connect(a).iWin()).to.be.true;
   });
 
   it("exploit denial of service vulnerability", async function () {

@@ -25,7 +25,8 @@ describe("attack denial_of_service/dos_simple.sol", function () {
 
   it("sanity check: denial_of_service/dos_simple.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.ifillArray()).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    await expect(victim.connect(a).ifillArray()).to.not.be.reverted;
   });
 
   it("exploit denial of service vulnerability", async function () {

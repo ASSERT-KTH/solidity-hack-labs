@@ -25,7 +25,20 @@ describe("attack denial_of_service/auction.sol", function () {
 
   it("sanity check: denial_of_service/auction.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.bid({ value: 1 })).to.not.be.reverted;
+    const [v, a, b] = await ethers.getSigners();
+    const amount = ethers.parseEther("1");
+    await expect(victim.connect(a).bid({ value: amount })).to.not.be.reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+
+    const balanceBefore = await ethers.provider.getBalance(a.address);
+    await expect(victim.connect(b).bid({ value: amount + amount })).to.not.be
+      .reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(
+      amount + amount,
+    );
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore + amount,
+    );
   });
 
   it("exploit denial of service vulnerability", async function () {

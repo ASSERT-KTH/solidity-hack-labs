@@ -28,8 +28,9 @@ describe("attack arithmetic/overflow_simple_add.sol", function () {
 
   it("sanity check: arithmetic/overflow_simple_add.sol", async function () {
     const { overflow } = await loadFixture(deployContracts);
+    const [v, a] = await ethers.getSigners();
     expect(await overflow.balance()).to.equal(1);
-    await overflow.add(1);
+    await overflow.connect(a).add(1);
     expect(await overflow.balance()).to.equal(2);
   });
 

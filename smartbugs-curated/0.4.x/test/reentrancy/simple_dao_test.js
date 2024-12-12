@@ -33,19 +33,20 @@ describe("Reentrancy Attack for simpleDAO.sol", function () {
   }
 
   it("sanity check: reentrancy/simpleDAO.sol", async function () {
-    const [sig] = await ethers.getSigners();
+    const [v, a] = await ethers.getSigners();
+    const amount = ethers.parseEther("1");
     const { simpleDAO } = await loadFixture(deployContracts);
-    await expect(
-      simpleDAO
-        .connect(sig)
-        .donate(sig.address, { value: ethers.parseEther("1") }),
-    ).to.not.be.reverted;
-    expect(await ethers.provider.getBalance(simpleDAO.target)).to.equal(
-      ethers.parseEther("1"),
-    );
-    await expect(simpleDAO.connect(sig).withdraw(ethers.parseEther("1"))).to.not
-      .be.reverted;
+    await expect(simpleDAO.connect(a).donate(a.address, { value: amount })).to
+      .not.be.reverted;
+    expect(await ethers.provider.getBalance(simpleDAO.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(a.address);
+    const tx = await simpleDAO.connect(a).withdraw(amount);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
     expect(await ethers.provider.getBalance(simpleDAO.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore + amount - gasFee,
+    );
   });
 
   it("should successfully drain funds through reentrancy attack", async function () {

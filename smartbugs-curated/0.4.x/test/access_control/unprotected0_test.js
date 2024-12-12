@@ -30,7 +30,8 @@ describe("attack access_control/unprotected0.sol", function () {
 
   it("sanity check: access_control/unprotected0.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.connect(owner).changeOwner(owner)).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    await expect(victim.connect(owner).changeOwner(a)).to.not.be.reverted;
   });
 
   it("exploit access control vulnerability", async function () {

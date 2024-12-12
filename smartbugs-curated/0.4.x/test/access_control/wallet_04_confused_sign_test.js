@@ -5,6 +5,7 @@ const fs = require("fs");
 
 describe("attack access_control/wallet_04_confused_sign.sol", function () {
   async function deployContracts() {
+    const [v] = await ethers.getSigners();
     const codePath = path.join(
       __dirname,
       "../../artifacts/contracts/dataset/access_control/wallet_04_confused_sign.sol/Wallet.json",
@@ -13,7 +14,7 @@ describe("attack access_control/wallet_04_confused_sign.sol", function () {
     const Wallet = await ethers.getContractFactory(
       "contracts/dataset/access_control/wallet_04_confused_sign.sol:Wallet",
     );
-    const victim = await Wallet.deploy();
+    const victim = await Wallet.connect(v).deploy();
     await victim.waitForDeployment();
     const address = await victim.getAddress();
 
@@ -27,8 +28,35 @@ describe("attack access_control/wallet_04_confused_sign.sol", function () {
 
   it("sanity check: access_control/wallet_04_confused_sign.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.deposit({ value: 1 })).to.not.be.reverted;
-    await expect(victim.withdraw(1)).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+
+    const amount = ethers.parseEther("2");
+    await expect(victim.connect(a).deposit({ value: amount })).to.not.be
+      .reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    let balanceBefore = await ethers.provider.getBalance(a.address);
+
+    const oneEther = ethers.parseEther("1");
+    let tx = await victim.connect(a).withdraw(amount);
+    let receipt = await tx.wait();
+    let gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore - gasFee + amount,
+    );
+
+    await expect(victim.connect(a).deposit({ value: oneEther })).to.not.be
+      .reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(oneEther);
+
+    balanceBefore = await ethers.provider.getBalance(v.address);
+    tx = await victim.connect(v).migrateTo(v.address);
+    receipt = await tx.wait();
+    gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(v.address)).to.equal(
+      balanceBefore - gasFee + oneEther,
+    );
   });
 
   it("exploit access control vulnerability", async function () {

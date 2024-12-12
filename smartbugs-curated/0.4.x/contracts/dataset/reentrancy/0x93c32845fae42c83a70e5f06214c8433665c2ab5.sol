@@ -4,7 +4,7 @@
  * @vulnerable_at_lines: 29
  */
 
-pragma solidity ^0.4.25;
+pragma solidity ^0.4.24;
 
 contract X_WALLET
 {

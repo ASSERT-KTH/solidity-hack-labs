@@ -47,8 +47,12 @@ describe("attack bad_randomness/guess_the_random_number.sol", function () {
 
   it("sanity check: bad_randomness/guess_the_random_number.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.guess(42, { value: ethers.parseEther("1") })).to.not.be
-      .reverted;
+    const [v, a] = await ethers.getSigners();
+    await expect(victim.connect(a).guess(42, { value: ethers.parseEther("1") }))
+      .to.not.be.reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.be.equal(
+      ethers.parseEther("2"),
+    );
   });
 
   it("exploit bad randomness vulnerability", async function () {

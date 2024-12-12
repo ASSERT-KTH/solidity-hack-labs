@@ -31,14 +31,19 @@ describe("attack unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8
   it("sanity check: unchecked_low_level_calls/0x3a0e9acd953ffc0dd18d63603488846a6b8b2b01.sol", async function () {
     const { contract, token } = await loadFixture(deployContracts);
     const ownerBalance = await token.balanceOf(owner.address);
+    const amount = ethers.parseEther("2");
+    await expect(contract.connect(owner).initTokenBank()).to.not.be.reverted;
     await expect(token.connect(owner).transfer(contract.target, 10)).to.not.be
       .reverted;
     expect(await token.balanceOf(contract.target)).to.equal(10);
-    await expect(contract.initTokenBank()).to.not.be.reverted;
     await expect(
       contract.connect(owner).WithdrawToken(token.target, 10, owner.address),
     ).to.not.be.reverted;
     expect(await token.balanceOf(owner.address)).to.equal(ownerBalance);
+    expect(await sig.sendTransaction({ to: contract.target, value: amount })).to
+      .not.be.reverted;
+    expect(await ethers.provider.getBalance(contract.target)).to.equal(amount);
+    expect(await contract.Holders(sig.address)).to.equal(amount);
   });
 
   it("exploit unchecked low level call vulnerability in WithdrawToken()", async function () {
