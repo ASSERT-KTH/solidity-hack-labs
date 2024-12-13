@@ -4,7 +4,7 @@
  * @vulnerable_at_lines: 29
  */
 
-pragma solidity ^0.4.24;
+pragma solidity ^0.4.25;
 
 contract W_WALLET
 {

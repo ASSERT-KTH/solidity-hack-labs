@@ -4,7 +4,7 @@
  * @vulnerable_at_lines: 18,20
  */
 
-pragma solidity ^0.4.24;
+pragma solidity ^0.4.25;
 
 contract Roulette {
     uint public pastBlockTime; // Forces one bet per block

@@ -4,7 +4,7 @@
  * @vulnerable_at_lines: 27
  */
 
- pragma solidity ^0.4.24;
+ pragma solidity ^0.4.25;
 
  contract Wallet {
      uint[] private bonusCodes;
