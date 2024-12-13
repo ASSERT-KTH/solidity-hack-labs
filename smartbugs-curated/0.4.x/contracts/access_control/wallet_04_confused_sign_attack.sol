@@ -1,7 +1,6 @@
 pragma solidity ^0.4.24;
 
 import "../dataset/access_control/wallet_04_confused_sign.sol";
-
 contract WalletAttacker {
     Wallet public target;
 

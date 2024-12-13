@@ -33,7 +33,7 @@ describe("attack unchecked_low_level_calls/0x4051334adc52057aca763453820cb0e0450
     const amount = ethers.parseEther("1");
     await expect(
       contract
-        .connect(owner)
+        .connect(sig)
         .transfer(
           owner.address,
           success_contract.target,

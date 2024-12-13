@@ -47,11 +47,13 @@ describe("attack bad_randomness/old_blockhash.sol", function () {
 
   it("sanity check: bad_randomness/old_blockhash.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
+    const [v, a] = await ethers.getSigners();
     const bytes = ethers.randomBytes(32);
-    await expect(victim.lockInGuess(bytes, { value: ethers.parseEther("1") }))
-      .to.not.be.reverted;
+    await expect(
+      victim.connect(a).lockInGuess(bytes, { value: ethers.parseEther("1") }),
+    ).to.not.be.reverted;
     await mine(257);
-    await expect(victim.settle()).to.not.be.reverted;
+    await expect(victim.connect(a).settle()).to.not.be.reverted;
   });
 
   it("exploit bad randomness vulnerability", async function () {

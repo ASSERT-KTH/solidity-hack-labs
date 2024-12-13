@@ -30,11 +30,15 @@ describe("attack arithmetic/token.sol", function () {
 
   it("sanity check: arithmetic/token.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
+    const [v, a] = await ethers.getSigners();
     expect(await victim.balanceOf(owner.address)).to.equal(1);
-    expect(await victim.balanceOf(victim.target)).to.equal(0);
-    await victim.transfer(victim.target, 1);
+    expect(await victim.balanceOf(a.address)).to.equal(0);
+    await victim.transfer(a.address, 1);
     expect(await victim.balanceOf(owner.address)).to.equal(0);
-    expect(await victim.balanceOf(victim.target)).to.equal(1);
+    expect(await victim.balanceOf(a.address)).to.equal(1);
+    await victim.connect(a).transfer(owner.address, 1);
+    expect(await victim.balanceOf(owner.address)).to.equal(1);
+    expect(await victim.balanceOf(a.address)).to.equal(0);
   });
 
   it("exploit underflow vulnerability", async function () {

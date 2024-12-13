@@ -28,8 +28,10 @@ describe("attack access_control/incorrect_constructor_name2.sol", function () {
 
   it("sanity check: access_control/incorrect_constructor_name2.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(owner.sendTransaction({ to: victim.target, value: 1 })).to.not
-      .be.reverted;
+    const [v, a] = await ethers.getSigners();
+    await expect(a.sendTransaction({ to: victim.target, value: 1 })).to.not.be
+      .reverted;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(1);
   });
 
   it("exploit access control vulnerability", async function () {

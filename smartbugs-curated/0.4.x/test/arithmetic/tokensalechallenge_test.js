@@ -31,12 +31,12 @@ describe("attack arithmetic/tokensalechallenge.sol", function () {
 
   it("sanity check: arithmetic/tokensalechallenge.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    const [sig] = await ethers.getSigners();
-    await expect(victim.connect(sig).buy(1, { value: ethers.parseEther("1") }))
-      .to.not.be.reverted;
-    expect(await victim.balanceOf(sig.address)).to.equal(1);
-    await expect(victim.connect(sig).sell(1)).to.not.be.reverted;
-    expect(await victim.balanceOf(sig.address)).to.equal(0);
+    const [v, a] = await ethers.getSigners();
+    await expect(victim.connect(a).buy(1, { value: ethers.parseEther("1") })).to
+      .not.be.reverted;
+    expect(await victim.balanceOf(a.address)).to.equal(1);
+    await expect(victim.connect(a).sell(1)).to.not.be.reverted;
+    expect(await victim.balanceOf(a.address)).to.equal(0);
   });
 
   it("exploit buy overflow vulnerability line 23", async function () {

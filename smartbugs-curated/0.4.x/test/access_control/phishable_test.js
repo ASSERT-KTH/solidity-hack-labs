@@ -34,8 +34,21 @@ describe("attack access_control/phishable.sol", function () {
 
   it("sanity check: access_control/phishable.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.connect(victim_sig).withdrawAll(victim_sig.address)).to
-      .not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    const amount = ethers.parseEther("1.0");
+    await a.sendTransaction({
+      to: victim.target,
+      value: amount,
+    });
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(victim_sig.address);
+    const tx = await victim.withdrawAll(victim_sig.address);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(victim_sig.address)).to.equal(
+      balanceBefore + amount - gasFee,
+    );
   });
 
   it("exploit access control vulnerability", async function () {

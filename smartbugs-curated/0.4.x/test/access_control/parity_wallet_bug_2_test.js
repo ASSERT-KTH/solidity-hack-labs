@@ -30,9 +30,22 @@ describe("attack access_control/parity_wallet_bug_2.sol", function () {
 
   it("sanity check: access_control/parity_wallet_bug_2.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
+    const [v, a] = await ethers.getSigners();
     await expect(victim.connect(owner).initWallet([owner.address], 1, 1)).to.not
       .be.reverted;
-    await expect(victim.connect(owner).kill(owner.address)).to.not.be.reverted;
+    const amount = ethers.parseEther("1");
+    await a.sendTransaction({
+      to: victim.target,
+      value: amount,
+    });
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(owner.address);
+    const tx = await victim.connect(owner).kill(owner.address);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await ethers.provider.getBalance(owner.address)).to.equal(
+      balanceBefore - gasFee + amount,
+    );
   });
 
   it("exploit access control vulnerability", async function () {

@@ -49,6 +49,7 @@ describe("attack arithmetic/integer_overflow_mapping_sym_1.sol", function () {
 
   it("exploit overflow vulnerability", async function () {
     const { overflow } = await loadFixture(deployContracts);
+    const [v, a] = await ethers.getSigners();
 
     const mappingSlot = BigInt(0); // map is at slot 0
     const key = BigInt(0); // We want to find map[0]
@@ -68,7 +69,7 @@ describe("attack arithmetic/integer_overflow_mapping_sym_1.sol", function () {
     let value = Number(storedValue);
     expect(value).to.be.equal(0);
 
-    await overflow.init(0, 1);
+    await overflow.connect(a).init(0, 1);
 
     storedValue = await ethers.provider.getStorage(
       overflow.target,

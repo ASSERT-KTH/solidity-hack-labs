@@ -28,8 +28,13 @@ describe("attack bad_randomness/etheraffle.sol", function () {
 
   it("sanity check: bad_randomness/etheraffle.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.buyTickets({ value: ethers.parseEther("1") })).to.not.be
-      .reverted;
+    const [v, a] = await ethers.getSigners();
+    await expect(
+      victim.connect(a).buyTickets({ value: ethers.parseEther("0.0506") }),
+    ).to.not.be.reverted;
+    expect(await ethers.provider.getBalance(victim)).to.be.equal(
+      ethers.parseEther("0.0506"),
+    );
   });
 
   it("exploit bad randomness vulnerability", async function () {

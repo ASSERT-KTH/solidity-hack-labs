@@ -29,7 +29,18 @@ describe("Reentrancy Attack for reentrancy_bonus.sol", function () {
   });
 
   it("sanity check: reentrancy/reentrancy_bonus.sol", async function () {
-    await expect(victim.withdrawReward(hacker.target)).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    await network.provider.send("hardhat_setBalance", [victim.target, "0x64"]);
+    const amount = 100;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(amount);
+    const balanceBefore = await ethers.provider.getBalance(a.address);
+    const tx = await victim.connect(a).getFirstWithdrawalBonus(a.address);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(a.address)).to.equal(
+      balanceBefore + BigInt(amount) - gasFee,
+    );
   });
 
   it("should successfully drain funds through reentrancy attack", async function () {

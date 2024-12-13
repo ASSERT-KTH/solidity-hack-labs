@@ -25,8 +25,19 @@ describe("attack access_control/wallet_02_refund_nosub.sol", function () {
 
   it("sanity check: access_control/wallet_02_refund_nosub.sol", async function () {
     const { victim } = await loadFixture(deployContracts);
-    await expect(victim.deposit({ value: 1 })).to.not.be.reverted;
-    await expect(victim.withdraw(1)).to.not.be.reverted;
+    const [v, a] = await ethers.getSigners();
+    const amount = ethers.parseEther("1.0");
+    await expect(victim.connect(a).deposit({ value: amount })).to.not.be
+      .reverted;
+
+    const balanceBefore = await ethers.provider.getBalance(await a.address);
+    const tx = await victim.connect(a).withdraw(amount);
+    const receipt = await tx.wait();
+    const gasFee = receipt.gasUsed * receipt.gasPrice;
+    expect(await ethers.provider.getBalance(victim.target)).to.equal(0);
+    expect(await ethers.provider.getBalance(await a.address)).to.equal(
+      balanceBefore + amount - gasFee,
+    );
   });
 
   it("exploit access control vulnerability", async function () {

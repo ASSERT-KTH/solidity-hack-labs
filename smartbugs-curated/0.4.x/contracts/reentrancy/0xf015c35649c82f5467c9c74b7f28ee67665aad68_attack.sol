@@ -1,4 +1,4 @@
-pragma solidity ^0.4.25;
+pragma solidity ^0.4.24;
 
 import "../dataset/reentrancy/0xf015c35649c82f5467c9c74b7f28ee67665aad68.sol";
 
